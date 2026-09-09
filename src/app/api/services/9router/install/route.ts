@@ -1,6 +1,5 @@
-import { install } from "@/lib/services/installers/ninerouter";
-import { handleServiceInstall } from "@/app/api/services/_shared/installRoute";
+import { createErrorResponse } from "@/lib/api/errorResponse";
 
-export async function POST(request: Request): Promise<Response> {
-  return handleServiceInstall(request, install);
+export async function POST(_request: Request): Promise<Response> {
+  return createErrorResponse({ status: 501, message: "Not implemented in minimal build profile" });
 }

@@ -7,15 +7,8 @@
  */
 import { AgentBridgeServerActionSchema } from "@/shared/schemas/agentBridge";
 import { getCachedPassword, setCachedPassword } from "@/mitm/manager";
-import { installCertResult, checkCertInstalled } from "@/mitm/cert/install";
+import { normalizeMitmSudoPasswordInput, resolveMitmSudoPassword } from "@/mitm/sudoGate";
 import { generateCert } from "@/mitm/cert/generate";
-import { resolveMitmDataDir } from "@/mitm/dataDir";
-import {
-  isMitmSudoPasswordRequired,
-  normalizeMitmSudoPasswordInput,
-  resolveMitmSudoPassword,
-} from "@/mitm/sudoGate";
-import path from "path";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { pickApiKeyForInternalUse } from "@/lib/db/apiKeys";
@@ -101,34 +94,9 @@ export async function POST(request: Request): Promise<Response> {
     }
 
     if (action === "trust-cert") {
-      if (isMitmSudoPasswordRequired(sudoPassword)) {
-        return createErrorResponse({ status: 400, message: "Missing sudoPassword" });
-      }
-      const certPath = path.join(resolveMitmDataDir(), "mitm", "server.crt");
-      const result = await installCertResult(sudoPassword, certPath);
-      if (result.installed) {
-        const suppliedPassword =
-          typeof raw.sudoPassword === "string"
-            ? normalizeMitmSudoPasswordInput(raw.sudoPassword)
-            : "";
-        if (process.platform !== "win32" && suppliedPassword) {
-          setCachedPassword(suppliedPassword);
-        }
-        const trusted = await checkCertInstalled(certPath);
-        return Response.json({ ok: true, trusted });
-      }
-      if (result.reason === "canceled") {
-        return createErrorResponse({ status: 409, message: "User canceled authorization" });
-      }
-      // Environment failure (container / headless): not an error — return the
-      // manual-install guide so the UI can let the operator trust the CA by hand.
-      return Response.json({
-        ok: false,
-        trusted: false,
-        skippable: true,
-        reason: result.reason,
-        message: sanitizeErrorMessage(result.message ?? "Certificate install failed"),
-        manualGuide: result.manualGuide,
+      return createErrorResponse({
+        status: 501,
+        message: "Not implemented in minimal build profile",
       });
     }
 

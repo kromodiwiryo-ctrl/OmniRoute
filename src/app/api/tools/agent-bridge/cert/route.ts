@@ -4,7 +4,7 @@
  * LOCAL_ONLY: registered in routeGuard.ts
  */
 import { z } from "zod";
-import { installCertResult, uninstallCert, checkCertInstalled } from "@/mitm/cert/install";
+import { uninstallCert, checkCertInstalled } from "@/mitm/cert/install";
 import { resolveMitmDataDir } from "@/mitm/dataDir";
 import { getCachedPassword, setCachedPassword } from "@/mitm/manager";
 import {
@@ -39,54 +39,8 @@ export async function GET(): Promise<Response> {
   }
 }
 
-export async function POST(request: Request): Promise<Response> {
-  const raw = await request.json().catch(() => ({}));
-  const parsed = CertTrustBodySchema.safeParse(raw);
-  const sudoPassword = resolveMitmSudoPassword(
-    parsed.success ? parsed.data.sudoPassword : undefined,
-    getCachedPassword()
-  );
-
-  if (isMitmSudoPasswordRequired(sudoPassword)) {
-    return createErrorResponse({ status: 400, message: "Missing sudoPassword" });
-  }
-
-  try {
-    const crtPath = certPath();
-    if (!fs.existsSync(crtPath)) {
-      return createErrorResponse({
-        status: 404,
-        message: "Certificate not found. Generate one first.",
-      });
-    }
-    const result = await installCertResult(sudoPassword, crtPath);
-    if (result.installed) {
-      const suppliedPassword = parsed.success
-        ? normalizeMitmSudoPasswordInput(parsed.data.sudoPassword)
-        : "";
-      if (process.platform !== "win32" && suppliedPassword) {
-        setCachedPassword(suppliedPassword);
-      }
-      const trusted = await checkCertInstalled(crtPath);
-      return Response.json({ ok: true, trusted });
-    }
-    if (result.reason === "canceled") {
-      return createErrorResponse({ status: 409, message: "User canceled authorization" });
-    }
-    // Environment failure (container / headless): not a 500 — surface the
-    // manual-install guide so the operator can trust the CA by hand. (#4546)
-    return Response.json({
-      ok: false,
-      trusted: false,
-      skippable: true,
-      reason: result.reason,
-      message: sanitizeErrorMessage(result.message ?? "Certificate install failed"),
-      manualGuide: result.manualGuide,
-    });
-  } catch (err) {
-    const msg = sanitizeErrorMessage(err instanceof Error ? err.message : String(err));
-    return createErrorResponse({ status: 500, message: msg });
-  }
+export async function POST(_request: Request): Promise<Response> {
+  return createErrorResponse({ status: 501, message: "Not implemented in minimal build profile" });
 }
 
 /**
