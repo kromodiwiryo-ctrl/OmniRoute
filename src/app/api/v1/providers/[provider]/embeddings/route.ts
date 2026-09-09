@@ -75,18 +75,18 @@ export async function POST(request, { params }) {
   if (!credentials) {
     return errorResponse(HTTP_STATUS.BAD_REQUEST, `No credentials for provider: ${rawProvider}`);
   }
-  if (credentials.allRateLimited) {
+  if ((credentials as any).allRateLimited) {
     return unavailableResponse(
       HTTP_STATUS.RATE_LIMITED,
       `[${rawProvider}] All accounts rate limited`,
-      credentials.retryAfter,
-      credentials.retryAfterHuman
+      (credentials as any).retryAfter,
+      (credentials as any).retryAfterHuman
     );
   }
 
   const result = await handleEmbedding({
     body,
-    credentials,
+    credentials: credentials as any,
     log,
     // #10347 — thread the selected connection id so a hard upstream failure cools
     // the account instead of re-hitting it on every request.

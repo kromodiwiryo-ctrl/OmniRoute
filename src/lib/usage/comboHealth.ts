@@ -3,6 +3,7 @@ import { getDbInstance } from "@/lib/db/core";
 import { getQuotaSnapshots } from "@/lib/db/quotaSnapshots";
 import { getComboMetrics } from "@omniroute/open-sse/services/comboMetrics.ts";
 import { resolveNestedComboTargets } from "@omniroute/open-sse/services/combo.ts";
+import type { ComboLike } from "@omniroute/open-sse/services/combo/types.ts";
 import type {
   ComboRecord,
   ComboHealthMetrics,
@@ -498,7 +499,10 @@ function buildComboHealth(
   const comboName = typeof combo.name === "string" ? combo.name : "";
   if (!comboId || !comboName) return null;
 
-  const targets = resolveNestedComboTargets(combo, allCombos) as ResolvedComboTargetView[];
+  const targets = resolveNestedComboTargets(
+    combo as ComboLike,
+    allCombos as ComboLike[]
+  ) as ResolvedComboTargetView[];
   const models = targets.map((target) => target.modelStr);
   const providers = Array.from(new Set(targets.map((target) => target.provider)));
 

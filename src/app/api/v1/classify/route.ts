@@ -66,7 +66,7 @@ async function postHandler(request: Request) {
     path: "/v1/classify",
     upstreamUrl: `${JINA_FOUNDATION_BASE_URL}/v1/classify`,
     body,
-    credentials,
+    credentials: credentials as any,
     provider: JINA_FOUNDATION_PROVIDER_ID,
     model: model || null,
   });

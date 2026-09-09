@@ -7,6 +7,7 @@ import {
   cavemanIntensitySchema,
   stackedPipelineStepSchema,
 } from "@/shared/validation/compressionConfigSchemas";
+import type { CompressionCombo } from "@/lib/db/compressionCombos";
 
 export const pipelineStepSchema = stackedPipelineStepSchema;
 
@@ -45,6 +46,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: validation.error }, { status: 400 });
   }
 
-  const combo = createCompressionCombo(validation.data);
+  const combo = createCompressionCombo(validation.data as Partial<CompressionCombo>);
   return NextResponse.json(combo, { status: 201 });
 }

@@ -27,16 +27,20 @@ export async function GET(request) {
     if (alias) {
       const resolved = await resolveModelAliasLookup(alias);
       if (!resolved.ok) {
+        const { error } = resolved as {
+          ok: false;
+          error: { status: number; code: string; message: string; candidates?: string[] };
+        };
         return NextResponse.json(
           {
             error: {
-              message: resolved.error.message,
-              code: resolved.error.code,
-              ...(resolved.error.candidates ? { candidates: resolved.error.candidates } : {}),
+              message: error.message,
+              code: error.code,
+              ...(error.candidates ? { candidates: error.candidates } : {}),
             },
           },
           {
-            status: resolved.error.status,
+            status: error.status,
             headers: getCatalogDiagnosticsHeaders({ request, resolvedAlias: alias }),
           }
         );

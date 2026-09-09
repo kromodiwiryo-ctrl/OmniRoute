@@ -177,7 +177,7 @@ async function postHandler(request, context) {
         return rateLimitedProviderResponse(prefix, credentials);
       }
 
-      const token = credentials?.apiKey || credentials?.accessToken;
+      const token = (credentials as any)?.apiKey || (credentials as any)?.accessToken;
       const startTime = Date.now();
       try {
         let res = await fetch(localProvider.baseUrl, {

@@ -94,7 +94,7 @@ async function listPublicOverrides(
 const reasoningEffortsValueSchema = z.string().transform((value, context) => {
   const parsed = parseReasoningEffortsOverride(value);
   if (!parsed.ok) {
-    context.addIssue({ code: "custom", message: parsed.error });
+    context.addIssue({ code: "custom", message: (parsed as { ok: false; error: string }).error });
     return z.NEVER;
   }
   return parsed.efforts;

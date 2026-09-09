@@ -7,7 +7,7 @@ import { volcenginePlanConnectSchema } from "@/shared/validation/schemas/volceng
 
 export async function POST(request: Request): Promise<NextResponse> {
   const auth = await requireManagementAuth(request);
-  if (auth) return auth;
+  if (auth) return auth as NextResponse;
 
   const raw = await request.json().catch(() => ({}));
   const validation = validateBody(volcenginePlanConnectSchema, raw);
@@ -22,9 +22,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   // Auto flow: phone present → start a session-based headless phone/SMS login.
   if (phone) {
     try {
-      const { volcengineConsoleAutoLoginService } = await import(
-        "@omniroute/open-sse/services/volcengineConsoleAutoLogin.ts"
-      );
+      const { volcengineConsoleAutoLoginService } =
+        await import("@omniroute/open-sse/services/volcengineConsoleAutoLogin.ts");
       const started = await volcengineConsoleAutoLoginService.startLogin(phone, { timeout });
       if (started.ok === false) {
         return NextResponse.json({ success: false, error: started.error }, { status: 400 });

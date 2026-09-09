@@ -10,7 +10,7 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createModelComboMapping, getModelComboMappings } from "@/lib/db/modelComboMappings";
 import { paginationSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
-import { validatedJsonBody } from "@/shared/validation/helpers";
+import { validatedJsonBody, isValidatedJsonBodyFailure } from "@/shared/validation/helpers";
 
 const createMappingSchema = z.object({
   pattern: z.string().min(1, "Pattern is required").max(500),
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
 
   try {
     const parsed = await validatedJsonBody(request, createMappingSchema);
-    if (!parsed.success) {
+    if (isValidatedJsonBodyFailure(parsed)) {
       return parsed.response;
     }
 

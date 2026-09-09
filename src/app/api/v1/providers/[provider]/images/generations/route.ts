@@ -88,12 +88,12 @@ export async function POST(request, { params }) {
       `No credentials for image provider: ${rawProvider}`
     );
   }
-  if (credentials.allRateLimited) {
+  if ((credentials as any).allRateLimited) {
     return unavailableResponse(
       HTTP_STATUS.RATE_LIMITED,
       `[${rawProvider}] All accounts rate limited`,
-      credentials.retryAfter,
-      credentials.retryAfterHuman
+      (credentials as any).retryAfter,
+      (credentials as any).retryAfterHuman
     );
   }
 
@@ -123,8 +123,8 @@ export async function POST(request, { params }) {
 
   const errorPayload = toJsonErrorPayload((result as any).error, "Image generation provider error");
   const message =
-    typeof errorPayload?.error?.message === "string"
-      ? errorPayload.error.message
+    typeof (errorPayload as any)?.error?.message === "string"
+      ? (errorPayload as any).error.message
       : "Image generation provider error";
   return errorResponse((result as any).status, message);
 }

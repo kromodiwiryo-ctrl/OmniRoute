@@ -48,7 +48,7 @@ export async function GET(request: Request) {
   // Fall back to ~/.aws/sso/cache (social auth / manual token)
   const cacheResult = await tryAwsSsoCache(targetProvider);
   if (cacheResult.found) {
-    return await saveAndRespond(cacheResult, targetProvider, request);
+    return await saveAndRespond(cacheResult as SaveAndRespondResult, targetProvider, request);
   }
 
   return NextResponse.json({

@@ -15,7 +15,7 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string }> }
 ): Promise<NextResponse> {
   const auth = await requireManagementAuth(request);
-  if (auth) return auth;
+  if (auth) return auth as NextResponse;
 
   const { sessionId } = await params;
   const raw = await request.json().catch(() => ({}));
@@ -30,9 +30,8 @@ export async function POST(
   const { index, timeout } = validation.data;
 
   try {
-    const { volcengineConsoleAutoLoginService } = await import(
-      "@omniroute/open-sse/services/volcengineConsoleAutoLogin.ts"
-    );
+    const { volcengineConsoleAutoLoginService } =
+      await import("@omniroute/open-sse/services/volcengineConsoleAutoLogin.ts");
 
     if (!volcengineConsoleAutoLoginService.getStatus(sessionId)) {
       return NextResponse.json(

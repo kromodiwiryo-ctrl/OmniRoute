@@ -47,7 +47,7 @@ function resolveAccessToken(
     return { ok: true, resolved: { accessToken: parsed.accessToken, name: parsed.name } };
   }
   const result = parseCodexSessionJson(parsed.session);
-  if (!result.ok) return { ok: false, error: result.error };
+  if (!result.ok) return { ok: false, error: (result as { ok: false; error: string }).error };
   return { ok: true, resolved: { accessToken: result.session.accessToken, name: parsed.name } };
 }
 
@@ -87,7 +87,10 @@ async function parseRequestBody(
   if (!resolved.ok) {
     return {
       ok: false,
-      response: NextResponse.json(buildErrorBody(400, resolved.error), { status: 400 }),
+      response: NextResponse.json(
+        buildErrorBody(400, (resolved as { ok: false; error: string }).error),
+        { status: 400 }
+      ),
     };
   }
   return { ok: true, resolved: resolved.resolved };
@@ -105,7 +108,7 @@ export async function POST(request: Request) {
   if (authResponse) return authResponse;
 
   const body = await parseRequestBody(request);
-  if (!body.ok) return body.response;
+  if (!body.ok) return (body as { ok: false; response: NextResponse }).response;
 
   const { accessToken, name } = body.resolved;
   const info = extractCodexAccountInfo(accessToken);

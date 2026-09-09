@@ -89,7 +89,7 @@ export async function PUT(request: NextRequest) {
 
     const validation = validateBody(cacheConfigUpdateSchema, rawBody);
     if (isValidationFailure(validation)) {
-      return validation.response;
+      return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
     const updates: Partial<UserDatabaseSettings["cache"]> = {};
@@ -118,7 +118,7 @@ export async function PUT(request: NextRequest) {
     // which bumps the model-catalog cache version so in-flight responses pick
     // up the fresh TTL — no separate version bump needed here.
     if (Object.keys(updates).length > 0) {
-      updateDatabaseSettings({ cache: updates });
+      updateDatabaseSettings({ cache: updates as UserDatabaseSettings["cache"] });
     }
 
     // idempotencyWindowMs and alwaysPreserveClientCache are read from the flat

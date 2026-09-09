@@ -8,8 +8,9 @@ import {
   resolveReasoningSourceModels,
   validateCodexWsDecision,
 } from "@/lib/reasoningRouting/policy";
+import type { ReasoningSourceEffort } from "@/lib/db/reasoningRoutingRules";
 import { simulateReasoningRoutingSchema } from "@/shared/validation/schemas";
-import { validatedJsonBody } from "@/shared/validation/helpers";
+import { validatedJsonBody, isValidatedJsonBodyFailure } from "@/shared/validation/helpers";
 import { validateApiKeyRoutingTarget } from "@/shared/utils/apiKeyPolicy";
 import { getModelInfo } from "@/sse/services/model";
 import { resolveCodexWsModelInfo } from "@/app/api/internal/codex-responses-ws/modelResolution";
@@ -58,7 +59,8 @@ async function resolveSimulationDecision(
   const decision = await resolveReasoningRoutingRule({
     sourceModel: sourceModels.normalized,
     sourceModelAliases: sourceModels.aliases,
-    sourceEffort: effort === "any" ? "missing" : effort,
+    sourceEffort: (effort === "any" ? "missing" : effort) as
+      Exclude<ReasoningSourceEffort, "any"> | "signal",
     hasReasoningSignal:
       (effort !== "missing" && effort !== "any") || typeof thinkingBudgetTokens === "number",
     hasThinkingBudget: typeof thinkingBudgetTokens === "number",
@@ -73,7 +75,7 @@ export async function POST(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;
   const parsed = await validatedJsonBody(request, simulateReasoningRoutingSchema);
-  if (!parsed.success) return parsed.response;
+  if (isValidatedJsonBodyFailure(parsed)) return parsed.response;
   const { model, effort, thinkingBudgetTokens, apiKeyId, requestTags, transport } = parsed.data;
   const apiKey = apiKeyId ? await getApiKeyById(apiKeyId) : null;
   if (apiKeyId && !apiKey) {

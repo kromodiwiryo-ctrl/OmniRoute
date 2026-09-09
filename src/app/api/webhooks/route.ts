@@ -26,7 +26,7 @@ const createWebhookSchema = z
     secret: z.string().max(500).optional(),
     description: z.string().max(1000).optional().default(""),
     kind: z.enum(WEBHOOK_KINDS).optional().default("custom"),
-    metadata: z.record(z.string()).optional(),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .superRefine((data, ctx) => {
     if (data.kind === "telegram") return;
@@ -84,7 +84,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const metadataEncrypted = data.metadata ? encryptMetadata(data.metadata) : undefined;
+    const metadataEncrypted = data.metadata
+      ? encryptMetadata(data.metadata as Record<string, string>)
+      : undefined;
     const webhook = createWebhook({
       url: data.url,
       events: data.events,

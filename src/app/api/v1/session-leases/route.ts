@@ -72,7 +72,9 @@ export async function POST(request: Request): Promise<Response> {
   let acquisitionModelInfo: Awaited<ReturnType<typeof getModelInfo>> | null = null;
   if (parsed.data.action === "acquire") {
     try {
-      acquisitionModelInfo = await getModelInfo(parsed.data.model);
+      acquisitionModelInfo = await getModelInfo(
+        (parsed.data as { action: "acquire"; model: string }).model
+      );
     } catch (cause) {
       if (isCommonChatGptWebRetirementError(cause)) {
         return error(cause.status, cause.code, cause.message);
@@ -83,7 +85,9 @@ export async function POST(request: Request): Promise<Response> {
 
   const policy = await enforceApiKeyPolicy(
     request,
-    parsed.data.action === "acquire" ? parsed.data.model : null
+    parsed.data.action === "acquire"
+      ? (parsed.data as { action: "acquire"; model: string }).model
+      : null
   );
   if (policy.rejection) return policy.rejection;
   if (!policy.apiKeyInfo || !isExclusiveLeaseManagedKey(policy.apiKeyInfo))
@@ -95,7 +99,7 @@ export async function POST(request: Request): Promise<Response> {
     if (parsed.data.action !== "acquire") {
       const input = {
         leaseOwnerId,
-        generation: parsed.data.generation,
+        generation: (parsed.data as { generation: number }).generation,
         apiKeyId: policy.apiKeyInfo.id,
       };
       if (parsed.data.action === "status") {
@@ -125,7 +129,7 @@ export async function POST(request: Request): Promise<Response> {
       modelInfo.provider,
       null,
       policy.apiKeyInfo.allowedConnections ?? [],
-      modelInfo.model || parsed.data.model,
+      modelInfo.model || (parsed.data as { action: "acquire"; model: string }).model,
       {
         lease: {
           apiKeyId: policy.apiKeyInfo.id,
@@ -143,7 +147,7 @@ export async function POST(request: Request): Promise<Response> {
         "No eligible connection satisfies the managed key policy"
       );
     }
-    const failure = buildManagedLeaseSelectionErrorResponse(selection);
+    const failure = buildManagedLeaseSelectionErrorResponse(selection as any);
     if (failure) {
       for (const [name, value] of Object.entries(CORS_HEADERS)) failure.headers.set(name, value);
       return failure;

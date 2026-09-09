@@ -12,5 +12,5 @@ export async function POST(request: Request) {
     method: "POST",
     body: request.body,
     duplex: "half",
-  });
+  } as any);
 }

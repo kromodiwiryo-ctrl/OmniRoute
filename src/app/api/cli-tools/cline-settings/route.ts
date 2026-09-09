@@ -21,17 +21,17 @@ const SECRETS_PATH = path.join(CLINE_DATA_DIR, "secrets.json");
 // Ported from upstream decolua/9router@6c10edf8: tolerate JSONC (trailing
 // commas) and return null on any parse error so the dashboard renders
 // "installed but not configured" instead of a 500 misread as "not installed".
-const readGlobalState = async () => readJsoncConfig(GLOBAL_STATE_PATH);
+const readGlobalState = async () => readJsoncConfig<Record<string, unknown>>(GLOBAL_STATE_PATH);
 
 // Read secrets.json (same JSONC-tolerant behaviour; defaults to {} for compat).
 const readSecrets = async () => readJsoncConfig<Record<string, unknown>>(SECRETS_PATH, {});
 
 // Check if OmniRoute is configured as OpenAI-compatible provider
-const hasOmniRouteConfig = (globalState: any) => {
+const hasOmniRouteConfig = (globalState: Record<string, unknown> | null) => {
   if (!globalState) return false;
   const isOpenAi =
     globalState.actModeApiProvider === "openai" || globalState.planModeApiProvider === "openai";
-  const baseUrl = globalState.openAiBaseUrl || "";
+  const baseUrl = (globalState.openAiBaseUrl as string) || "";
   return (
     isOpenAi &&
     (baseUrl.includes("localhost") ||
@@ -75,11 +75,11 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       settings: {
-        actModeApiProvider: globalState?.actModeApiProvider,
-        planModeApiProvider: globalState?.planModeApiProvider,
-        openAiBaseUrl: globalState?.openAiBaseUrl,
-        openAiModelId: globalState?.openAiModelId,
-        planModeOpenAiModelId: globalState?.planModeOpenAiModelId,
+        actModeApiProvider: globalState?.actModeApiProvider as string | undefined,
+        planModeApiProvider: globalState?.planModeApiProvider as string | undefined,
+        openAiBaseUrl: globalState?.openAiBaseUrl as string | undefined,
+        openAiModelId: globalState?.openAiModelId as string | undefined,
+        planModeOpenAiModelId: globalState?.planModeOpenAiModelId as string | undefined,
       },
       hasOmniRoute: hasOmniRouteConfig(globalState),
       globalStatePath: GLOBAL_STATE_PATH,

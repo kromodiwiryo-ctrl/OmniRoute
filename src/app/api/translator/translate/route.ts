@@ -48,7 +48,7 @@ async function getUnmanagedActiveConnection(provider: string) {
   for (const connection of connections) {
     if (
       connection.isActive !== false &&
-      !(await isConnectionUnavailableToAuxiliaryActivity(connection.id))
+      !(await isConnectionUnavailableToAuxiliaryActivity(connection.id as string))
     )
       return connection;
   }
@@ -201,7 +201,7 @@ export async function POST(request) {
         const url = buildProviderUrl(provider, model, true, {
           baseUrlIndex: 0,
           baseUrl: getProviderBaseUrl(connection.providerSpecificData),
-          providerSpecificData: connection.providerSpecificData,
+          providerSpecificData: connection.providerSpecificData as Record<string, unknown>,
         });
         const headers = buildProviderHeaders(provider, credentials, true, actualBody);
 

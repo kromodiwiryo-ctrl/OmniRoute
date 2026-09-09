@@ -97,7 +97,7 @@ function projectCodexAccountPoolWithRoutingQuota(
         },
       },
     };
-  }) as typeof projection.children;
+  }) as unknown as typeof projection.children;
 
   return { ...projection, children };
 }
@@ -140,9 +140,9 @@ export async function GET(request: Request) {
           ? {
               codexAccountPool: projectCodexAccountPoolWithRoutingQuota(
                 {
-                  id: c.id,
-                  provider: c.provider,
-                  providerSpecificData: c.providerSpecificData ?? {},
+                  id: c.id as string,
+                  provider: c.provider as string,
+                  providerSpecificData: (c.providerSpecificData ?? {}) as Record<string, unknown>,
                 },
                 Date.now()
               ),
@@ -325,7 +325,7 @@ export async function POST(request: Request) {
           ...(cookieHeader ? { cookie: cookieHeader } : {}),
           ...buildModelSyncInternalHeaders(),
         };
-        const syncUrl = `${internalOrigin}/api/providers/${encodeURIComponent(newConnection.id)}/sync-models?mode=import`;
+        const syncUrl = `${internalOrigin}/api/providers/${encodeURIComponent(newConnection.id as string)}/sync-models?mode=import`;
         // Intentionally not awaited: this is async/non-blocking work.
         void fetchModelSyncInternal(syncUrl, {
           method: "POST",
@@ -362,7 +362,7 @@ export async function POST(request: Request) {
     // seconds (OAuth refresh, upstream round-trip) and must not block the
     // 201 response. testSingleConnection() persists testStatus/lastError/etc.
     // itself, so nothing further is needed here beyond logging failures.
-    void testSingleConnection(newConnection.id).catch((testError: unknown) => {
+    void testSingleConnection(newConnection.id as string).catch((testError: unknown) => {
       console.log(
         `[providers] Auto-test failed for ${newConnection.id}:`,
         (testError as { message?: string })?.message || testError
@@ -444,7 +444,7 @@ export async function PATCH(request: Request) {
       const requestedIds = new Set(ids);
       const requestedConnections = (
         await getProviderConnections({}, undefined, undefined, ["id", "provider"])
-      ).filter((connection) => requestedIds.has(connection.id));
+      ).filter((connection) => requestedIds.has(connection.id as string));
       for (const connection of requestedConnections) {
         const retirementResponse = rejectRetiredCommonChatGptWebProvider(connection.provider);
         if (retirementResponse) return retirementResponse;

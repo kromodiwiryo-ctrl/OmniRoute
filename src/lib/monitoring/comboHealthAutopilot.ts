@@ -16,12 +16,12 @@ import type {
   ComboForecastMetrics,
   ComboForecastResponse,
   ComboForecastRiskLevel,
-  ProviderAutopilotReport,
   ComboHealthMetrics,
   ComboHealthResponse,
   ComboRecord,
   UtilizationTimeRange,
 } from "@/shared/types/utilization";
+import type { ProviderAutopilotReport } from "@/lib/monitoring/providerHealthAutopilot";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -466,7 +466,7 @@ export async function buildComboHealthAutopilotReport(
   const allCombos = health.combos.map((combo) =>
     buildAutopilotCombo(
       combo,
-      forecastsByComboId.get(combo.comboId),
+      forecastsByComboId.get(combo.comboId) as ComboForecastMetrics | undefined,
       providerIssues,
       includeActions
     )

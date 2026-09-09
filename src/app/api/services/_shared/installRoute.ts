@@ -60,7 +60,7 @@ export async function handleServiceInstall(
 ): Promise<Response> {
   const parsed = await readServiceInstallVersion(request);
   if (!parsed.ok) {
-    return parsed.response;
+    return (parsed as { ok: false; response: Response }).response;
   }
 
   try {

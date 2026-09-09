@@ -9,7 +9,7 @@ import {
   createReasoningRoutingRuleSchema,
   updateReasoningRoutingRuleSchema,
 } from "@/shared/validation/schemas";
-import { validatedJsonBody } from "@/shared/validation/helpers";
+import { validatedJsonBody, isValidatedJsonBodyFailure } from "@/shared/validation/helpers";
 import { reasoningRuleDataToInput } from "@/lib/reasoningRouting/input";
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
@@ -31,7 +31,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const existing = await getReasoningRoutingRuleById(id);
   if (!existing) return errorResponse(404, "Rule not found");
   const parsed = await validatedJsonBody(request, updateReasoningRoutingRuleSchema);
-  if (!parsed.success) return parsed.response;
+  if (isValidatedJsonBodyFailure(parsed)) return parsed.response;
   const merged = { ...existing, ...parsed.data };
   const validated = createReasoningRoutingRuleSchema.safeParse(merged);
   if (!validated.success) {

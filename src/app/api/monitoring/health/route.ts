@@ -258,7 +258,7 @@ async function rebuildHealthPayload(): Promise<unknown> {
     circuitBreakers,
     rateLimitStatus,
     learnedLimits,
-    lockouts,
+    lockouts: lockouts as unknown as Record<string, unknown>,
     localProviders,
     inflightRequests:
       requestDedupModule.status === "fulfilled"

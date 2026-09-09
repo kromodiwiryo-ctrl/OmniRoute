@@ -10,7 +10,7 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string }> }
 ): Promise<NextResponse> {
   const auth = await requireManagementAuth(request);
-  if (auth) return auth;
+  if (auth) return auth as NextResponse;
 
   const { sessionId } = await params;
 

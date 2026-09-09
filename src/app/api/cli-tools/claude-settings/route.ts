@@ -26,7 +26,7 @@ const getClaudeSettingsPath = () => getCliPrimaryConfigPath("claude");
 // "installed but not configured" instead of a 500 misread as "not installed".
 const readSettings = async () => {
   const settingsPath = getClaudeSettingsPath();
-  return readJsoncConfig(settingsPath);
+  return readJsoncConfig<Record<string, unknown>>(settingsPath);
 };
 
 // GET - Check claude CLI and read current settings
@@ -54,7 +54,9 @@ export async function GET(request: Request) {
     }
 
     const settings = await readSettings();
-    const hasOmniRoute = !!settings?.env?.ANTHROPIC_BASE_URL;
+    const env = (settings as Record<string, unknown> | null)?.env as
+      Record<string, unknown> | undefined;
+    const hasOmniRoute = !!env?.ANTHROPIC_BASE_URL;
 
     return NextResponse.json({
       installed: runtime.installed,

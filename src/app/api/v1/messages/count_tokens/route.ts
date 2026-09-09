@@ -65,7 +65,7 @@ export async function POST(request) {
       null,
       modelInfo.model
     );
-    if (!credentials || credentials.allRateLimited) {
+    if (!credentials || (credentials as any).allRateLimited) {
       return estimated;
     }
 
@@ -73,7 +73,7 @@ export async function POST(request) {
     // The provider-side count is a real upstream call — it must honor the
     // connection's proxy assignment exactly like chat execution does.
     const proxyInfo = await safeResolveProxy(
-      credentials.connectionId,
+      (credentials as any).connectionId,
       undefined,
       modelInfo.provider
     );
@@ -81,7 +81,7 @@ export async function POST(request) {
       executor?.countTokens?.({
         model: modelInfo.model,
         body,
-        credentials,
+        credentials: credentials as any,
         log,
       })
     );

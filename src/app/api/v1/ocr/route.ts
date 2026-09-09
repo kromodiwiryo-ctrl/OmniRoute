@@ -102,8 +102,11 @@ async function postHandler(request, context) {
     return rateLimitedProviderResponse(resolvedProvider, credentials);
   }
 
-  const tokenReadyCredentials = await resolveVertexOcrAccessToken(resolvedProvider, credentials);
-  const ocrCredentials = resolveOcrCredentials(tokenReadyCredentials, resolvedProvider);
+  const tokenReadyCredentials = await resolveVertexOcrAccessToken(
+    resolvedProvider,
+    credentials as any
+  );
+  const ocrCredentials = resolveOcrCredentials(tokenReadyCredentials as any, resolvedProvider);
 
   const response = await handleOcr({ body: { ...body, model }, credentials: ocrCredentials });
   if (response?.ok) {

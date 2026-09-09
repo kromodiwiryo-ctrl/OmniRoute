@@ -12,6 +12,7 @@ import {
   cavemanIntensitySchema,
   stackedPipelineStepSchema,
 } from "@/shared/validation/compressionConfigSchemas";
+import type { CompressionCombo } from "@/lib/db/compressionCombos";
 
 export const pipelineStepSchema = stackedPipelineStepSchema;
 
@@ -59,7 +60,7 @@ export async function PUT(request: Request, { params }) {
       return NextResponse.json({ error: "Compression combo not found" }, { status: 404 });
   }
 
-  const combo = updateCompressionCombo(id, validation.data);
+  const combo = updateCompressionCombo(id, validation.data as Partial<CompressionCombo>);
   if (!combo) return NextResponse.json({ error: "Compression combo not found" }, { status: 404 });
   return NextResponse.json(combo);
 }

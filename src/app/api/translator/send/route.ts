@@ -52,7 +52,7 @@ export async function POST(request) {
       await Promise.all(
         connections.map(async (candidate) => ({
           candidate,
-          blocked: await isConnectionUnavailableToAuxiliaryActivity(candidate.id),
+          blocked: await isConnectionUnavailableToAuxiliaryActivity(candidate.id as string),
         }))
       )
     ).find(({ candidate, blocked }) => candidate.isActive !== false && !blocked)?.candidate;
@@ -91,7 +91,7 @@ export async function POST(request) {
     const url = buildProviderUrl(provider, body.model || "test-model", true, {
       baseUrlIndex: 0,
       baseUrl: getProviderBaseUrl(connection.providerSpecificData),
-      providerSpecificData: connection.providerSpecificData,
+      providerSpecificData: connection.providerSpecificData as Record<string, unknown>,
     });
     const headers = buildProviderHeaders(provider, credentials, true, body);
 
@@ -107,7 +107,7 @@ export async function POST(request) {
       const normalizedUpstreamError = toJsonErrorPayload(
         errorText,
         `Provider error: ${response.status} ${response.statusText}`
-      );
+      ) as { error?: { message?: string } };
       logTranslationEvent({
         provider,
         model: body.model || "test-model",

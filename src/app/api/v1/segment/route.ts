@@ -66,7 +66,7 @@ async function postHandler(request: Request) {
     path: "/v1/segment",
     upstreamUrl: `${JINA_SEGMENT_BASE_URL}/`,
     body,
-    credentials,
+    credentials: credentials as any,
     provider: JINA_FOUNDATION_PROVIDER_ID,
     model: "segment",
   });

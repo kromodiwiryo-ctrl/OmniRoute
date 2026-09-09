@@ -251,12 +251,12 @@ async function handleAdobeFireflyEditRequest(params: {
       `No credentials for provider: ${parsed.provider}`
     );
   }
-  if (credentials.allRateLimited) {
+  if ((credentials as any).allRateLimited) {
     return unavailableResponse(
       HTTP_STATUS.RATE_LIMITED,
       `[${parsed.provider}] All accounts rate limited`,
-      credentials.retryAfter,
-      credentials.retryAfterHuman
+      (credentials as any).retryAfter,
+      (credentials as any).retryAfterHuman
     );
   }
 
@@ -280,17 +280,17 @@ async function handleAdobeFireflyEditRequest(params: {
       image_urls: dataUrls,
       images: dataUrls,
     },
-    credentials,
+    credentials: credentials as any,
     log,
   });
 
-  if ((result as { success?: boolean }).success) {
+  if ((result as any).success) {
     await clearRecoveredProviderState(credentials);
-    return jsonResponse((result as { data?: unknown }).data);
+    return jsonResponse((result as any).data);
   }
   return jsonResponse(
-    toJsonErrorPayload((result as { error?: unknown }).error, "Image edit provider error"),
-    (result as { status?: number }).status ?? HTTP_STATUS.BAD_GATEWAY
+    toJsonErrorPayload((result as any).error, "Image edit provider error"),
+    (result as any).status ?? HTTP_STATUS.BAD_GATEWAY
   );
 }
 
@@ -417,18 +417,15 @@ async function postHandler(request: Request, _context?: unknown) {
         `No credentials for provider: ${parsed.provider}`
       );
     }
-    if (credentials.allRateLimited) {
+    if ((credentials as any).allRateLimited) {
       return unavailableResponse(
         HTTP_STATUS.RATE_LIMITED,
         `[${parsed.provider}] All accounts rate limited`,
-        credentials.retryAfter,
-        credentials.retryAfterHuman
+        (credentials as any).retryAfter,
+        (credentials as any).retryAfterHuman
       );
     }
-    const credentialDetails = credentials as {
-      connectionId?: unknown;
-      providerSpecificData?: unknown;
-    };
+    const credentialDetails = credentials as any;
     if (isCodexFreePlan(credentialDetails.providerSpecificData)) {
       return errorResponse(
         HTTP_STATUS.BAD_REQUEST,
@@ -494,12 +491,12 @@ async function postHandler(request: Request, _context?: unknown) {
         `No credentials for provider: ${parsed.provider}`
       );
     }
-    if (credentials.allRateLimited) {
+    if ((credentials as any).allRateLimited) {
       return unavailableResponse(
         HTTP_STATUS.RATE_LIMITED,
         `[${parsed.provider}] All accounts rate limited`,
-        credentials.retryAfter,
-        credentials.retryAfterHuman
+        (credentials as any).retryAfter,
+        (credentials as any).retryAfterHuman
       );
     }
 
@@ -514,17 +511,17 @@ async function postHandler(request: Request, _context?: unknown) {
         n: 1,
       },
       images,
-      credentials,
+      credentials: credentials as any,
       log,
     });
 
-    if (result.success) {
+    if ((result as any).success) {
       await clearRecoveredProviderState(credentials);
-      return jsonResponse(result.data);
+      return jsonResponse((result as any).data);
     }
     return jsonResponse(
-      toJsonErrorPayload(result.error, "Image edit provider error"),
-      result.status
+      toJsonErrorPayload((result as any).error, "Image edit provider error"),
+      (result as any).status
     );
   }
 
@@ -561,12 +558,12 @@ async function postHandler(request: Request, _context?: unknown) {
         `No credentials for provider: ${parsed.provider}`
       );
     }
-    if (credentials.allRateLimited) {
+    if ((credentials as any).allRateLimited) {
       return unavailableResponse(
         HTTP_STATUS.RATE_LIMITED,
         `[${parsed.provider}] All accounts rate limited`,
-        credentials.retryAfter,
-        credentials.retryAfterHuman
+        (credentials as any).retryAfter,
+        (credentials as any).retryAfterHuman
       );
     }
 
@@ -574,7 +571,7 @@ async function postHandler(request: Request, _context?: unknown) {
       provider: parsed.provider,
       model: parsed.model,
       baseUrl: providerConfig.baseUrl,
-      credentials,
+      credentials: credentials as any,
       prompt,
       imageBytes,
       imageMime,
@@ -626,19 +623,19 @@ async function postHandler(request: Request, _context?: unknown) {
       `No credentials for custom image provider: ${customProviderId}`
     );
   }
-  if (credentials.allRateLimited) {
+  if ((credentials as any).allRateLimited) {
     return unavailableResponse(
       HTTP_STATUS.RATE_LIMITED,
       `[${customProviderId}] All accounts rate limited`,
-      credentials.retryAfter,
-      credentials.retryAfterHuman
+      (credentials as any).retryAfter,
+      (credentials as any).retryAfterHuman
     );
   }
 
   const result = await handleOpenAIImageEdit({
     provider: customProviderId,
     model: customModel,
-    credentials,
+    credentials: credentials as any,
     prompt,
     imageBytes,
     imageMime,

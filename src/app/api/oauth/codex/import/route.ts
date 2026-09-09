@@ -85,9 +85,7 @@ async function validateCodexRefreshToken(payload: {
  */
 
 const bodySchema = z.object({
-  accounts: z.union([z.record(z.unknown()), z.array(z.unknown())], {
-    errorMap: () => ({ message: "accounts must be an object or an array of objects" }),
-  }),
+  accounts: z.union([z.record(z.string(), z.unknown()), z.array(z.unknown())]),
 });
 
 async function requireAuth(request: Request): Promise<Response | null> {
@@ -110,14 +108,17 @@ export async function POST(request: Request) {
   const parsed = bodySchema.safeParse(rawBody);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: parsed.error.errors[0]?.message ?? "Invalid request body" },
+      { error: parsed.error.issues[0]?.message ?? "Invalid request body" },
       { status: 400 }
     );
   }
 
   const flat = flattenCodexImportPayload(parsed.data.accounts);
   if (!flat.ok) {
-    return NextResponse.json({ error: flat.error }, { status: 400 });
+    return NextResponse.json(
+      { error: (flat as { ok: false; error: string }).error },
+      { status: 400 }
+    );
   }
   if (flat.records.length === 0) {
     return NextResponse.json({ error: "No accounts found in payload" }, { status: 400 });
@@ -134,7 +135,7 @@ export async function POST(request: Request) {
     const norm = normalizeCodexImportRecord(flat.records[i]);
     if (!norm.ok) {
       failed += 1;
-      results.push({ index: i, ok: false, error: norm.error });
+      results.push({ index: i, ok: false, error: (norm as { ok: false; error: string }).error });
       continue;
     }
 

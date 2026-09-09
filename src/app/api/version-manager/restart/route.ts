@@ -10,7 +10,7 @@ import { parseVersionManagerToolRequest } from "../request";
 export async function POST(request: Request) {
   const parsed = await parseVersionManagerToolRequest(request);
   if (!parsed.ok) {
-    return parsed.response;
+    return (parsed as { ok: false; response: Response }).response;
   }
 
   try {

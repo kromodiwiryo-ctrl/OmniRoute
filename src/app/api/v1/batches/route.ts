@@ -74,7 +74,12 @@ export async function GET(request: Request) {
   const parsedLimit = parseBatchListLimit(url.searchParams.get("limit"));
   if (!parsedLimit.ok) {
     return NextResponse.json(
-      { error: { message: parsedLimit.message, type: "invalid_request_error" } },
+      {
+        error: {
+          message: (parsedLimit as { ok: false; message: string }).message,
+          type: "invalid_request_error",
+        },
+      },
       { status: 400, headers: CORS_HEADERS }
     );
   }

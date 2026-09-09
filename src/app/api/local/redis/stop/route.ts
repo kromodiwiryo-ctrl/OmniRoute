@@ -13,7 +13,8 @@ import {
 export async function POST() {
   const guard = isLocalRequestAllowed();
   if (!guard.allowed) {
-    return NextResponse.json({ error: guard.reason }, { status: 403 });
+    const { reason } = guard as { allowed: false; reason: string };
+    return NextResponse.json({ error: reason }, { status: 403 });
   }
 
   const runtime = await detectRedisContainerRuntime();

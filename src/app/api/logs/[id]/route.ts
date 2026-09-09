@@ -181,7 +181,7 @@ export async function GET(
                 pipelinePayloads: persistedRequest.pipelinePayloads || pipelinePayloads,
                 hasPipelineDetails: persistedRequest.hasPipelineDetails || true,
               }
-            : minimal;
+            : (minimal as typeof persistedRequest);
         }
       } catch (e) {
         console.warn("/api/logs/[id] - failed to read in-memory completed detail:", e);

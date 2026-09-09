@@ -20,7 +20,26 @@ const hermesAgentSettingsSchema = z.object({
   selections: z
     .array(
       z.object({
-        role: z.string(),
+        role: z.enum([
+          "default",
+          "delegation",
+          "vision",
+          "web_extract",
+          "compression",
+          "skills_hub",
+          "approval",
+          "mcp",
+          "title_generation",
+          "memory_query_rewrite",
+          "tts_audio_tags",
+          "triage_specifier",
+          "kanban_decomposer",
+          "profile_describer",
+          "goal_judge",
+          "curator",
+          "monitor",
+          "background_review",
+        ]),
         model: z.string(),
       })
     )

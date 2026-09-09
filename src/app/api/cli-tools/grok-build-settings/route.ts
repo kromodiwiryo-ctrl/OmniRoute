@@ -19,6 +19,7 @@ import {
   applyGrokBuildConfig,
   GrokBuildConfigConflictError,
   GROK_SUBAGENT_TYPES,
+  GrokBuildSettings,
   parseGrokBuildConfig,
   resetGrokBuildConfig,
   resolveGrokBuildConfigPath,

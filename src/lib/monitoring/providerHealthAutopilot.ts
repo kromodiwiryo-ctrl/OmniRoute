@@ -273,7 +273,7 @@ export async function buildProviderHealthAutopilotReport(
     return provider && (!providerFilter || provider === providerFilter);
   });
   const breakers = getAllCircuitBreakerStatuses().filter((breaker) => {
-    const name = toString((breaker as JsonRecord).name);
+    const name = toString((breaker as unknown as JsonRecord).name);
     const provider = canonicalProviderId(name);
     if (!name || !provider || name.startsWith("test-") || name.startsWith("test_")) return false;
     return !providerFilter || provider === providerFilter;
@@ -295,7 +295,7 @@ export async function buildProviderHealthAutopilotReport(
     if (provider) providerIds.add(provider);
   }
   for (const breaker of breakers) {
-    const provider = canonicalProviderId((breaker as JsonRecord).name);
+    const provider = canonicalProviderId((breaker as unknown as JsonRecord).name);
     if (provider) providerIds.add(provider);
   }
   for (const lockout of lockouts) {
@@ -314,8 +314,8 @@ export async function buildProviderHealthAutopilotReport(
       (connection) => canonicalProviderId(connection.provider) === provider
     );
     const breaker = breakers.find(
-      (entry) => canonicalProviderId((entry as JsonRecord).name) === provider
-    ) as JsonRecord | undefined;
+      (entry) => canonicalProviderId((entry as unknown as JsonRecord).name) === provider
+    ) as unknown as JsonRecord | undefined;
     const providerLockouts = lockouts.filter(
       (lockout) => canonicalProviderId(providerFromLockout(lockout)) === provider
     );
@@ -324,15 +324,15 @@ export async function buildProviderHealthAutopilotReport(
     );
     const issues: ProviderAutopilotIssue[] = [];
 
-    if (breaker && OPEN_BREAKER_STATES.has(String(breaker.state))) {
-      const target = { provider: toString(breaker.name) ?? provider };
+    if (breaker && OPEN_BREAKER_STATES.has(String((breaker as unknown as JsonRecord).state))) {
+      const target = { provider: toString((breaker as unknown as JsonRecord).name) ?? provider };
       const evidence = {
-        state: breaker.state,
-        failureCount: toNumber(breaker.failureCount) ?? 0,
-        retryAfterMs: toNumber(breaker.retryAfterMs) ?? 0,
-        lastFailureTime: breaker.lastFailureTime ?? null,
+        state: (breaker as unknown as JsonRecord).state,
+        failureCount: toNumber((breaker as unknown as JsonRecord).failureCount) ?? 0,
+        retryAfterMs: toNumber((breaker as unknown as JsonRecord).retryAfterMs) ?? 0,
+        lastFailureTime: (breaker as unknown as JsonRecord).lastFailureTime ?? null,
       };
-      const isOpen = breaker.state === "OPEN";
+      const isOpen = (breaker as unknown as JsonRecord).state === "OPEN";
       issues.push({
         id: issueId(isOpen ? "provider_circuit_open" : "provider_circuit_half_open", target),
         severity: isOpen ? "critical" : "warning",
@@ -532,7 +532,11 @@ export async function buildProviderHealthAutopilotReport(
       hasStaleConnectionError(connection, now)
     ).length;
     const breakerPenalty =
-      breaker?.state === "OPEN" ? 0.35 : breaker?.state === "HALF_OPEN" ? 0.2 : 0;
+      (breaker as unknown as JsonRecord)?.state === "OPEN"
+        ? 0.35
+        : (breaker as unknown as JsonRecord)?.state === "HALF_OPEN"
+          ? 0.2
+          : 0;
     const total = Math.max(1, providerConnections.length);
     const score = Math.max(
       0,
@@ -561,9 +565,9 @@ export async function buildProviderHealthAutopilotReport(
       signals: {
         circuitBreaker: breaker
           ? {
-              state: breaker.state,
-              failureCount: breaker.failureCount ?? 0,
-              retryAfterMs: breaker.retryAfterMs ?? 0,
+              state: (breaker as unknown as JsonRecord).state,
+              failureCount: (breaker as unknown as JsonRecord).failureCount ?? 0,
+              retryAfterMs: (breaker as unknown as JsonRecord).retryAfterMs ?? 0,
             }
           : null,
         connections: {

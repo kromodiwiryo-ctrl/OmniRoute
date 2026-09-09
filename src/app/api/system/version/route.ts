@@ -58,7 +58,9 @@ async function sendRestartStep(send: (data: Record<string, unknown>) => void): P
 
 async function getNews() {
   try {
-    const res = await fetch(NEWS_JSON_URL, { next: { revalidate: 3600 } });
+    const res = await fetch(NEWS_JSON_URL, {
+      next: { revalidate: 3600 },
+    } as unknown as RequestInit);
     if (!res.ok) return null;
     const data = await res.json();
     return parseActiveNewsPayload(data);
@@ -98,7 +100,10 @@ export async function GET(req: NextRequest) {
   const serialized = JSON.stringify(body);
   const etag = `"${createHash("sha256").update(serialized).digest("base64url")}"`;
   const headers = { "Cache-Control": "private, no-cache, must-revalidate", ETag: etag };
-  const validators = req.headers.get("If-None-Match")?.split(",").map((value) => value.trim());
+  const validators = req.headers
+    .get("If-None-Match")
+    ?.split(",")
+    .map((value) => value.trim());
   if (validators?.some((value) => value === etag || value === `W/${etag}`)) {
     return new NextResponse(null, { status: 304, headers });
   }
@@ -322,11 +327,11 @@ export async function POST(req: NextRequest) {
           return;
         }
         send({ step: "install", status: "running", message: `Installing omniroute@${latest}...` });
-          await execFileAsync(
-            "npm",
-            ["install", "-g", `omniroute@${latest}`, "--ignore-scripts", "--legacy-peer-deps"],
-            buildNpmExecOptions(process.platform, { cwd: PROJECT_ROOT, timeoutMs: 300_000 })
-          );
+        await execFileAsync(
+          "npm",
+          ["install", "-g", `omniroute@${latest}`, "--ignore-scripts", "--legacy-peer-deps"],
+          buildNpmExecOptions(process.platform, { cwd: PROJECT_ROOT, timeoutMs: 300_000 })
+        );
         send({ step: "install", status: "done", message: `Installed omniroute@${latest}` });
 
         // Step 2: Rebuild native modules (critical for better-sqlite3)

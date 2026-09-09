@@ -23,7 +23,7 @@ const VALID_IDS = new Set<AgentId>([
   "trae",
   "windsurf",
   "jules",
-]);
+] as AgentId[]);
 
 type Params = { params: Promise<{ id: string }> };
 

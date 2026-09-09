@@ -1,4 +1,5 @@
 import { upsertProxy } from "@/lib/db/proxies";
+import type { ProxyPayload } from "@/lib/db/proxies/types";
 import { bulkImportProxiesSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
@@ -44,7 +45,7 @@ export async function POST(request: Request) {
 
     for (const item of items) {
       try {
-        const result = await upsertProxy(item);
+        const result = await upsertProxy(item as ProxyPayload);
         if (result.proxy) {
           if (result.action === "created") created++;
           else updated++;

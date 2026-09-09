@@ -9,7 +9,6 @@ import { copyFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
-// @ts-expect-error - .mjs without types
 import { getEnvSyncPlan, syncEnv } from "../../../../../../scripts/dev/sync-env.mjs";
 
 async function loadSyncHelpers() {
@@ -42,7 +41,7 @@ export async function GET(request: Request) {
     // webpack-frozen `import.meta.url` (build-machine path) — that froze the
     // path and 500'd this route on packaged installs (#5006). cwd matches the
     // `.env` target used by createEnvBackup() above.
-    const plan = getEnvSyncPlan({ scope: "oauth", rootDir: process.cwd() });
+    const plan = getEnvSyncPlan({ scope: "oauth" });
 
     return NextResponse.json({
       available: plan.available,
@@ -68,8 +67,8 @@ export async function POST(request: Request) {
     const { syncEnv, getEnvSyncPlan } = await loadSyncHelpers();
     const backupPath = createEnvBackup();
     // Explicit rootDir (cwd) — see GET above (#5006).
-    const result = syncEnv({ scope: "oauth", quiet: true, rootDir: process.cwd() });
-    const plan = getEnvSyncPlan({ scope: "oauth", rootDir: process.cwd() });
+    const result = syncEnv({ scope: "oauth", quiet: true });
+    const plan = getEnvSyncPlan({ scope: "oauth" });
 
     return NextResponse.json({
       success: true,

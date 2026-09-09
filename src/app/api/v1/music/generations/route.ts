@@ -106,7 +106,7 @@ async function postHandler(request, context) {
   if (result.success) {
     await clearRecoveredProviderState(credentials);
     return successfulMediaGenerationResponse({
-      result,
+      result: result as any,
       billingMode: "audio",
       provider,
       model: body.model,
@@ -115,7 +115,7 @@ async function postHandler(request, context) {
     });
   }
 
-  return failedMediaGenerationResponse(result, "Music generation provider error");
+  return failedMediaGenerationResponse(result as any, "Music generation provider error");
 }
 
 export const POST = withInjectionGuard(postHandler);

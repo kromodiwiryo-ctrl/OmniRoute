@@ -4,5 +4,32 @@
     "noEmit": true,
     "incremental": false
   },
-  "include": ["src/app/api/**/*.ts", "src/app/api/**/*.tsx"]
+  "exclude": [
+    "node_modules",
+    "electron/node_modules",
+    "electron/dist-electron",
+    ".build",
+    "dist",
+    "coverage",
+    ".source",
+    ".tmp",
+    ".claude",
+    ".worktrees",
+    "@omniroute",
+    "_tasks",
+    "_ideia",
+    "_mono_repo",
+    "_references",
+    ".opencode",
+    ".scratch",
+    ".agents",
+    ".slim",
+    "packages"
+  ],
+  "include": [
+    "src/app/api/**/*.ts",
+    "src/app/api/**/*.tsx",
+    "open-sse/types.d.ts",
+    "open-sse/**/*.ts"
+  ]
 }

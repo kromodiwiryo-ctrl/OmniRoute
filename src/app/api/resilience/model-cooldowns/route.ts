@@ -45,7 +45,10 @@ export async function DELETE(request: Request) {
     const rawBody = await request.json().catch(() => ({}));
     const validation = validateBody(deleteCooldownSchema, rawBody);
     if (!validation.success) {
-      return NextResponse.json({ error: validation.error }, { status: 400 });
+      return NextResponse.json(
+        { error: (validation as { success: false; error: unknown }).error },
+        { status: 400 }
+      );
     }
     const body = validation.data;
 

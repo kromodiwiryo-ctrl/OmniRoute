@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         requestedIds: validation.data.providerIds,
         candidates: getEligibleFreeOnboardingProviders(),
         listExisting: () => getProviderConnections(),
-        create: (input) => createProviderConnection(input),
+        create: (input) => createProviderConnection(input as unknown as Record<string, unknown>),
       })
     );
     return NextResponse.json(result);

@@ -49,7 +49,7 @@ export function validateBody<TSchema extends z.ZodTypeAny>(
       details: issues.map((e) => ({
         field: e.path.join("."),
         message: e.message,
-        ...(("keys" in e && (e as { keys?: string[] }).keys)
+        ...("keys" in e && (e as { keys?: string[] }).keys
           ? { keys: (e as { keys: string[] }).keys }
           : {}),
       })),
@@ -61,6 +61,12 @@ export function isValidationFailure<TData>(
   validation: ValidationResult<TData>
 ): validation is ValidationFailure {
   return validation.success === false;
+}
+
+export function isValidatedJsonBodyFailure<TData>(
+  result: ValidatedJsonBodyResult<TData>
+): result is { success: false; response: NextResponse } {
+  return result.success === false;
 }
 
 /**

@@ -7,7 +7,7 @@ import { authorizeWebSocketHandshake, extractWsTokenFromRequest } from "@/lib/ws
 import { getModelInfo } from "@/sse/services/model";
 import { resolveCcDiscoveryAliasStrip } from "@/lib/ccDiscoveryAliasResolve";
 import { getProviderCredentialsWithQuotaPreflight } from "@/sse/services/auth";
-import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
+import { enforceApiKeyPolicy, type ApiKeyMetadata } from "@/shared/utils/apiKeyPolicy";
 import { checkAndRefreshToken } from "@/sse/services/tokenRefresh";
 import { resolveCodexWsModelInfo } from "./modelResolution";
 import { isFeatureFlagEnabled } from "@/shared/utils/featureFlags";
@@ -48,7 +48,6 @@ const executor = new CodexExecutor();
 const log = logger("RESPONSES_WS");
 
 type JsonRecord = Record<string, unknown>;
-type ApiKeyMetadata = Awaited<ReturnType<typeof getApiKeyMetadata>>;
 
 const bridgePayloadSchema = z
   .object({
@@ -518,7 +517,7 @@ async function resolveCodexProxy(provider: string): Promise<string | undefined> 
   try {
     return proxyConfigToUrl(await resolveProxy(provider)) || undefined;
   } catch (err) {
-    logger.warn(`[codex-responses-ws] proxy resolution failed: ${sanitizeErrorMessage(err)}`);
+    log.warn(`[codex-responses-ws] proxy resolution failed: ${sanitizeErrorMessage(err)}`);
     return undefined;
   }
 }
@@ -539,8 +538,9 @@ async function prepare(body: JsonRecord) {
   }
   const upstream = await resolveCodexUpstreamContext(context);
   if ("error" in upstream) return upstream.error;
-  const { responseBody, metadata, provider, model, credentials: refreshedCredentials } = upstream;
-  const reasoningDecision = upstream.reasoningDecision;
+  const upstreamOk = upstream as Extract<typeof upstream, { provider: string }>;
+  const { responseBody, metadata, provider, model, credentials: refreshedCredentials } = upstreamOk;
+  const reasoningDecision = upstreamOk.reasoningDecision;
 
   let responseBodyWithMemory = await maybeInjectResponsesWsMemory(responseBody, metadata);
   let reasoningRouting: JsonRecord | null = null;

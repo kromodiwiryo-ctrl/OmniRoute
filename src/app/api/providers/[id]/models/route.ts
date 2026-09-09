@@ -122,6 +122,7 @@ import {
   PROVIDER_MODELS_CONFIG,
 } from "./discovery/providerModelsConfig";
 import {
+  type CodexDiscoveryModel,
   buildCodexDiscoveryCatalog,
   enrichCodexModelsFromGithubCatalog,
   fetchCodexDiscoveryModels,
@@ -356,7 +357,7 @@ export async function GET(
         return buildDiscoveryFallbackResponse(warnings);
       }
       const status = getSafeOutboundFetchErrorStatus(error);
-      if (status === 400 || status === 503 || status === 504) return null;
+      if (status === 503 || status === 504) return null;
       return buildDiscoveryFallbackResponse(warnings);
     };
 
@@ -512,9 +513,11 @@ export async function GET(
       }
 
       try {
-        const graphqlEndpoint =
-          (typeof connection.providerSpecificData?.graphqlEndpoint === "string" &&
-            connection.providerSpecificData.graphqlEndpoint) ||
+        const graphqlEndpoint: string =
+          (typeof (connection.providerSpecificData as Record<string, unknown>)?.graphqlEndpoint ===
+            "string" &&
+            ((connection.providerSpecificData as Record<string, unknown>)
+              .graphqlEndpoint as string)) ||
           process.env.PROMPTQL_GRAPHQL_ENDPOINT ||
           "https://data.prompt.ql.app/promptql/playground-v2-hge/v1/graphql";
         const discovered = await discoverPromptQlModels({
@@ -615,9 +618,7 @@ export async function GET(
       try {
         const discovery = await discoverMaxaiModels({
           providerSpecificData: connection.providerSpecificData as
-            | Record<string, unknown>
-            | null
-            | undefined,
+            Record<string, unknown> | null | undefined,
           accessToken: apiKey || accessToken,
           fetchImpl: (url, init) =>
             safeOutboundFetch(url, {
@@ -1246,7 +1247,7 @@ export async function GET(
           method: "GET",
           headers: {
             ...buildOptionalBearerHeaders(token),
-            ...(projectId ? { "OpenAI-Project": projectId } : {}),
+            ...(projectId ? { "OpenAI-Project": projectId as string } : {}),
           },
         });
       } catch (error) {
@@ -1443,8 +1444,7 @@ export async function GET(
 
         const modelsResp = await safeOutboundFetch(
           "https://platformapi.innerai.com/api/v1/ai_models",
-          { headers: innerAiHeaders },
-          getProviderOutboundGuard(provider)
+          { headers: innerAiHeaders, guard: getProviderOutboundGuard() }
         );
         if (!modelsResp.ok) {
           throw new Error(`Inner.ai models API returned HTTP ${modelsResp.status}`);
@@ -2095,9 +2095,11 @@ export async function GET(
         getModelsByProviderId("codex") || [],
         getStaticModelsForProvider("codex") || []
       );
-      const finalizeCodexCatalog = (remoteModels: typeof cachedDiscoveryModels) =>
+      const finalizeCodexCatalog = (remoteModels: CodexDiscoveryModel[]) =>
         buildCodexDiscoveryCatalog(remoteModels, staticCodexCatalog);
-      const cachedCatalogModels = finalizeCodexCatalog(cachedDiscoveryModels);
+      const cachedCatalogModels = finalizeCodexCatalog(
+        cachedDiscoveryModels as unknown as CodexDiscoveryModel[]
+      );
       const cachedIdsMatchFinalCatalog =
         cachedDiscoveryModels.length === cachedCatalogModels.length &&
         cachedDiscoveryModels.every((model, index) => model.id === cachedCatalogModels[index]?.id);
@@ -2128,7 +2130,7 @@ export async function GET(
 
       const liveModels = await fetchCodexDiscoveryModels({
         accessToken: accessToken || null,
-        providerSpecificData: connection.providerSpecificData,
+        providerSpecificData: connection.providerSpecificData as Record<string, unknown>,
         fetchImpl: (url, init) =>
           safeOutboundFetch(url, {
             ...SAFE_OUTBOUND_FETCH_PRESETS.modelsDiscovery,

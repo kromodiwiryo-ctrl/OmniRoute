@@ -10,10 +10,7 @@ export async function OPTIONS() {
   return elevenLabsOptionsResponse();
 }
 
-export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ voiceId: string }> }
-) {
+export async function POST(request: Request, { params }: { params: Promise<{ voiceId: string }> }) {
   const { voiceId } = await params;
   if (!isSafeElevenLabsVoiceId(voiceId)) {
     return new Response(JSON.stringify(buildErrorBody(400, "Invalid ElevenLabs voice ID")), {
@@ -25,5 +22,5 @@ export async function POST(
     method: "POST",
     body: request.body,
     duplex: "half",
-  });
+  } as any);
 }

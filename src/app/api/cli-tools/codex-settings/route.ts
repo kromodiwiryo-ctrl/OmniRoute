@@ -22,8 +22,13 @@ const getCodexAuthPath = () => getCliConfigPaths("codex").auth;
 const getCodexDir = () => path.dirname(getCodexConfigPath());
 
 // Parse TOML config to object (simple parser for codex config)
-const parseToml = (content: string) => {
-  const result: Record<string, any> = { _root: {}, _sections: {} };
+const parseToml = (
+  content: string
+): { _root: Record<string, unknown>; _sections: Record<string, Record<string, unknown>> } => {
+  const result: {
+    _root: Record<string, unknown>;
+    _sections: Record<string, Record<string, unknown>>;
+  } = { _root: {}, _sections: {} };
   let currentSection = "_root";
 
   content.split("\n").forEach((line) => {
@@ -92,7 +97,10 @@ const formatTomlValue = (value: unknown): string => {
 };
 
 // Convert parsed object back to TOML string
-const toToml = (parsed: Record<string, any>) => {
+const toToml = (parsed: {
+  _root: Record<string, unknown>;
+  _sections: Record<string, Record<string, unknown>>;
+}) => {
   let lines: string[] = [];
 
   // Root level keys
@@ -245,7 +253,10 @@ export async function POST(request: Request) {
     await createMultiBackup("codex", [configPath, authPath]);
 
     // Read and parse existing config
-    let parsed: Record<string, any> = { _root: {}, _sections: {} };
+    let parsed: {
+      _root: Record<string, unknown>;
+      _sections: Record<string, Record<string, unknown>>;
+    } = { _root: {}, _sections: {} };
     try {
       const existingConfig = await fs.readFile(configPath, "utf-8");
       parsed = parseToml(existingConfig);
@@ -342,7 +353,10 @@ export async function DELETE(request: Request) {
     await createMultiBackup("codex", [configPath, getCodexAuthPath()]);
 
     // Read and parse existing config
-    let parsed: Record<string, any> = { _root: {}, _sections: {} };
+    let parsed: {
+      _root: Record<string, unknown>;
+      _sections: Record<string, Record<string, unknown>>;
+    } = { _root: {}, _sections: {} };
     try {
       const existingConfig = await fs.readFile(configPath, "utf-8");
       parsed = parseToml(existingConfig);

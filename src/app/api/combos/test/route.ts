@@ -5,6 +5,7 @@ import { getComboByName, getCombos } from "@/lib/db/combos";
 import { pickApiKeyForInternalUse } from "@/lib/db/apiKeys";
 import { getRuntimePorts } from "@/lib/runtime/ports";
 import { resolveNestedComboTargets } from "@omniroute/open-sse/services/combo.ts";
+import type { ComboLike, ResolvedComboTarget } from "@omniroute/open-sse/services/combo/types.ts";
 import { testComboSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
@@ -17,7 +18,10 @@ async function getInternalApiKey(): Promise<string | null> {
   return pickApiKeyForInternalUse("combo-health-check");
 }
 
-function buildComboTestResult(target, partial = {}) {
+function buildComboTestResult(
+  target: ResolvedComboTarget,
+  partial: Record<string, unknown> = {}
+): Record<string, unknown> {
   return {
     model: target.modelStr,
     provider: target.provider,
@@ -29,7 +33,11 @@ function buildComboTestResult(target, partial = {}) {
   };
 }
 
-async function testComboTarget(target, baseInternalUrl, internalApiKey: string | null) {
+async function testComboTarget(
+  target: ResolvedComboTarget,
+  baseInternalUrl: string,
+  internalApiKey: string | null
+) {
   const startTime = Date.now();
   try {
     // Issue #2359: combo entries with a malformed/missing modelStr surfaced
@@ -154,10 +162,19 @@ export async function POST(request) {
     }
     const { comboName } = validation.data;
 
-    const combo = await getComboByName(comboName);
-    if (!combo) {
+    const comboRecord = await getComboByName(comboName);
+    if (!comboRecord) {
       return NextResponse.json({ error: "Combo not found" }, { status: 404 });
     }
+    // ComboRecord has optional name/models; assert they exist for ComboLike
+    const combo: ComboLike = {
+      name: (comboRecord.name as string) ?? comboName,
+      models: (comboRecord.models as unknown[]) ?? [],
+      strategy: comboRecord.strategy as string | null | undefined,
+      config: comboRecord.config as Record<string, unknown> | null | undefined,
+      autoConfig: comboRecord.autoConfig as Record<string, unknown> | null | undefined,
+      id: comboRecord.id as string | undefined,
+    };
 
     const allCombos = await getCombos();
     const targets = resolveNestedComboTargets(combo, allCombos);

@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { databaseSettingsSchema } from "@/shared/validation/settingsSchemas";
-import { getDatabaseSettings, updateDatabaseSettings } from "@/lib/db/databaseSettings";
+import {
+  getDatabaseSettings,
+  updateDatabaseSettings,
+  type UserDatabaseSettings,
+} from "@/lib/db/databaseSettings";
 
 const databaseSettingsPatchSchema = databaseSettingsSchema.partial().strict();
 
@@ -32,7 +36,7 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
-    updateDatabaseSettings(validation.data);
+    updateDatabaseSettings(validation.data as Partial<UserDatabaseSettings>);
 
     // Return merged settings (GET response pattern)
     return NextResponse.json(getDatabaseSettings());

@@ -27,7 +27,8 @@ async function requireOAuthAuth(request: Request) {
 async function syncToCloudIfEnabled() {
   try {
     if (await isCloudEnabled()) {
-      await syncToCloud();
+      const machineId = await getConsistentMachineId();
+      await syncToCloud(machineId);
     }
   } catch {
     // best-effort

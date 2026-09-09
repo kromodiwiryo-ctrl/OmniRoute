@@ -122,7 +122,7 @@ export async function POST(request) {
     if (!proxyToUse) {
       const providerProxy = await getProxyForLevel("provider", provider);
       const globalProxy = providerProxy ? null : await getProxyForLevel("global");
-      proxyToUse = providerProxy || globalProxy || null;
+      proxyToUse = (providerProxy || globalProxy || null) as typeof proxyToUse;
     }
 
     const result = projectProviderValidationResultForPublicResponse(

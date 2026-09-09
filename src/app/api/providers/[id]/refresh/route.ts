@@ -102,9 +102,9 @@ export async function POST(_request: Request, { params }: { params: Promise<{ id
       connection.accessToken
     ) {
       const copilotResult = await refreshCopilotToken(
-        connection.accessToken,
+        connection.accessToken as string,
         credentials,
-        resolveCopilotTokenBaseUrl(provider, credentials)
+        resolveCopilotTokenBaseUrl(provider, credentials as Record<string, unknown>)
       );
       if (!copilotResult?.token) {
         return NextResponse.json(
@@ -114,7 +114,7 @@ export async function POST(_request: Request, { params }: { params: Promise<{ id
       }
 
       const refreshedProviderSpecificData = {
-        ...(connection.providerSpecificData || {}),
+        ...((connection.providerSpecificData || {}) as Record<string, unknown>),
         copilotToken: copilotResult.token,
         copilotTokenExpiresAt: copilotResult.expiresAt,
       };
@@ -165,10 +165,11 @@ export async function POST(_request: Request, { params }: { params: Promise<{ id
         // retrying, but "Refresh token expired" would be a lie: the token is fine, the
         // provider is gone. Say that, and say where to go — the operator otherwise
         // re-authenticates in a loop against something that no longer exists.
-        const isDeprecated = newCredentials.code === "provider_deprecated";
+        const isDeprecated =
+          (newCredentials as Record<string, unknown>).code === "provider_deprecated";
         const reason =
-          isDeprecated && typeof newCredentials.reason === "string"
-            ? newCredentials.reason
+          isDeprecated && typeof (newCredentials as Record<string, unknown>).reason === "string"
+            ? ((newCredentials as Record<string, unknown>).reason as string)
             : "Refresh token expired. Please re-authenticate this account.";
         await updateProviderConnection(id, {
           testStatus: isDeprecated ? "expired" : "invalid",
@@ -183,7 +184,12 @@ export async function POST(_request: Request, { params }: { params: Promise<{ id
               ? "This provider was deprecated and can no longer be refreshed"
               : "Token refresh failed — provider returned no new token",
             requiresReauth: true,
-            ...(isDeprecated ? { deprecated: true, migrateTo: newCredentials.migrateTo } : {}),
+            ...(isDeprecated
+              ? {
+                  deprecated: true,
+                  migrateTo: (newCredentials as Record<string, unknown>).migrateTo,
+                }
+              : {}),
           },
           { status: 401 }
         );
@@ -203,8 +209,9 @@ export async function POST(_request: Request, { params }: { params: Promise<{ id
     }
 
     const resolvedCreds = persistedCredentials || newCredentials;
-    const expiresAt = resolvedCreds.expiresAt
-      ? resolvedCreds.expiresAt
+    const resolvedCredsAny = resolvedCreds as Record<string, unknown>;
+    const expiresAt = resolvedCredsAny.expiresAt
+      ? resolvedCredsAny.expiresAt
       : resolvedCreds.expiresIn
         ? new Date(Date.now() + resolvedCreds.expiresIn * 1000).toISOString()
         : null;
