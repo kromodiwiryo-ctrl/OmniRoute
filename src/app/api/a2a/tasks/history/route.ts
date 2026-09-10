@@ -5,6 +5,8 @@ import { authorizeA2ATaskRoute } from "@/app/api/a2a/_auth";
 import { listA2ATaskHistory } from "@/lib/db/a2aTasks";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * `GET /api/a2a/tasks/history` — persisted A2A task history (Orchestration Canvas Fase 2,
  * Task C3). Distinct from `GET /api/a2a/tasks` (in-memory, TTL-bound `A2ATaskManager` map): this

@@ -8,6 +8,8 @@ import {
 } from "@/lib/db/a2aTasks";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /** JSON.parse with a fallback on malformed/absent input — persisted history rows are our own
  * writes (A2ATaskManager.persist()) but are still parsed defensively. */
 function safeJsonParse<T>(json: string | null | undefined, fallback: T): T {
@@ -29,10 +31,10 @@ const STATE_EVENT_PREFIX = "state:";
  * state each event represents is recovered by stripping that prefix.
  */
 function reconstituteHistoricalTask(row: A2ATaskHistoryRow) {
-  const input = safeJsonParse<{ skill: string; messages: Array<{ role: string; content: string }> }>(
-    row.input_json,
-    { skill: row.skill_id ?? "", messages: [] }
-  );
+  const input = safeJsonParse<{
+    skill: string;
+    messages: Array<{ role: string; content: string }>;
+  }>(row.input_json, { skill: row.skill_id ?? "", messages: [] });
   const artifacts = safeJsonParse<unknown[]>(row.output_json, []);
   const events = listA2ATaskEvents(row.id).map((event) => {
     const data = safeJsonParse<{ message?: string } | null>(event.data_json, null);
