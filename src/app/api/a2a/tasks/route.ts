@@ -7,6 +7,8 @@ import { authorizeA2ATaskRoute } from "@/app/api/a2a/_auth";
 import { createConductorTask } from "@/lib/conductor/hubProxy";
 import { getSettings } from "@/lib/db/settings";
 
+export const dynamic = "force-dynamic";
+
 const VALID_TASK_STATES = new Set<TaskState>([
   "submitted",
   "working",
