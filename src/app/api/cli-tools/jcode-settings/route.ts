@@ -17,8 +17,6 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
-export const dynamic = "force-dynamic";
-
 const TOOL_ID = "jcode";
 
 /**

@@ -27,8 +27,6 @@ import {
   type GrokSubagentType,
 } from "@/shared/services/grokBuildConfig";
 
-export const dynamic = "force-dynamic";
-
 const logger = pino({ name: "grok-build-settings-api" });
 const TOOL_ID = "grok-build";
 const DEFAULT_CONTEXT_WINDOW = 200000;

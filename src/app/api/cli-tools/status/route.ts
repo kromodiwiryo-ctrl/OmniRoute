@@ -6,8 +6,6 @@ import { getCliRuntimeStatus, CLI_TOOL_IDS } from "@/shared/services/cliRuntime"
 import { getAllCliToolLastConfigured } from "@/lib/db/cliToolState";
 import { checkToolConfigStatus } from "@/lib/cliTools/checkToolConfigStatus";
 
-export const dynamic = "force-dynamic";
-
 /**
  * GET /api/cli-tools/status
  * Returns runtime + config status for all CLI tools in one batch call.

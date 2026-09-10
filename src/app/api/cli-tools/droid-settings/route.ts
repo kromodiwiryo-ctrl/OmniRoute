@@ -21,8 +21,6 @@ import {
   normalizeDroidModelList,
 } from "@/shared/services/droidCustomModels";
 
-export const dynamic = "force-dynamic";
-
 const getDroidSettingsPath = () => getCliPrimaryConfigPath("droid");
 const getDroidDir = () => path.dirname(getDroidSettingsPath());
 

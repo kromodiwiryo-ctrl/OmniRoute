@@ -17,8 +17,6 @@ import { getApiKeyById } from "@/lib/db/apiKeys";
 import { normalizeCodexBaseUrl } from "@/shared/utils/codexBaseUrl";
 import { migrateCodexFeatureFlags } from "@/shared/utils/codexConfig";
 
-export const dynamic = "force-dynamic";
-
 const getCodexConfigPath = () => getCliConfigPaths("codex").config;
 const getCodexAuthPath = () => getCliConfigPaths("codex").auth;
 const getCodexDir = () => path.dirname(getCodexConfigPath());
