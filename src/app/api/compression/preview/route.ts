@@ -23,6 +23,8 @@ import {
 import { summarizeEncoderCandidates } from "@omniroute/open-sse/services/compression/engines/headroom/encoderComparison";
 import { DEFAULT_MIN_ROWS } from "@omniroute/open-sse/services/compression/engines/headroom/smartcrusher";
 
+export const dynamic = "force-dynamic";
+
 export const PreviewCompressionConfigSchema = compressionPreviewConfigSchema;
 
 export const PreviewRequestSchema = z.object({

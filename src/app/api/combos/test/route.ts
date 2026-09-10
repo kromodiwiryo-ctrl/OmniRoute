@@ -11,6 +11,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 async function getInternalApiKey(): Promise<string | null> {
   // Combo health-check probes hit /v1/chat/completions, which enforces
   // per-key model allowlists (see shared/utils/apiKeyPolicy.ts). Picking
@@ -108,6 +110,7 @@ async function testComboTarget(
     }
 
     let errorMsg = "";
+
     try {
       const errBody = await res.json();
       errorMsg = errBody?.error?.message || errBody?.error || res.statusText;

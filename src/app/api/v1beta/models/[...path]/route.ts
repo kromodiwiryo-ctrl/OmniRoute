@@ -9,6 +9,8 @@ import { v1betaGeminiGenerateSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { convertGeminiToInternal } from "./convertGeminiToInternal";
 
+export const dynamic = "force-dynamic";
+
 let initialized = false;
 
 /**

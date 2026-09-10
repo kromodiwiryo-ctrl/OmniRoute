@@ -11,6 +11,8 @@ import { getConsistentMachineId } from "@/shared/utils/machineId";
 import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
 import { resolveProxyForProvider } from "@/models";
 
+export const dynamic = "force-dynamic";
+
 async function requireOAuthImportAuth(request: Request) {
   // GHSA-mg76: importing a provider connection is a state-mutating admin action;
   // require management scope (or a dashboard session), not any valid client key.

@@ -8,6 +8,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { rtkConfigSchema } from "@/shared/validation/compressionConfigSchemas";
 
+export const dynamic = "force-dynamic";
+
 export const rtkTestSchema = z
   .object({
     text: z.string().min(1),

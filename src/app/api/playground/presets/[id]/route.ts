@@ -21,6 +21,8 @@ import {
 import { PlaygroundPresetUpdateSchema } from "@/shared/schemas/playground";
 import { isRequireApiKeyEnabled } from "@/shared/utils/featureFlags";
 
+export const dynamic = "force-dynamic";
+
 const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "GET, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "*",
@@ -124,6 +126,7 @@ export async function PUT(
     const message = firstIssue
       ? `${firstIssue.path.join(".") || "body"}: ${firstIssue.message}`
       : "Invalid request body";
+
     return errorResp(HTTP_STATUS.BAD_REQUEST, message);
   }
   const patch = parsed.data;

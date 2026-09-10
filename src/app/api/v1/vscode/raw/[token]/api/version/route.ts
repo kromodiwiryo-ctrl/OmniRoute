@@ -1,5 +1,7 @@
 import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
 
+export const dynamic = "force-dynamic";
+
 const OLLAMA_COMPAT_VERSION = "0.6.4";
 
 export async function OPTIONS() {

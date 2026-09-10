@@ -5,6 +5,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;
@@ -39,6 +41,7 @@ export async function POST(request: Request) {
       name: string;
       success: boolean;
       action?: "created" | "updated";
+
       id?: string;
       error?: string;
     }> = [];

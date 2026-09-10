@@ -4,6 +4,8 @@ import { rotateScope } from "@/lib/gamification/leaderboard";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

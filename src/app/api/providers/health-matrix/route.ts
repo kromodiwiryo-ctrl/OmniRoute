@@ -7,6 +7,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { buildProviderHealthMatrix } from "@/lib/monitoring/providerHealthMatrix";
 
+export const dynamic = "force-dynamic";
+
 const logger = pino({ name: "provider-health-matrix-api" });
 
 const healthMatrixQuerySchema = z.object({

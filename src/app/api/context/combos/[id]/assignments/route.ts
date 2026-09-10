@@ -8,6 +8,8 @@ import {
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 export const assignmentsUpdateSchema = z
   .object({
     routingComboIds: z.array(z.string().trim().min(1)),

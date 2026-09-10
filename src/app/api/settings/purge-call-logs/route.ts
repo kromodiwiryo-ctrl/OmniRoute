@@ -3,6 +3,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 import { purgeCallLogs } from "@/lib/db/cleanup";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 
+export const dynamic = "force-dynamic";
+
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {

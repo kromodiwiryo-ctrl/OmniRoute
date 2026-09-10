@@ -6,6 +6,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 import { getProviderMetrics } from "@/lib/db/callLogStats";
 import { toNumber, toNumberOrNull } from "@/shared/utils/numeric";
 
+export const dynamic = "force-dynamic";
+
 const logger = pino({ name: "provider-metrics-api" });
 
 /**
@@ -39,6 +41,7 @@ export async function GET() {
         typeof row.provider === "string" && row.provider.trim().length > 0
           ? row.provider
           : "unknown";
+
       const totalRequests = toNumber(row.totalRequests);
       const totalSuccesses = toNumber(row.totalSuccesses);
       const avgLatencyMs = toNumberOrNull(row.avgLatencyMs);

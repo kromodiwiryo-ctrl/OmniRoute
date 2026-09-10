@@ -16,6 +16,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const TOOL_ID = "crush";
 
 // Crush (charmbracelet/crush) reads a file-based config, default
@@ -35,6 +37,7 @@ const getCrushDir = () => path.dirname(getCrushConfigPath());
  */
 type CrushProvider = {
   type: "openai-compat";
+
   base_url: string;
   api_key: string;
   models: Array<{ id: string; name: string; context_window: number }>;

@@ -41,6 +41,7 @@ import {
 } from "@/server/authz/headers";
 import { readSubjectFromHeaders } from "@/server/authz/assertAuth";
 
+export const dynamic = "force-dynamic";
 /**
  * Force this route to run dynamically per-request and never be cached/prerendered.
  * Combined with the `Cache-Control: no-store` response header below, this keeps
@@ -48,7 +49,6 @@ import { readSubjectFromHeaders } from "@/server/authz/assertAuth";
  * items) visible immediately after refresh or restart instead of falling back
  * to stale Next.js fetch cache. Ported from upstream decolua/9router#951.
  */
-export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 /** Response headers applied to every successful GET/PATCH on /api/settings. */

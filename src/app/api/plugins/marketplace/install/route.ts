@@ -5,6 +5,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 import { installMarketplacePlugin } from "@/lib/plugins/marketplace";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 const InstallBodySchema = z.object({
   name: z.string().trim().min(1),
 });
@@ -31,6 +33,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result, { status: 201, headers: CORS_HEADERS });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to install marketplace plugin";
+
     console.error("[plugins/marketplace] Install error:", msg);
     return NextResponse.json(buildErrorBody(400, msg), {
       status: 400,

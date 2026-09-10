@@ -17,6 +17,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { getApiKeyById } from "@/lib/db/apiKeys";
 import { readJsoncConfig } from "../_lib/jsoncConfig";
 
+export const dynamic = "force-dynamic";
+
 // Get claude settings path based on OS
 const getClaudeSettingsPath = () => getCliPrimaryConfigPath("claude");
 

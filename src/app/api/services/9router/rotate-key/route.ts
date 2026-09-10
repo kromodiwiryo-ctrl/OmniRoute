@@ -6,6 +6,8 @@ import { encrypt } from "@/lib/db/encryption";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(): Promise<Response> {
   try {
     const newKey = generateServiceApiKey("nr");

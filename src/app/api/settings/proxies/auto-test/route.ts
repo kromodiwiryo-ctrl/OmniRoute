@@ -16,6 +16,8 @@ import { resolveProviderProbeTarget } from "@/lib/proxyHealth/providerProbeTarge
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 const TEST_TIMEOUT_MS = 5000;
 // Shared with the background sweep — see src/lib/proxyHealth/probeTarget.ts.
 const TEST_URL = resolveProbeTarget();
@@ -91,6 +93,7 @@ async function testSingleProxy(proxy: {
     // (any status under 500): "blocked" covers 401/403/429, which were — and stay —
     // alive here, so no proxy changes state because of this field.
     const alive = outcome === "ok" || outcome === "blocked";
+
     // #6246: "Test All" is a test, not test-and-set. By default an automated probe
     // never mutates a proxy's status (only the operator does). Opt back into the
     // legacy write with PROXY_HEALTH_AUTO_DEACTIVATE=true.

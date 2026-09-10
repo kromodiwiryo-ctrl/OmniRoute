@@ -3,6 +3,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 import { getCcDiscoveryMetrics } from "@/lib/db/ccDiscoveryMetrics";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/settings/cc-discovery-metrics — usage counters for the Claude Code
  * discovery-alias feature: how many requests were served via a resolved

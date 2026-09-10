@@ -8,6 +8,8 @@ import type {
 } from "@/shared/types/utilization";
 import { BUCKET_SIZES } from "@/shared/types/utilization";
 
+export const dynamic = "force-dynamic";
+
 const VALID_RANGES: UtilizationTimeRange[] = ["1h", "24h", "7d", "30d"];
 
 function asNullableString(value: unknown): string | null {

@@ -48,6 +48,7 @@ import {
 } from "../relaySecurity";
 import { finalizeReadableStream } from "../streamFinalizer";
 
+export const dynamic = "force-dynamic";
 // Minimal request-shape validation (Rule #7). `.passthrough()` keeps every other
 // OpenAI chat-completion field intact (temperature, tools, response_format, …) —
 // we only assert the fields this route and the sidecar rely on, so a malformed
@@ -361,6 +362,7 @@ export async function POST(request: Request) {
   } catch (err) {
     // Surface timeout/abort clearly so the caller can fall back to TS path.
     const isAbort = err instanceof Error && err.name === "AbortError";
+
     return new Response(
       JSON.stringify(
         buildErrorBody(

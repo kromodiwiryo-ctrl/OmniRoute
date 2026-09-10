@@ -21,6 +21,8 @@ import {
   normalizeDroidModelList,
 } from "@/shared/services/droidCustomModels";
 
+export const dynamic = "force-dynamic";
+
 const getDroidSettingsPath = () => getCliPrimaryConfigPath("droid");
 const getDroidDir = () => path.dirname(getDroidSettingsPath());
 
@@ -125,9 +127,7 @@ export async function POST(request: Request) {
         {
           error: {
             message: "Invalid request",
-            details: [
-              { field: "models", message: "baseUrl and at least one model are required" },
-            ],
+            details: [{ field: "models", message: "baseUrl and at least one model are required" }],
           },
         },
         { status: 400 }

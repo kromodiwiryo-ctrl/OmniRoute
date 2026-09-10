@@ -11,6 +11,8 @@ import { createErrorResponse } from "@/lib/api/errorResponse";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { cancelConductorTask } from "@/lib/conductor/hubProxy";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

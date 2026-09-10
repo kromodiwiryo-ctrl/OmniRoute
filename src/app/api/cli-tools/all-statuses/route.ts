@@ -23,6 +23,8 @@ import {
 import { getCached, setCached } from "@/lib/cliTools/batchStatusCache";
 import type { ToolBatchStatus, ToolBatchStatusMap } from "@/shared/types/cliBatchStatus";
 
+export const dynamic = "force-dynamic";
+
 const logger = pino({ name: "cli-tools-all-statuses-api" });
 
 const TOOL_CHECK_TIMEOUT_MS = 5000; // 5s per tool max
@@ -197,6 +199,7 @@ export async function GET(request: Request): Promise<Response> {
         } catch (toolErr) {
           const errMsg =
             toolErr instanceof Error && toolErr.message === "Timeout" ? "Timeout" : "Check failed";
+
           logger.warn({ toolId, err: toolErr }, "Failed to check CLI tool status");
 
           const result: ToolBatchStatus = {

@@ -21,7 +21,10 @@ import { createHash } from "node:crypto";
 import { globalTrafficBuffer } from "@/mitm/inspector/buffer";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const WS_GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+
 const PING_INTERVAL_MS = 30_000;
 
 function acceptKey(clientKey: string): string {

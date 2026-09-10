@@ -7,6 +7,8 @@ import { reorderCombosSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 // POST /api/combos/reorder - Persist combo ordering
 export async function POST(request) {
   const authError = await requireManagementAuth(request);

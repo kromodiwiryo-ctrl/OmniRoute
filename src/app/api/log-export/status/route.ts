@@ -13,6 +13,8 @@ import { getLogExportDestinations } from "@/lib/db/logExportDestinations";
 import { getMaxCallLogRowId } from "@/lib/usage/callLogExportSource";
 import { toDestinationView } from "@/lib/logExport/presenter";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

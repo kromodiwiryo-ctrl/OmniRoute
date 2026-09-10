@@ -15,6 +15,8 @@ import { buildKiroImportError } from "../import/route";
 import { buildKiroApiKeyConnectionName, isKiroApiKeyImportClientError } from "./helpers";
 import { findKiroConnectionByIdentity } from "@/lib/oauth/kiroConnectionIdentity";
 
+export const dynamic = "force-dynamic";
+
 async function requireKiroApiKeyImportAuth(request: Request) {
   if (!(await isAuthRequired(request))) return null;
   if (await isAuthenticated(request)) return null;
@@ -50,6 +52,7 @@ export async function POST(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const targetProvider = searchParams.get("targetProvider") === "amazon-q" ? "amazon-q" : "kiro";
+
     const validation = validateBody(kiroApiKeyImportSchema, rawBody);
     if (isValidationFailure(validation)) {
       return NextResponse.json({ error: validation.error }, { status: 400 });

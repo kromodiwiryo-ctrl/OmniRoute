@@ -13,6 +13,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { clampLoginTimeoutMs } from "@/lib/api/loginTimeout";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const ADOBE_FIREFLY_SLUGS = new Set(["adobe-firefly", "firefly"]);
 
 /** Resolve the provider slug (e.g. "claude-web", "adobe-firefly") from the connection row. */

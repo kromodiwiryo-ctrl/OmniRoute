@@ -5,6 +5,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { clearDispatcherCache } from "@omniroute/open-sse/utils/proxyDispatcher";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const batchActivateSchema = z.object({
   ids: z.array(z.string()).min(1).max(500),
   // "active" (bulk enable) or "inactive" (bulk disable). Defaults to enable —

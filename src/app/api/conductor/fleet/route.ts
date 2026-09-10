@@ -10,6 +10,8 @@ import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getFleetSnapshot } from "@/lib/conductor/hubProxy";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

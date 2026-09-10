@@ -3,8 +3,11 @@ import { NextResponse } from "next/server";
 import { buildApiKeySelfServiceStatus } from "@/lib/usage/apiKeySelfService";
 import { hasSelfUsageScope } from "@/shared/constants/selfServiceScopes";
 
+export const dynamic = "force-dynamic";
+
 function extractBearerToken(request: Request): string | null {
   const authorization = request.headers.get("Authorization") ?? "";
+
   const match = authorization.match(/^Bearer\s+(.+)$/i);
   const token = match?.[1]?.trim();
   return token ? token : null;

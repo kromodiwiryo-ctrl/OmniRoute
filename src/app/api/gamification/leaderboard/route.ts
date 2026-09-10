@@ -9,6 +9,8 @@ import {
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getApiKeyDisplayNames } from "@/lib/db/apiKeys/displayNames";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

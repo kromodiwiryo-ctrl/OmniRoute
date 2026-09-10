@@ -24,6 +24,8 @@ import { summarizeDiagnostics } from "@/mitm/inspector/diagnostics";
 import { getAllAgentBridgeStates } from "@/lib/db/agentBridgeState";
 import { checkDNSEntryForAgent } from "@/mitm/dns/dnsConfig";
 
+export const dynamic = "force-dynamic";
+
 /** Best-effort TCP reachability probe; resolves false on error/timeout. */
 function probeTcp(port: number, host = "127.0.0.1", timeoutMs = 1500): Promise<boolean> {
   return new Promise((resolve) => {

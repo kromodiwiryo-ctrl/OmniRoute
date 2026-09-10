@@ -12,6 +12,8 @@ import { getOpenRouterCatalog, refreshOpenRouterCatalog } from "@/lib/catalog/op
 import { getSettings } from "@/lib/db/settings";
 import { isFreeModel } from "@/shared/utils/freeModels";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   // Require authentication (dashboard/API key)
   if (!(await isAuthenticated(req))) {

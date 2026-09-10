@@ -17,6 +17,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { buildRelayTestResult } from "./relayTestResult";
 import { recordRelayProbe } from "@/lib/db/relayProbeStats";
 
+export const dynamic = "force-dynamic";
+
 const BASE_SUPPORTED_PROXY_TYPES = new Set(["http", "https"]);
 
 function getErrorMessage(error: unknown, fallbackMessage: string): string {
@@ -102,6 +104,7 @@ export async function POST(request: Request) {
       let relayAuth = extractRelayAuth(dbProxyNotes) ?? "";
       // Fallback: ad-hoc callers may pass relayAuth in the password field
       if (!relayAuth) relayAuth = proxy.password ?? "";
+
       const relayUrl = `https://${relayHost}`;
       const start = Date.now();
       const controller2 = new AbortController();

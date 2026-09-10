@@ -5,6 +5,8 @@ import { getConnectedServerByKeyHash } from "@/lib/db/gamification";
 import { z } from "zod";
 import crypto from "crypto";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

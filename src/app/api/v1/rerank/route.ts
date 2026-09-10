@@ -21,6 +21,8 @@ import { generateRequestId } from "@/shared/utils/requestId";
 import { CORS_HEADERS } from "@omniroute/open-sse/utils/cors.ts";
 import { deriveRerankProviderForChatProvider } from "@omniroute/open-sse/config/rerankRegistry.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */
@@ -41,6 +43,7 @@ export async function OPTIONS() {
 function buildDynamicRerankProvider(node: any) {
   // Strip trailing /v1 if present — we'll add /rerank
   let base = node.baseUrl || "";
+
   if (base.endsWith("/v1")) base = base.slice(0, -3);
   return {
     id: node.prefix,

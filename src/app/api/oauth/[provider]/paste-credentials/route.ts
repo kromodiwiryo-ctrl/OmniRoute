@@ -7,6 +7,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/oauth/[provider]/paste-credentials
  *

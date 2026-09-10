@@ -15,6 +15,8 @@ import {
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */
@@ -55,6 +57,7 @@ async function postHandler(request, context) {
 
   // Default to openai if no provider prefix
   const resolvedProvider = provider || "openai";
+
   const credentials = await getProviderCredentialsWithQuotaPreflight(resolvedProvider);
   if (!credentials) {
     return errorResponse(

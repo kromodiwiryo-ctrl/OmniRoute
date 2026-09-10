@@ -13,6 +13,8 @@ import { resolveApiKey, getOrCreateApiKey } from "@/shared/services/apiKeyResolv
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { guardCliConfigWrite } from "@/lib/api/cliConfigWriteGuard";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Where each guide tool's config lands, and the host command that writes the
  * same thing when OmniRoute itself runs in a container.
@@ -210,6 +212,7 @@ async function saveOpenCodeConfig({ baseUrl, apiKey, model, models, modelLabels 
 
   // Read existing JSONC/JSON text to preserve unrelated config formatting and fields.
   let existingConfigText = "";
+
   try {
     existingConfigText = await fs.readFile(configPath, "utf-8");
   } catch (error) {

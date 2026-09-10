@@ -13,6 +13,8 @@ import { safeResolveProxy } from "@/sse/handlers/chatHelpers";
 import * as log from "@/sse/utils/logger";
 import { isInputTokenCountPlausible } from "@omniroute/open-sse/utils/usageTracking.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

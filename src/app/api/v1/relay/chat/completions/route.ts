@@ -43,6 +43,7 @@ import {
 } from "./bifrostCooldown";
 import type { RelayToken } from "@/lib/db/relayProxies";
 
+export const dynamic = "force-dynamic";
 const JSON_CORS_HEADERS = { ...CORS_HEADERS, "Content-Type": "application/json" } as const;
 
 // `logger: null` — this relay forwards to handleChat, where the guardrail registry
@@ -434,6 +435,7 @@ async function postHandler(request: Request) {
     // buildErrorBody() routes through sanitizeErrorMessage(), which strips
     // stack traces and absolute file paths. Hard rule #12.
     const message = error instanceof Error ? error.message : "Unknown error";
+
     return new Response(JSON.stringify(buildErrorBody(500, message)), {
       status: 500,
       headers: JSON_CORS_HEADERS,

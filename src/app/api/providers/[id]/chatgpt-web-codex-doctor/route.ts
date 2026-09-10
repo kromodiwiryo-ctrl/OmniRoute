@@ -4,6 +4,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getProviderConnectionById } from "@/lib/db/providers";
 import { getChatGptWebCodexDoctorStatus } from "@omniroute/open-sse/services/chatgptWebCodexAdmin.ts";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

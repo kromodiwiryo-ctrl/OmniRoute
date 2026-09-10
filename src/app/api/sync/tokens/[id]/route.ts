@@ -5,6 +5,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getSyncTokenById } from "@/lib/db/syncTokens";
 import { revokeSyncTokenById } from "@/lib/sync/tokens";
 
+export const dynamic = "force-dynamic";
+
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

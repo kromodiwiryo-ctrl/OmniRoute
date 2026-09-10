@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getComboBuilderOptions } from "@/lib/combos/builderOptions";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

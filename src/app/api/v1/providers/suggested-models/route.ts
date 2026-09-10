@@ -9,6 +9,8 @@ import {
   type HfModelSummary,
 } from "@omniroute/open-sse/services/hfModelSuggestions.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/v1/providers/suggested-models?type=image
  *
@@ -25,6 +27,7 @@ import {
  */
 
 const HF_MODELS_API_URL = "https://huggingface.co/api/models";
+
 const HF_SEARCH_PAGE_SIZE = 100;
 const HF_FETCH_TIMEOUT_MS = 8000;
 
@@ -63,10 +66,10 @@ export async function GET(request: Request) {
   const { type, sortBy, limit } = parsed.data;
   const pipelineTag = resolveHfPipelineTag(type);
   if (!pipelineTag) {
-    return NextResponse.json(
-      buildErrorBody(400, `Unsupported suggested-models type: ${type}`),
-      { status: 400, headers: CORS_HEADERS }
-    );
+    return NextResponse.json(buildErrorBody(400, `Unsupported suggested-models type: ${type}`), {
+      status: 400,
+      headers: CORS_HEADERS,
+    });
   }
 
   try {

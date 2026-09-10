@@ -10,6 +10,8 @@ import {
 } from "@/lib/db/relayProxies";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const relayTokenPatchSchema = z
   .object({
     enabled: z.boolean().optional(),

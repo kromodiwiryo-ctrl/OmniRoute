@@ -5,6 +5,8 @@ import { RESET_USAGE_HISTORY_PERIODS, resetUsageHistory } from "@/lib/db/cleanup
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 export const runtime = "nodejs";
 
 const resetUsageHistorySchema = z.object({

@@ -19,6 +19,8 @@ import {
 } from "@/shared/network/safeOutboundFetch";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const DAHL_TOKENS_URL = "https://inference.dahl.global/tokens";
 
 export async function POST() {

@@ -7,6 +7,8 @@ import { updateSettings, getSettings } from "@/lib/db/settings";
 import { invalidateMemorySettingsCache } from "@/lib/memory/settings";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 function maskApiKey(apiKey: string | null): { hasApiKey: boolean; apiKeyMasked: string | null } {
   if (!apiKey || apiKey.trim().length === 0) {
     return { hasApiKey: false, apiKeyMasked: null };

@@ -10,6 +10,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { describeLogExportDestinationTypes } from "@/lib/logExport/registry";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

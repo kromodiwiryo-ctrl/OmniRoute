@@ -13,6 +13,8 @@ import {
 import { getCachedSettings } from "@/lib/db/settings";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request, { acceptMcpConnectScope: true });
   if (authError) return authError;
@@ -80,6 +82,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to load MCP status";
+
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

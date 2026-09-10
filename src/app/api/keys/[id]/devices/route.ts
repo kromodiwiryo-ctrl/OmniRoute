@@ -22,6 +22,8 @@ import { getDeviceCount, getDeviceDetails } from "@omniroute/open-sse/services/d
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import * as log from "@/sse/utils/logger";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

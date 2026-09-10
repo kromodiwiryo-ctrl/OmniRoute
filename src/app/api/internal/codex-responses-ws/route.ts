@@ -43,6 +43,7 @@ import {
   LeaseContextError,
 } from "@/sse/services/leaseContext";
 
+export const dynamic = "force-dynamic";
 const CODEX_RESPONSES_WS_URL = "wss://chatgpt.com/backend-api/codex/responses";
 const executor = new CodexExecutor();
 const log = logger("RESPONSES_WS");
@@ -622,6 +623,7 @@ export async function POST(request: Request) {
   }
 
   const action = typeof body.action === "string" ? body.action : "";
+
   if (action === "authenticate") {
     return authenticate(body);
   }

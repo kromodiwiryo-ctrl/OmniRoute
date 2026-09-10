@@ -3,6 +3,8 @@ import { z } from "zod";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { generateConfig, generateAllConfigs } from "@/lib/cli-helper/config-generator";
 
+export const dynamic = "force-dynamic";
+
 const generateConfigSchema = z.object({
   toolId: z.string().min(1),
   baseUrl: z.string().optional(),

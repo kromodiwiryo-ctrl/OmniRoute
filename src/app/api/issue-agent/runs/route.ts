@@ -11,6 +11,8 @@ import { POST as postChatCompletion } from "@/app/api/v1/chat/completions/route"
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const issueAgentRunRequestSchema = z.object({
   mode: z.string().optional(),
   issueUrl: z.string().optional(),
@@ -135,7 +137,9 @@ export async function POST(request: Request) {
     // absolute filesystem path.
     const message = isNodeSystemError(error)
       ? "Issue Agent request failed due to an internal error"
-      : sanitizeErrorMessage(error instanceof Error ? error.message : "Invalid issue-agent request");
+      : sanitizeErrorMessage(
+          error instanceof Error ? error.message : "Invalid issue-agent request"
+        );
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }

@@ -22,6 +22,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 // Determine auth type group for a provider id
 function getAuthGroup(providerId) {
   if (NOAUTH_PROVIDERS[providerId]) return "no-auth";

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { validateApiKey, getProviderConnections, getModelAliases } from "@/models";
 
+export const dynamic = "force-dynamic";
+
 // Verify API key and return provider credentials
 export async function POST(request) {
   try {
@@ -24,6 +26,7 @@ export async function POST(request) {
     function maskSecret(value: string | null | undefined): string | null {
       if (!value) return null;
       if (value.length <= 8) return "****";
+
       return value.slice(0, 4) + "****" + value.slice(-4);
     }
 

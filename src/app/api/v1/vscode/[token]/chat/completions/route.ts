@@ -2,6 +2,8 @@ import { POST as basePost, OPTIONS } from "@/app/api/v1/chat/completions/route";
 import { rewriteVscodeServiceTierRequest } from "@/app/api/v1/vscode/[token]/serviceTierVariants";
 import { withSanitizedPathTokenApiKey } from "@/app/api/v1/vscode/[token]/tokenizedRequest";
 
+export const dynamic = "force-dynamic";
+
 export { OPTIONS };
 
 export async function POST(request: Request) {

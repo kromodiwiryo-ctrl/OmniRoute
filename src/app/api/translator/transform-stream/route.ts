@@ -4,6 +4,8 @@ import { z } from "zod";
 import { transformChatCompletionSseToResponses } from "@/lib/translator/streamTransform";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const transformStreamSchema = z.object({
   rawSse: z.string().min(1).max(100_000),
 });

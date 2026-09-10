@@ -15,6 +15,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 import { InspectorTlsInterceptToggleSchema } from "@/shared/schemas/inspector";
 import { isTlsInterceptEnabled, setTlsIntercept } from "@/lib/inspector/captureState";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request): Promise<Response> {
   let body: unknown;
   try {

@@ -20,6 +20,8 @@ import { getSettings } from "@/lib/db/settings";
 import { isFreeModel, providerHasFreeModels } from "@/shared/utils/freeModels";
 import * as log from "@/sse/utils/logger";
 
+export const dynamic = "force-dynamic";
+
 const CONSECUTIVE_RATE_LIMIT_STOP_THRESHOLD = 3;
 /** Web-session providers (esp. Arena/CF) ban burst probes — pause between models. */
 const SLOW_PROBE_PROVIDERS = new Set(["lmarena", "lma"]);
@@ -247,6 +249,7 @@ export async function POST(request: Request) {
     if (slowProbe && consecutiveBotBlocks >= CONSECUTIVE_BOT_STOP_THRESHOLD) {
       stoppedEarly = true;
       stopReason = "consecutive_bot_blocks";
+
       log.warn(
         "MODEL_TEST_ALL",
         `Stopping batch early after ${consecutiveBotBlocks} consecutive bot/Cloudflare blocks (avoid session ban)`,

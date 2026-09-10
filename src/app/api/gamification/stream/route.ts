@@ -10,6 +10,8 @@ import { type LeaderboardScope, getTopN } from "@/lib/gamification/leaderboard";
 import { CORS_HEADERS } from "@/shared/utils/cors";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 const VALID_SCOPES: ReadonlySet<string> = new Set([
   "global",
   "weekly",

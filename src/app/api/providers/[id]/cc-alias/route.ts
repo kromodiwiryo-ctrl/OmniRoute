@@ -10,6 +10,8 @@ import { updateCcAliasSettingSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/providers/[id]/cc-alias
  *

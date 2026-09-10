@@ -14,6 +14,8 @@ import { computeComboContextLength } from "@/lib/combos/comboContext";
 import { ComboInvariantError } from "@/lib/combos/invariants";
 import { buildComboNameCollisionWarning } from "@/lib/combos/modelNameCollision";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/combos - Get all combos
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);

@@ -13,6 +13,8 @@ import { isCcCompatibleProviderEnabled } from "@/shared/utils/featureFlags";
 import { providerNodeValidateSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 // Matches a base URL whose host is localhost / 127.0.0.1 (with an optional port).
 const LOCALHOST_BASE_URL_RE = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(?:[/?#]|$)/i;
 
@@ -333,6 +335,7 @@ export async function POST(request) {
           : error instanceof Error
             ? error.message
             : "Validation failed";
+
       const message = augmentDockerLocalhostHint(error, attemptedBaseUrl, rawMessage);
       if (error instanceof SafeOutboundFetchError && error.code === "URL_GUARD_BLOCKED") {
         logAuditEvent({

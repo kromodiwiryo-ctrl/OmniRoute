@@ -10,6 +10,8 @@ import { compareTr } from "@/shared/utils/turkishText";
 import { codexProfileIdSchema, codexProfileNameSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const PROFILES_DIR = path.join(resolveDataDir(), "codex-profiles");
 
 /**

@@ -4,6 +4,8 @@ import { SEARCH_PROVIDERS } from "@omniroute/open-sse/config/searchRegistry.ts";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { getSearchProviderStats, getRecentSearchLogs } from "@/lib/db/callLogStats";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   if (!(await isAuthenticated(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -36,6 +38,7 @@ export async function GET(request: Request) {
       try {
         const summary = JSON.parse(row.request_summary ?? "");
         query = summary.query || "";
+
         filters = summary.filters || {};
       } catch {
         // Unparseable request_summary

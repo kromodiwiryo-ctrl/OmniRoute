@@ -9,6 +9,8 @@ import {
   firstIssueMessage,
 } from "@/lib/proxySubscription";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET  /api/v1/management/proxy-subscriptions — list all operator subscriptions.
  * POST /api/v1/management/proxy-subscriptions — create a subscription.

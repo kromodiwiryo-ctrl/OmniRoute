@@ -16,6 +16,8 @@ import { z } from "zod";
 import { forwardToDarioAdmin, requireAdminAuth } from "../_lib";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 const DeleteAccountBodySchema = z.object({
   alias: z.string().trim().min(1).optional(),
 });

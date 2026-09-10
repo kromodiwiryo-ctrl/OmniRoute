@@ -13,6 +13,8 @@ import { importAgyAuthBulkSchema } from "@/shared/validation/schemas";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { sanitizeProviderSpecificDataForResponse } from "@/lib/providers/requestDefaults";
 
+export const dynamic = "force-dynamic";
+
 function sanitizeConnectionForResponse(connection: Record<string, unknown>) {
   const safe = { ...connection };
   delete safe.accessToken;
@@ -81,6 +83,7 @@ export async function POST(request: Request) {
         err instanceof AgyAuthFileError
           ? err.message
           : sanitizeErrorMessage(err) || "Failed to import";
+
       errors.push({ index: i, name: label, message });
     }
   }

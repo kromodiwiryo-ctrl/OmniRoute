@@ -12,6 +12,8 @@ import { getBadgeDefinitions } from "@/lib/db/gamification";
 import { seedBuiltinBadges } from "@/lib/gamification/badges";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

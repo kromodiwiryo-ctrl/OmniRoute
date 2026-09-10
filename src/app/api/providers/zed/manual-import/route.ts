@@ -13,6 +13,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createProviderConnection } from "@/lib/db/providers";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const manualImportSchema = z.object({
   provider: z.string().min(1).max(64),
   token: z.string().min(1).max(512),

@@ -12,6 +12,8 @@ import { checkLoginGuard, clearLoginAttempts, recordLoginFailure } from "@/serve
 import { createAccessToken } from "@/lib/db/accessTokens";
 import { ACCESS_SCOPES } from "@/lib/accessTokens/scopes";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/cli/connect — remote-mode bootstrap.
  *
@@ -119,6 +121,7 @@ export async function POST(request: Request) {
 
     const tokenScope = scope ?? "admin";
     const tokenName = (name ?? "remote-cli").trim() || "remote-cli";
+
     const expiresAt =
       typeof expiresInDays === "number"
         ? new Date(Date.now() + expiresInDays * 86_400_000).toISOString()

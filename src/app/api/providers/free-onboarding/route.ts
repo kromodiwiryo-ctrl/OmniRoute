@@ -11,6 +11,8 @@ import {
 } from "@/lib/providers/freeOnboarding";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const setupSchema = z.object({
   providerIds: z.array(z.string().trim().min(1)).min(1).max(20),
   confirmed: z.literal(true),

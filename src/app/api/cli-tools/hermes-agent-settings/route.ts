@@ -13,6 +13,8 @@ import { getHermesConfigPath } from "@/lib/cli-helper/config-generator/hermesHom
 import { getApiKeyById } from "@/lib/db/apiKeys";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const hermesAgentSettingsSchema = z.object({
   baseUrl: z.string().min(1, "baseUrl is required"),
   keyId: z.string().optional().nullable(),

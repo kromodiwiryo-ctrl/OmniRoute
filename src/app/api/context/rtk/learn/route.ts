@@ -6,6 +6,8 @@ import {
 } from "@omniroute/open-sse/services/compression/engines/rtk";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /** Parse a positive `limit` query param, clamped to [1, 2000]; default 500. */
 function parseLimit(value: string | null): number {
   const n = Number(value);

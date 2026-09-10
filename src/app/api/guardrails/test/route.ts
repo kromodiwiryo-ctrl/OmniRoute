@@ -16,6 +16,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { registerDefaultGuardrails } from "@/lib/guardrails/registry";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const TestRequestSchema = z.object({
   input: z.union([z.string(), z.record(z.string(), z.unknown()), z.array(z.unknown())]),
   disabledGuardrails: z.array(z.string()).optional(),

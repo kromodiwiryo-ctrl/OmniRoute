@@ -16,6 +16,8 @@ import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/e
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { scanProvider, persistDiscoveryResult } from "@/lib/discovery/index";
 
+export const dynamic = "force-dynamic";
+
 const scanRequestSchema = z.object({
   providerId: z.string().min(1).max(200),
 });

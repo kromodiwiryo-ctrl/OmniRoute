@@ -9,6 +9,7 @@ import {
   resolveCallLogIdByResponseId,
 } from "@/lib/db/responsesContinuationStore";
 
+export const dynamic = "force-dynamic";
 // Each logged chunk-array element is one raw network read, timestamp-prefixed
 // for the debug display — NOT one complete SSE `data:` line. A single JSON
 // value (e.g. a `reasoning_content` delta) routinely splits across two or
@@ -83,8 +84,6 @@ export function extractPartialAssistantText(
   }
   return "";
 }
-
-export const dynamic = "force-dynamic";
 
 export async function GET(
   req: Request,

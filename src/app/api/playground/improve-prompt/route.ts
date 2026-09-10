@@ -24,6 +24,8 @@ import {
 } from "@/lib/playground/promptImprover";
 import { isRequireApiKeyEnabled } from "@/shared/utils/featureFlags";
 
+export const dynamic = "force-dynamic";
+
 const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "*",
@@ -99,6 +101,7 @@ export async function POST(request: Request): Promise<Response> {
 
   if (!upstreamResponse.ok) {
     let upstreamText = "";
+
     try {
       upstreamText = await upstreamResponse.text();
     } catch {

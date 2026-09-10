@@ -14,6 +14,8 @@ import { syncToCloud } from "@/lib/cloudSync";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { getConsistentMachineId } from "@/shared/utils/machineId";
 
+export const dynamic = "force-dynamic";
+
 const pollSchema = z.object({
   sessionId: z.string().trim().min(1, "sessionId is required"),
 });
@@ -108,6 +110,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = sanitizeErrorMessage(error) || "Failed to poll Cursor login";
+
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

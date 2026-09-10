@@ -4,6 +4,8 @@ import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { issueRegisteredKey, checkQuota, listRegisteredKeys } from "@/lib/db/registeredKeys";
 
+export const dynamic = "force-dynamic";
+
 // ─── Validation ───────────────────────────────────────────────────────────────
 
 const issueKeySchema = z.object({

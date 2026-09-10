@@ -6,6 +6,8 @@ import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const updateSkillSchema = z.object({
   enabled: z.boolean().optional(),
   mode: z.enum(["on", "off", "auto"]).optional(),

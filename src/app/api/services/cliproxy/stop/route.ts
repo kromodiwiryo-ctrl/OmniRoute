@@ -2,6 +2,8 @@ import { getSupervisor } from "@/lib/services/registry";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const TOOL = "cliproxy";
 
 export async function POST(): Promise<Response> {

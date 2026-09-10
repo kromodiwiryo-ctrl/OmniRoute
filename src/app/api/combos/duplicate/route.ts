@@ -12,6 +12,8 @@ import { AutoVariant } from "@omniroute/open-sse/services/autoCombo/autoPrefix";
 import { AutoComboSpec } from "@omniroute/open-sse/services/autoCombo/virtualFactory";
 import { MODEL_FAMILIES, ModelFamily } from "@omniroute/open-sse/services/autoCombo/modelFamily";
 
+export const dynamic = "force-dynamic";
+
 // POST /api/combos/duplicate - Resolve an auto-combo into a static combo snapshot.
 // Takes an auto/* template name, resolves its candidate pool using the same logic as
 // createVirtualAutoCombo(), then creates a persistent editable combo with those models.
@@ -154,6 +156,7 @@ export async function POST(request: Request) {
 
     // Create the static combo using the template's strategy.
     const comboStrategy = strategy || "priority";
+
     const snapshotDate = new Date().toISOString();
     const comboData = await createCombo({
       name: newName,

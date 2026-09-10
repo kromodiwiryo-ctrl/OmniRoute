@@ -15,6 +15,8 @@ import { AgentBridgeUpstreamCaPostSchema } from "@/shared/schemas/agentBridge";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request): Promise<Response> {
   let body: unknown;
   try {

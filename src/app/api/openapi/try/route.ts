@@ -9,6 +9,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const ALLOWED_TRY_PATH_PREFIXES = ["/api/", "/v1/", "/v1beta/", "/a2a", "/.well-known/agent.json"];
 const BLOCKED_FORWARD_HEADERS = new Set([
   "connection",
@@ -109,6 +111,7 @@ export async function POST(request: NextRequest) {
 
     // Read response
     const contentType = res.headers.get("content-type") || "";
+
     let responseBody: any;
 
     if (contentType.includes("application/json")) {

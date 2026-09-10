@@ -14,6 +14,8 @@ import {
 } from "@/lib/db/modelComboMappings";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const updateMappingSchema = z.object({
   pattern: z.string().min(1).max(500).optional(),
   comboId: z.string().min(1).optional(),

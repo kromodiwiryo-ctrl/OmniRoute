@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 /**
  * Re-exports the GET function from the analytics/compression route for the context analytics endpoint.
  * This is used to provide compression analytics data for the context analysis.

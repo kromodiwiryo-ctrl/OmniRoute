@@ -14,6 +14,8 @@ import {
   validateBody,
 } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/pricing
  * Get current pricing configuration (merged user + defaults)
@@ -24,6 +26,7 @@ export async function GET(request: Request) {
 
   try {
     const includeSources = new URL(request.url).searchParams.get("includeSources") === "1";
+
     if (includeSources) {
       return NextResponse.json(await getPricingWithSources());
     }

@@ -17,6 +17,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { matchesSearch } from "@/shared/utils/turkishText";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const LEVEL_ORDER: Record<string, number> = {
   trace: 5,
   debug: 10,
@@ -116,6 +118,7 @@ export async function GET(req: NextRequest) {
         // Filter by component
         if (componentFilter) {
           const comp = entry.component || entry.module || "";
+
           if (!matchesSearch(comp, componentFilter)) continue;
         }
 

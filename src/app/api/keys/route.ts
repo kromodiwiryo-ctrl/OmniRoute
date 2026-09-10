@@ -15,6 +15,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { normalizeSelfServiceScopesForCreate } from "@/shared/constants/selfServiceScopes";
 import * as log from "@/sse/utils/logger";
 
+export const dynamic = "force-dynamic";
+
 function parsePagination(request: Request) {
   const url = new URL(request.url);
   const limitValue = url.searchParams.get("limit");

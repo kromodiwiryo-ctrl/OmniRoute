@@ -13,6 +13,8 @@ import { NextResponse } from "next/server";
 import { getPerEngineAnalytics } from "@/lib/db/compressionAnalytics";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   const authError = await requireManagementAuth(req);
   if (authError) return authError;

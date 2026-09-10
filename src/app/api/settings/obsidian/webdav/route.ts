@@ -9,6 +9,8 @@ import {
   disableObsidianVaultSync,
 } from "@/lib/obsidianSync";
 
+export const dynamic = "force-dynamic";
+
 const enableSchema = z
   .object({
     vaultPath: z.string().min(1).max(4096),

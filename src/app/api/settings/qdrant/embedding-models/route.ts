@@ -4,10 +4,9 @@ import { getProviderConnections } from "@/lib/db/providers";
 import { providerAllowsOptionalApiKey } from "@/shared/constants/providers";
 import { getAllEmbeddingModels } from "@omniroute/open-sse/config/embeddingRegistry.ts";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
-import {
-  buildRegistryEmbeddingOptions,
-  mergeEmbeddingOptions,
-} from "./catalog";
+import { buildRegistryEmbeddingOptions, mergeEmbeddingOptions } from "./catalog";
+
+export const dynamic = "force-dynamic";
 
 type EmbeddingModelOption = {
   value: string;
@@ -81,6 +80,7 @@ export async function GET(request: NextRequest) {
           const rows = Array.isArray(data?.data) ? data.data : [];
           for (const row of rows) {
             const id = typeof row?.id === "string" ? row.id.trim() : "";
+
             if (!id) continue;
             const value = `openrouter/${id}`;
             if (options.some((option) => option.value === value)) continue;

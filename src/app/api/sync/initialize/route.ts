@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import initializeCloudSync from "@/shared/services/initializeCloudSync";
 import { startModelSyncScheduler } from "@/shared/services/modelSyncScheduler";
 
+export const dynamic = "force-dynamic";
+
 let syncInitialized = false;
 let modelSyncInitialized = false;
 

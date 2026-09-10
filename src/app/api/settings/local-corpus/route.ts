@@ -14,6 +14,8 @@ import {
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const localCorpusSchema = z
   .object({
     rootPath: z.string().trim().min(1).max(4_096),

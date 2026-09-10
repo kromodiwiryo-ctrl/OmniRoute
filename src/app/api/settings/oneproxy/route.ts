@@ -2,6 +2,8 @@
 // Usa path relativo no header Location — nenhum input do usuário entra na URL destino.
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 function relativeRedirect(location: string): Response {
   return new Response(null, { status: 308, headers: { Location: location } });
 }

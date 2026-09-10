@@ -13,6 +13,8 @@ import { validatedJsonBody, isValidatedJsonBodyFailure } from "@/shared/validati
 import { reasoningRuleDataToInput } from "@/lib/reasoningRouting/input";
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 function errorResponse(status: number, message: string) {
   return NextResponse.json(buildErrorBody(status, message), { status });
 }

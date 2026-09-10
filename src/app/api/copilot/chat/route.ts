@@ -5,6 +5,8 @@ import { processCopilotChat } from "@/lib/copilot/engine";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { sanitizeErrorMessage, buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const copilotRequestSchema = z.object({
   messages: z
     .array(

@@ -3,6 +3,8 @@ import { updateServiceField } from "@/lib/db/versionManager";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const BodySchema = z.object({ enabled: z.boolean() });
 
 export async function POST(request: Request): Promise<Response> {

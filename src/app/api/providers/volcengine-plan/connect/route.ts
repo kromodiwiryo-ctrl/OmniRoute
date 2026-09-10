@@ -5,6 +5,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { formatValidationMessage, validateBody } from "@/shared/validation/helpers";
 import { volcenginePlanConnectSchema } from "@/shared/validation/schemas/volcenginePlan";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request): Promise<NextResponse> {
   const auth = await requireManagementAuth(request);
   if (auth) return auth as NextResponse;

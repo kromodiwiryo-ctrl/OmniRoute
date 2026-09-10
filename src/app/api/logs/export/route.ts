@@ -3,6 +3,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { exportProxyLogsSince } from "@/lib/db/proxyLogs";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/logs/export — export logs as JSON
  * Query params: ?hours=24 (1, 6, 12, 24; default 24)
@@ -27,6 +29,7 @@ export async function GET(request: Request) {
       rows = await exportCallLogsSince(since);
     } else if (logType === "proxy-logs") {
       tableName = "proxy_logs";
+
       // NOTE: exportProxyLogsSince returns the historical `public_ip` column, NOT `clientIp`.
       // This intentionally differs from GET /api/usage/proxy-logs which exposes the
       // value as `clientIp`. Callers of this export endpoint should read `public_ip`.

@@ -15,6 +15,8 @@ import { comboErrorResponse } from "@/lib/api/comboErrorResponse";
 import { ComboInvariantError } from "@/lib/combos/invariants";
 import { buildComboNameCollisionWarning } from "@/lib/combos/modelNameCollision";
 
+export const dynamic = "force-dynamic";
+
 // Minimal shape for the fields we read off a combo row in this route.
 // `getComboById` returns a structurally `JsonRecord`-typed object, so we
 // narrow at the call sites rather than change the DB helper's return type.
@@ -241,6 +243,7 @@ export async function PUT(request, { params }) {
               : dagError instanceof Error && /depth/i.test(dagError.message)
                 ? "max-depth-exceeded"
                 : "invalid-graph";
+
           return comboErrorResponse("COMBO_005", 400, { comboName, reason }, request);
         }
       }

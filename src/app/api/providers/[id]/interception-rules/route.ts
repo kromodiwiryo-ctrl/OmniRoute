@@ -9,6 +9,8 @@ import { updateInterceptionRulesSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/providers/[id]/interception-rules
  * Returns the web search/fetch interception rules for a provider, or the

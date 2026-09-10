@@ -10,6 +10,8 @@ import { cloudSyncActionSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/sync/cloud
  * Returns current cloud sync status for sidebar indicator
@@ -231,6 +233,7 @@ async function handleDisable(machineId: string, request: any) {
 
   // Update Claude CLI settings to use local endpoint
   const host = request.headers.get("host") || "localhost:20128";
+
   await updateClaudeSettingsToLocal(machineId, host);
 
   return NextResponse.json({

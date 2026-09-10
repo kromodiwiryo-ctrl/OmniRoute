@@ -10,6 +10,8 @@ import {
   buildCloudflareWorkerUploadRequest,
 } from "@/lib/proxyRelay/cloudflareWorkerScript";
 
+export const dynamic = "force-dynamic";
+
 // Port of upstream decolua/9router PR #1360 — Cloudflare Workers proxy relay.
 // Architecture mirrors src/app/api/settings/proxy/vercel-deploy/route.ts so the
 // shared proxyFetch relay short-circuit, x-relay-auth scheme, and inline SSRF
@@ -136,6 +138,7 @@ export async function POST(request: Request) {
     );
 
     let deployUrl = "";
+
     if (subdomainRes.ok) {
       const subdomainData = (await subdomainRes.json().catch(() => null)) as {
         result?: { subdomain?: string };

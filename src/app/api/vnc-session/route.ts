@@ -3,6 +3,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { listVncProviders } from "@/lib/vncSession/manifest";
 import { listSessions } from "@/lib/vncSession/service";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/vnc-session
  *

@@ -11,6 +11,8 @@ import {
 import { getDbBackupMaxFiles, getDbBackupRetentionDays } from "@/lib/db/backup";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/storage/health — Return database storage information.
  * Provides: driver, dbPath, sizeBytes, lastBackupAt, retentionDays
@@ -54,6 +56,7 @@ export async function GET() {
 
     // Get the display path (abbreviated with ~)
     const homeDir = process.env.HOME || process.env.USERPROFILE || "";
+
     const displayPath = dbFilePath.startsWith(homeDir)
       ? "~" + dbFilePath.slice(homeDir.length)
       : dbFilePath;

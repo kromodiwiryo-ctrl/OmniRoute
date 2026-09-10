@@ -19,6 +19,8 @@ import { CreateCloudAgentTaskSchema } from "@/lib/cloudAgent/types";
 import pino from "pino";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const logger = pino({ name: "cloud-agents-api" });
 
 function getLimit(value: string | null): number {

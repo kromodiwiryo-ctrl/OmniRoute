@@ -9,13 +9,12 @@ import {
 import { getAuditRequestContext, logAuditEvent } from "@/lib/compliance/index";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 // Optional body { force?: boolean }. Unknown keys are stripped rather than
 // rejected so the endpoint stays tolerant of the empty/no-body calls it
 // historically accepted. Non-boolean `force` is coerced away to the default.
-const ApplyLocalBodySchema = z
-  .object({ force: z.boolean().optional() })
-  .partial()
-  .passthrough();
+const ApplyLocalBodySchema = z.object({ force: z.boolean().optional() }).partial().passthrough();
 
 function toErrorResponse(error: unknown) {
   if (error instanceof CodexAuthFileError) {
@@ -29,6 +28,7 @@ function toErrorResponse(error: unknown) {
   }
 
   const message = sanitizeErrorMessage(error) || "Failed to apply Codex auth file";
+
   return NextResponse.json({ error: message }, { status: 500 });
 }
 

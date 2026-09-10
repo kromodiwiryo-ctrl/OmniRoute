@@ -11,6 +11,8 @@ import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/e
 import { clearDispatcherCache } from "@omniroute/open-sse/utils/proxyDispatcher";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 // #6365 proxy pools — a scope (global/provider/account/combo) may hold MULTIPLE
 // proxies that a rotation strategy cycles through. Pure DB ops (no process spawn),
 // so this inherits the sibling /api/settings/proxies management-auth tier.

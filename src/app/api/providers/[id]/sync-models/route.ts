@@ -30,6 +30,7 @@ import { GET as getProviderModels } from "../models/route";
 import { isDegradedDiscovery } from "./degradedLocalCatalog";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
 type JsonRecord = Record<string, unknown>;
 
 function asRecord(value: unknown): JsonRecord {
@@ -576,6 +577,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     if (isDegradedDiscovery(modelsData)) {
       const responseError =
         modelWarning || "Remote model discovery failed; catalog fallback not synced";
+
       await saveCallLog({
         method: "GET",
         path: `/api/providers/${id}/models`,

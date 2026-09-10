@@ -7,6 +7,8 @@ import { getRegistryEntry } from "@omniroute/open-sse/config/providerRegistry.ts
 import { withChatAdmission } from "@/shared/middleware/withChatAdmission";
 import { rejectRetiredCommonChatGptWebProvider } from "@/lib/providers/chatgptWebRetirementResponse";
 
+export const dynamic = "force-dynamic";
+
 let initialized = false;
 
 async function ensureInitialized() {

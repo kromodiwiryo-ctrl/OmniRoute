@@ -49,6 +49,7 @@ const OAUTH_TEST_TIMEOUT_MS = 30_000;
 
 import { CLI_RUNTIME_PROVIDER_MAP } from "./cliRuntimeProviderMap";
 
+export const dynamic = "force-dynamic";
 /** POST body is optional; when present, only known fields are validated. */
 const providerConnectionTestBodySchema = z.object({
   validationModelId: z.string().max(500).optional(),
@@ -896,6 +897,7 @@ export async function testSingleConnection(connectionId: string, validationModel
   }
 
   const provider = typeof connection.provider === "string" ? connection.provider : "";
+
   if (!provider) {
     return {
       valid: false,

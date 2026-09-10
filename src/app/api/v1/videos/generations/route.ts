@@ -31,7 +31,6 @@ import {
 } from "@/app/api/v1/_shared/videoModelResolution";
 
 export const dynamic = "force-dynamic";
-
 /**
  * Handle CORS preflight
  */

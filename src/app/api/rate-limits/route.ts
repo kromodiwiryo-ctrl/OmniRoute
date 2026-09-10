@@ -13,6 +13,8 @@ import { getAccountDisplayName } from "@/lib/display/names";
 import { toggleRateLimitSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 type JsonRecord = Record<string, unknown>;
 
 function asRecord(value: unknown): JsonRecord {
@@ -35,6 +37,7 @@ export async function GET() {
       const conn = asRecord(connRaw);
       const connectionId = typeof conn.id === "string" ? conn.id : "";
       const provider = typeof conn.provider === "string" ? conn.provider : "unknown";
+
       const name =
         (typeof conn.name === "string" && conn.name.trim()) ||
         (typeof conn.email === "string" && conn.email.trim()) ||

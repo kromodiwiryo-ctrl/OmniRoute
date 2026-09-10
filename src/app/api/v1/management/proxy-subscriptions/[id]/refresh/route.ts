@@ -2,6 +2,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
 import { syncSubscription } from "@/lib/proxySubscription";
 
+export const dynamic = "force-dynamic";
+
 type RouteCtx = { params: Promise<{ id: string }> };
 
 /**

@@ -13,6 +13,8 @@ import {
 } from "@/shared/schemas/searchTools";
 import * as log from "@/sse/utils/logger";
 
+export const dynamic = "force-dynamic";
+
 // ---------------------------------------------------------------------------
 // Fetch provider metadata (hardcoded — no registry for these 4)
 // ---------------------------------------------------------------------------

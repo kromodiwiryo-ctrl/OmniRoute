@@ -4,6 +4,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { z } from "zod";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 const migrateLegacyProxySchema = z.object({
   force: z.boolean().optional(),
 });

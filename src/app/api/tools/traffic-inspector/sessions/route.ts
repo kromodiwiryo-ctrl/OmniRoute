@@ -9,6 +9,8 @@ import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/
 import { InspectorSessionStartSchema } from "@/shared/schemas/inspector";
 import { listSessions, createSession } from "@/lib/db/inspectorSessions";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(): Promise<Response> {
   try {
     const sessions = listSessions();

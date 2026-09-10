@@ -12,6 +12,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const hookScopeSchema = z.union([
   z.object({ type: z.literal("global") }),
   z.object({ type: z.literal("combo"), comboId: z.string().trim().min(1) }),
@@ -40,6 +42,7 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const hookName = url.searchParams.get("name");
     const includeLogs = url.searchParams.get("logs") === "true";
+
     const logLimit = parseInt(url.searchParams.get("logLimit") || "10", 10);
 
     if (hookName) {

@@ -41,6 +41,7 @@ import {
   type RateLimitedCredentials,
 } from "@/app/api/v1/_shared/rateLimit";
 
+export const dynamic = "force-dynamic";
 const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "*",
@@ -113,6 +114,7 @@ async function findNextFallbackProvider(
 interface WebFetchExecutionInput {
   url: string;
   format: "markdown" | "html" | "links" | "screenshot";
+
   depth: 0 | 1 | 2;
   wait_for_selector?: string;
   include_metadata?: boolean;

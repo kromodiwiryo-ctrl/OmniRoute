@@ -4,6 +4,8 @@ import { z } from "zod";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { buildComboForecastResponse } from "@/lib/usage/comboForecast";
 
+export const dynamic = "force-dynamic";
+
 const querySchema = z.object({
   range: z.enum(["1h", "24h", "7d", "30d"]).default("7d"),
   horizon: z.enum(["24h", "7d", "30d"]).default("30d"),

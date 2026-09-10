@@ -9,6 +9,8 @@ import {
   firstIssueMessage,
 } from "@/lib/proxySubscription";
 
+export const dynamic = "force-dynamic";
+
 type RouteCtx = { params: Promise<{ id: string }> };
 
 /**

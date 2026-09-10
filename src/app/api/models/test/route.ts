@@ -6,6 +6,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { getSettings } from "@/lib/db/settings";
 import { isFreeModel, providerHasFreeModels } from "@/shared/utils/freeModels";
 
+export const dynamic = "force-dynamic";
+
 const testModelSchema = z.object({
   providerId: z.string().min(1),
   modelId: z.string().min(1),

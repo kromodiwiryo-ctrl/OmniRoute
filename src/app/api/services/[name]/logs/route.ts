@@ -16,6 +16,8 @@ import { getSupervisor } from "@/lib/services/registry";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import type { LogLine } from "@/lib/services/types";
 
+export const dynamic = "force-dynamic";
+
 const MAX_TAIL = 1000;
 const DEFAULT_TAIL = 200;
 const HEARTBEAT_MS = 15_000;

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/resilience/reset — Reset all provider circuit breakers and model lockouts.
  *

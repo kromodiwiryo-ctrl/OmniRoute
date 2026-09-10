@@ -7,6 +7,8 @@ import { getApiKeyRequestScope } from "@/app/api/v1/_helpers/apiKeyScope";
 import { formatBatchResponse } from "./formatBatchResponse";
 import { parseBatchListLimit } from "./parseListLimit";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

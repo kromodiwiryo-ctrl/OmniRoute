@@ -2,6 +2,8 @@ import { buildConfigSyncEnvelope } from "@/lib/sync/bundle";
 import { getSyncTokenFromRequest, markSyncTokenUsed, validateSyncToken } from "@/lib/sync/tokens";
 import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 function matchesEtag(request: Request, version: string) {
   const ifNoneMatch = request.headers.get("if-none-match");
   if (!ifNoneMatch) return false;

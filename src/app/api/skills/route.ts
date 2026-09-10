@@ -6,6 +6,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { matchesSearch } from "@/shared/utils/turkishText";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const POPULAR_BY_PROVIDER = {
   skillsmp: ["web-search", "file-reader", "sql-assistant", "devops-helper", "docs-assistant"],
   skillssh: ["git", "terminal", "postgres", "kubernetes", "playwright"],
@@ -29,6 +31,7 @@ export async function GET(request?: Request) {
     if (query) {
       allSkills = allSkills.filter((skill) => {
         const tagsText = Array.isArray(skill.tags) ? skill.tags.join(" ") : "";
+
         return (
           matchesSearch(skill.name, query) ||
           matchesSearch(skill.description, query) ||

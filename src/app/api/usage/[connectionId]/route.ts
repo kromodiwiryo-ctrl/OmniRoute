@@ -1,5 +1,7 @@
 import { fetchAndPersistProviderLimits } from "@/lib/usage/providerLimits";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/usage/[connectionId] - Get live usage data for a specific connection
  * and persist the refreshed Provider Limits cache.
@@ -27,6 +29,7 @@ export async function GET(
         ? (error as { status: number }).status
         : 500;
     const message = (error as Error)?.message || "Failed to fetch usage";
+
     console.error("[Usage API] Error fetching usage:", error);
     return Response.json({ error: message }, { status });
   }

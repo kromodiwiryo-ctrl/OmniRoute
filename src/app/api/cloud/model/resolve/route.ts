@@ -3,6 +3,8 @@ import { validateApiKey, getModelAliases } from "@/models";
 import { cloudResolveAliasSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 // Resolve model alias to provider/model
 export async function POST(request: Request) {
   let rawBody;
@@ -10,7 +12,12 @@ export async function POST(request: Request) {
     rawBody = await request.json();
   } catch {
     return NextResponse.json(
-      { error: { message: "Invalid request", details: [{ field: "body", message: "Invalid JSON body" }] } },
+      {
+        error: {
+          message: "Invalid request",
+          details: [{ field: "body", message: "Invalid JSON body" }],
+        },
+      },
       { status: 400 }
     );
   }

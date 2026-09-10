@@ -17,6 +17,8 @@ import {
 import type { z } from "zod";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 const BASE_SUPPORTED_PROXY_TYPES = new Set(["http", "https"]);
 type UpdateProxyConfigInput = z.infer<typeof updateProxyConfigSchema>;
 type ProxyConfigInput = NonNullable<UpdateProxyConfigInput["proxy"]>;
@@ -50,6 +52,7 @@ function createInvalidProxyError(message: string): ApiRouteError {
   const error = new Error(message) as ApiRouteError;
   error.status = 400;
   error.type = "invalid_request";
+
   return error;
 }
 

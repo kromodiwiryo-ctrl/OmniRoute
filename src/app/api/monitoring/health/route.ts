@@ -9,6 +9,8 @@ import { AI_PROVIDERS } from "@/shared/constants/providers";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/monitoring/health — System health overview
  *
@@ -153,6 +155,7 @@ async function rebuildHealthPayload(): Promise<unknown> {
     import("@/lib/localHealthCheck"),
     import("@omniroute/open-sse/services/admission/runtime.ts"),
     import("@/shared/middleware/chatBodyAdmission"),
+
     getCachedSettings(),
     getProviderConnections(),
   ]);

@@ -3,6 +3,8 @@ import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { searchSkillsSh } from "@/lib/skills/skillssh";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   if (!(await isAuthenticated(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -10,6 +12,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const q = searchParams.get("q") || "";
+
     const limit = Math.min(Math.max(Number(searchParams.get("limit")) || 20, 1), 100);
 
     const data = await searchSkillsSh(q, limit);

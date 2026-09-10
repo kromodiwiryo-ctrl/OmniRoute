@@ -1,6 +1,8 @@
 import { CORS_HEADERS } from "@/shared/utils/cors";
 import { getUnifiedModelsResponse } from "./models/catalog";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/providers/volcengine-plan/connect/[sessionId]/resend
  * Re-trigger the SMS verification code for an active login session.

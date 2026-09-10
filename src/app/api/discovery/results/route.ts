@@ -14,6 +14,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
 import { getDiscoveryResults } from "@/lib/db/discoveryResults";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request): Promise<Response> {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

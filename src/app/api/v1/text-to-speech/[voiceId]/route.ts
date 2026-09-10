@@ -6,6 +6,8 @@ import {
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 import { CORS_HEADERS } from "@/shared/utils/cors";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return elevenLabsOptionsResponse();
 }

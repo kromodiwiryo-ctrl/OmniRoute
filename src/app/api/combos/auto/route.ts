@@ -12,6 +12,8 @@ import {
 import { parseAutoSuffix } from "@omniroute/open-sse/services/autoCombo/suffixComposition";
 import { isValidModelFamily } from "@omniroute/open-sse/services/autoCombo/modelFamily";
 
+export const dynamic = "force-dynamic";
+
 const ALL_VARIANTS: Array<{ variant: AutoVariant | undefined; name: string }> = [
   { variant: undefined, name: "Auto" },
   ...VALID_VARIANTS.map((v) => ({
@@ -120,6 +122,7 @@ export async function GET(request: Request) {
         const tierName = parsed.tier
           ? `${parsed.tier.charAt(0).toUpperCase() + parsed.tier.slice(1)}`
           : "";
+
         const displayName = tierName ? `${catName} ${tierName}` : catName;
 
         combos.push({

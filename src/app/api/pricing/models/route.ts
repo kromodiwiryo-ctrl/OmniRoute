@@ -4,6 +4,8 @@ import { getAllCustomModels, getAllSyncedAvailableModels } from "@/lib/db/models
 import { getPricing } from "@/lib/db/settings";
 import { getProviderPrefixIndex } from "@/lib/providerNodePrefixes";
 
+export const dynamic = "force-dynamic";
+
 function asRecord(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" && !Array.isArray(value)
     ? (value as Record<string, unknown>)

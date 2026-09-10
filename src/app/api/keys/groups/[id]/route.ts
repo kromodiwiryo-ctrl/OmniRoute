@@ -12,6 +12,8 @@ import {
 } from "@/lib/db/apiKeyGroups";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 type RouteParams = { params: Promise<{ id: string }> };
 
 const updateKeyGroupSchema = z

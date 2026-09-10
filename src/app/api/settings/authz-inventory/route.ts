@@ -11,6 +11,8 @@ import {
 } from "@/server/authz/routeGuard";
 import { getCorsStatus } from "@/server/cors/origins";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Static MANAGEMENT-tier example prefixes. Render-only — never consulted by
  * the runtime policy. The actual MANAGEMENT classification is "any /api/*

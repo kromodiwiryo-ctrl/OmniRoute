@@ -4,6 +4,8 @@ import { getApiKeyById } from "@/lib/db/apiKeys";
 import { getApiKeyUsageLimitStatus } from "@/lib/usage/apiKeyUsageLimits";
 import * as log from "@/sse/utils/logger";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

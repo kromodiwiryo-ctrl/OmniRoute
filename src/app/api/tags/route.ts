@@ -1,6 +1,8 @@
 import { CORS_HEADERS } from "@/shared/utils/cors";
 import { ollamaModels } from "@omniroute/open-sse/config/ollamaModels.ts";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return new Response(null, { headers: CORS_HEADERS });
 }

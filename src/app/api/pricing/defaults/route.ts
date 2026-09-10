@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getDefaultPricing } from "@/shared/constants/pricing";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/pricing/defaults
  * Get default pricing configuration

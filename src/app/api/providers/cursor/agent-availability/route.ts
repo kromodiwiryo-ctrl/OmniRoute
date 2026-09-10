@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getCachedCursorAgentAvailability } from "@/lib/cursor/renewal";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/providers/cursor/agent-availability
  * Credential-free, informational check for whether `cursor-agent` is

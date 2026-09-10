@@ -21,6 +21,8 @@ import {
   normalizeScope,
 } from "@omniroute/open-sse/services/kiroExternalIdp.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/oauth/kiro/auto-import
  *
@@ -588,6 +590,7 @@ async function saveAndRespond(
         providerSpecificData.clientId = reg.clientId;
         providerSpecificData.clientSecret = reg.clientSecret;
         providerSpecificData.region = "us-east-1";
+
         if (reg.clientSecretExpiresAt) {
           providerSpecificData.clientSecretExpiresAt = reg.clientSecretExpiresAt;
         }

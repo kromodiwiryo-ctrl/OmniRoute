@@ -7,6 +7,8 @@ import {
   validateProxyPool,
 } from "@/lib/proxyEgress";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET  /api/settings/proxies/egress — diagnose the egress IP of every OAuth
  *   connection: by which IP each account is entering (clientIp) and leaving

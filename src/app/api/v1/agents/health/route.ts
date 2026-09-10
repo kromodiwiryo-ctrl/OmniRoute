@@ -5,6 +5,8 @@ import { getCloudAgentCorsHeaders, requireCloudAgentManagementAuth } from "@/lib
 import pino from "pino";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const logger = pino({ name: "cloud-agents-health-api" });
 
 const PROVIDER_NAMES: Record<string, string> = {

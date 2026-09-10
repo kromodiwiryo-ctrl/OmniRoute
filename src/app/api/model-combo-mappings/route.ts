@@ -12,6 +12,8 @@ import { paginationSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { validatedJsonBody, isValidatedJsonBodyFailure } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const createMappingSchema = z.object({
   pattern: z.string().min(1, "Pattern is required").max(500),
   comboId: z.string().min(1, "ComboId is required"),

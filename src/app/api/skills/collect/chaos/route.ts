@@ -33,7 +33,6 @@ import { executeChaosRun, type ChaosRunResult } from "@/lib/chaos/chaosExecutor"
 import * as log from "@/sse/utils/logger";
 
 export const dynamic = "force-dynamic";
-
 // ── Schema ───────────────────────────────────────────────────────────────────
 
 const chaosSchema = z.object({

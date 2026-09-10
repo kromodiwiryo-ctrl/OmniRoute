@@ -1,6 +1,8 @@
 import { handleCorsOptions } from "@/shared/utils/cors";
 import { handleInternalUsageCommandHttpRequest } from "@/lib/usage/internalUsageCommand";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

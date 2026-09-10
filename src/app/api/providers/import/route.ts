@@ -32,6 +32,7 @@ import { resolveProxyForProvider } from "@/lib/db/proxies";
 import { runWithProxyContext } from "@omniroute/open-sse/utils/proxyFetch.ts";
 import { rejectRetiredCommonChatGptWebProvider } from "@/lib/providers/chatgptWebRetirementResponse";
 
+export const dynamic = "force-dynamic";
 type ImportEntry = {
   provider: string;
   name: string;

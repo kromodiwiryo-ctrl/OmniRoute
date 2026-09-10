@@ -5,6 +5,8 @@ import { getInstalledVersion, getLatestVersion } from "@/lib/services/installers
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;
@@ -14,6 +16,7 @@ export async function GET(request: Request) {
     // Both refer to the same binary; normalizing here avoids a DB lookup mismatch.
     const { searchParams } = new URL(request.url);
     const toolParam = searchParams.get("tool") ?? "cliproxy";
+
     if (toolParam !== "cliproxy" && toolParam !== "cliproxyapi") {
       return NextResponse.json({ error: `Unknown tool: ${toolParam}` }, { status: 400 });
     }

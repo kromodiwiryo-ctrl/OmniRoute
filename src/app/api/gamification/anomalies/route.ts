@@ -3,6 +3,8 @@ import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
 import { getAnomalies } from "@/lib/gamification/antiCheat";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

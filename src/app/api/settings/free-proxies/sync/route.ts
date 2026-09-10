@@ -6,6 +6,8 @@ import { getProvider } from "@/lib/freeProxyProviders";
 import { runFreeProxySyncCycle } from "@/lib/freeProxyProviders/syncCycle";
 import type { FreeProxyProvider, FreeProxySourceId } from "@/lib/freeProxyProviders/types";
 
+export const dynamic = "force-dynamic";
+
 let _providersOverrideForTests: FreeProxyProvider[] | null = null;
 export function _setProvidersForTests(providers: FreeProxyProvider[] | null): void {
   _providersOverrideForTests = providers;
@@ -17,6 +19,7 @@ export async function POST(request: Request) {
 
   let rawBody: unknown = {};
   const ct = request.headers.get("content-type") || "";
+
   if (ct.includes("application/json")) {
     try {
       rawBody = await request.json();

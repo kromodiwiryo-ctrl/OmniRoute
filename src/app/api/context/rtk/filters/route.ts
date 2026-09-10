@@ -5,6 +5,8 @@ import {
 } from "@omniroute/open-sse/services/compression/engines/rtk/filterLoader";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

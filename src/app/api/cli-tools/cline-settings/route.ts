@@ -13,6 +13,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { readJsoncConfig } from "../_lib/jsoncConfig";
 
+export const dynamic = "force-dynamic";
+
 const CLINE_DATA_DIR = path.join(os.homedir(), ".cline", "data");
 const GLOBAL_STATE_PATH = path.join(CLINE_DATA_DIR, "globalState.json");
 const SECRETS_PATH = path.join(CLINE_DATA_DIR, "secrets.json");

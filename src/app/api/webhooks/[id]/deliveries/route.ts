@@ -9,6 +9,8 @@ import { getWebhook } from "@/lib/db/webhooks";
 import { getDeliveries } from "@/lib/db/webhookDeliveries";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

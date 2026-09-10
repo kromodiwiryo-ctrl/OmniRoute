@@ -7,6 +7,8 @@ import { fetchSkillMd } from "@/lib/skills/skillssh";
 import { getSkillsProviderSetting } from "@/lib/skills/providerSettings";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const skillsshInstallSchema = z.object({
   name: z.string().min(1).max(64),
   description: z.string().min(1).max(1024),

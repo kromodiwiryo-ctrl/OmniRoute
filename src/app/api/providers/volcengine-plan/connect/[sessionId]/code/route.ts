@@ -5,6 +5,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { formatValidationMessage, validateBody } from "@/shared/validation/helpers";
 import { volcenginePlanCodeSchema } from "@/shared/validation/schemas/volcenginePlan";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/providers/volcengine-plan/connect/[sessionId]/code
  * Submit the SMS verification code (plus image captcha when required) for an

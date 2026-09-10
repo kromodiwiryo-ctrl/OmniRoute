@@ -5,20 +5,18 @@ import { parseKimiJwt } from "@omniroute/open-sse/utils/kimiJwt.ts";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
-export async function POST(
-  req: Request,
-  props: { params: Promise<{ id: string }> }
-) {
+export const dynamic = "force-dynamic";
+
+export async function POST(req: Request, props: { params: Promise<{ id: string }> }) {
   const authResponse = await requireManagementAuth(req);
   if (authResponse) return authResponse;
 
   const { id } = await props.params;
   const conn = await getProviderConnectionById(id);
   if (!conn) {
-    return NextResponse.json(
-      buildErrorBody(404, `Provider connection ${id} not found`),
-      { status: 404 }
-    );
+    return NextResponse.json(buildErrorBody(404, `Provider connection ${id} not found`), {
+      status: 404,
+    });
   }
 
   const provider = String(conn.provider || "").toLowerCase();
@@ -35,9 +33,7 @@ export async function POST(
     return NextResponse.json({
       success: true,
       message: "Token refreshed successfully",
-      expiresAt: result.expiresAtSec
-        ? new Date(result.expiresAtSec * 1000).toISOString()
-        : null,
+      expiresAt: result.expiresAtSec ? new Date(result.expiresAtSec * 1000).toISOString() : null,
       user: {
         userId: payload?.sub || null,
         region: payload?.region || null,

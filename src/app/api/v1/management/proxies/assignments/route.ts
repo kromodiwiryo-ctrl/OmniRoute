@@ -6,6 +6,8 @@ import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/e
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { clearDispatcherCache } from "@omniroute/open-sse/utils/proxyDispatcher";
 
+export const dynamic = "force-dynamic";
+
 function toPagination(searchParams: URLSearchParams) {
   const limit = Math.max(1, Math.min(200, Number(searchParams.get("limit") || 100)));
   const offset = Math.max(0, Number(searchParams.get("offset") || 0));

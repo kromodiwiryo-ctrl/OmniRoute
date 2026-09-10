@@ -13,6 +13,8 @@ import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { registerDefaultGuardrails } from "@/lib/guardrails/registry";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

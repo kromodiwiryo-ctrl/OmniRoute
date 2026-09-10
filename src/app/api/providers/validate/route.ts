@@ -17,6 +17,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { runWithProxyContextOrDirect } from "@omniroute/open-sse/utils/proxyFetch.ts";
 import { rejectRetiredCommonChatGptWebProvider } from "@/lib/providers/chatgptWebRetirementResponse";
 
+export const dynamic = "force-dynamic";
+
 function sanitizeAuditUrl(url: string | null | undefined) {
   if (!url) return null;
   try {
@@ -102,6 +104,7 @@ export async function POST(request) {
           : isClaudeCodeCompatibleProvider(provider)
             ? "CC"
             : "Anthropic";
+
         return NextResponse.json(
           { error: `${typeName} Compatible node not found` },
           { status: 404 }

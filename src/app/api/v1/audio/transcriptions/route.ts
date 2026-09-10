@@ -29,6 +29,7 @@ import { getDatabaseSettings } from "@/lib/db/databaseSettings";
 import { handleComboChat } from "@omniroute/open-sse/services/combo.ts";
 import { log } from "@omniroute/open-sse/utils/logger.ts";
 
+export const dynamic = "force-dynamic";
 /**
  * Copy a multipart body, swapping only the `model` field. Combo fan-out needs one
  * body per target, and the uploaded file part is reused as-is (a Blob can be read

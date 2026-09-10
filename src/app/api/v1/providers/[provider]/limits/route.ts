@@ -4,6 +4,8 @@ import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { setProviderKeyLimit, getProviderKeyLimit } from "@/lib/db/registeredKeys";
 
+export const dynamic = "force-dynamic";
+
 const limitsSchema = z.object({
   maxActiveKeys: z.number().int().positive().nullable().optional(),
   dailyIssueLimit: z.number().int().positive().nullable().optional(),

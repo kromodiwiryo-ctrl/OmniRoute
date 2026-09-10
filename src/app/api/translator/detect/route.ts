@@ -3,6 +3,8 @@ import { detectFormat } from "@omniroute/open-sse/services/provider.ts";
 import { translatorDetectSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/translator/detect
  * Detect the format of a request body.

@@ -9,6 +9,8 @@ import {
 } from "@/sse/services/tokenRefresh";
 import { rotationGroupFor } from "@omniroute/open-sse/services/refreshSerializer.ts";
 
+export const dynamic = "force-dynamic";
+
 type RefreshResult = {
   accessToken?: string;
   expiresIn?: number;
@@ -171,6 +173,7 @@ export async function POST(_request: Request, { params }: { params: Promise<{ id
           isDeprecated && typeof (newCredentials as Record<string, unknown>).reason === "string"
             ? ((newCredentials as Record<string, unknown>).reason as string)
             : "Refresh token expired. Please re-authenticate this account.";
+
         await updateProviderConnection(id, {
           testStatus: isDeprecated ? "expired" : "invalid",
           lastError: reason,

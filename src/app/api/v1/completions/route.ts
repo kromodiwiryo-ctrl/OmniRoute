@@ -9,6 +9,8 @@ import {
 } from "@/shared/utils/compressionHeaderEcho";
 import { withChatAdmission } from "@/shared/middleware/withChatAdmission";
 
+export const dynamic = "force-dynamic";
+
 let initPromise = null;
 // `logger: null` — the guardrail registry re-evaluates this request inside
 // handleChat with the pino logger (#11936 dedupe).

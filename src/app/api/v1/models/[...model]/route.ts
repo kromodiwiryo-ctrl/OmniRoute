@@ -2,6 +2,8 @@ import { handleCorsOptions } from "@/shared/utils/cors";
 import { getUnifiedModelsResponse } from "../catalog";
 import { handleGetModelById } from "../modelById";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

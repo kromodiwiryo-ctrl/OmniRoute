@@ -12,6 +12,8 @@ import { getSession, getSessionRequests } from "@/lib/db/inspectorSessions";
 import { toHar } from "@/lib/inspector/harExport";
 import type { InterceptedRequest } from "@/mitm/inspector/types";
 
+export const dynamic = "force-dynamic";
+
 interface Params {
   params: Promise<{ id: string }>;
 }

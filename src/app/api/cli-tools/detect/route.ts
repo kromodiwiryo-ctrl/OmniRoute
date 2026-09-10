@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { detectAllTools, detectTool } from "@/lib/cli-helper/tool-detector";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/cli-tools/detect - Detect all installed CLI tools
 export async function GET(request: Request) {
   const authError = await requireCliToolsAuth(request);

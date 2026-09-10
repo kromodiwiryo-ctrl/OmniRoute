@@ -34,6 +34,7 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createProviderConnection } from "@/lib/db/providers";
 import { isRunningInDocker } from "@/lib/zed-oauth/dockerDetect";
 
+export const dynamic = "force-dynamic";
 const LEGACY_ONE_STEP_ENABLED = process.env.OMNIROUTE_ZED_IMPORT_LEGACY_ONE_STEP === "true";
 
 interface ImportResponse {

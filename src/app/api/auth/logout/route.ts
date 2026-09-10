@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getAuditRequestContext, logAuditEvent } from "@/lib/compliance/index";
 import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
+
 export const logoutRouteInternals = {
   getCookieStore: cookies,
 };

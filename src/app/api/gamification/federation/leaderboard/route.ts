@@ -4,6 +4,8 @@ import { type LeaderboardScope, getTopN } from "@/lib/gamification/leaderboard";
 import { getConnectedServerByKeyHash } from "@/lib/db/gamification";
 import crypto from "crypto";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

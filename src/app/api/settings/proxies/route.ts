@@ -15,6 +15,8 @@ import {
 } from "@/lib/db/proxies/mappers";
 import { getRelayProbeStats } from "@/lib/db/relayProbeStats";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

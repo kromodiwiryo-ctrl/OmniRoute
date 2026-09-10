@@ -5,6 +5,8 @@ import { getRegistryEntry } from "@omniroute/open-sse/config/providerRegistry.ts
 import { getProviderById, getProviderByAlias } from "@/shared/constants/providers";
 import { isCompatibleProviderConnectionId } from "@/shared/utils/compatibleProviderId";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */
@@ -83,6 +85,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ prov
     if (root) return root;
 
     const id = typeof model.id === "string" ? model.id : "";
+
     if (!id) return id;
     if (id.startsWith(`${providerAlias}/`)) return id.slice(providerAlias.length + 1);
     if (id.startsWith(`${providerId}/`)) return id.slice(providerId.length + 1);

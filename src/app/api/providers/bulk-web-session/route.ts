@@ -20,6 +20,8 @@ import {
 } from "@/shared/providers/webSessionCredentials";
 import { rejectRetiredCommonChatGptWebProvider } from "@/lib/providers/chatgptWebRetirementResponse";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

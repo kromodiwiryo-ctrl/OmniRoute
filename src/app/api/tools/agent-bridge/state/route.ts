@@ -20,6 +20,8 @@ import { ALL_TARGETS } from "@/mitm/targets/index";
 import path from "path";
 import fs from "fs";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(): Promise<Response> {
   try {
     // Fetch all data in parallel for performance
@@ -55,6 +57,7 @@ export async function GET(): Promise<Response> {
       agentStates.some((s) => s.dns_enabled && checkDNSEntryForAgent(s.agent_id));
 
     const isWin = process.platform === "win32";
+
     const hasCachedPassword = !!getCachedPassword();
     const needsSudoPassword = !isWin && !hasCachedPassword && isSudoPasswordRequired();
 

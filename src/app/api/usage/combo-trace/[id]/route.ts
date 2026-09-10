@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getComboTrace } from "@omniroute/open-sse/services/combo/decisionTrace.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * #10681: read the ordered per-target decision trace for one combo invocation.
  * Safe by construction: the trace holds routing metadata only (provider/model,

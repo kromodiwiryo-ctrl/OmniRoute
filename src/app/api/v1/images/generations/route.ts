@@ -48,7 +48,6 @@ import {
 } from "@/shared/constants/chatgptWebRetirement";
 
 export const dynamic = "force-dynamic";
-
 /**
  * Handle CORS preflight
  */

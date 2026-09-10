@@ -6,6 +6,8 @@ import {
 } from "@/lib/oauth/services/cursorLogin";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 async function requireOAuthAuth(request: Request) {
   if (!(await isAuthRequired(request))) return null;
   if (await isAuthenticated(request)) return null;
@@ -32,6 +34,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = sanitizeErrorMessage(error) || "Failed to start Cursor login";
+
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -20,6 +20,8 @@ import {
 import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

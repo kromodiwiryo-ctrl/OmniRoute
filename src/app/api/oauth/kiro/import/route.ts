@@ -21,6 +21,8 @@ import {
   normalizeScope,
 } from "@omniroute/open-sse/services/kiroExternalIdp.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Build the user-facing error message for a failed Kiro/Amazon-Q token import.
  * The catch previously returned a bare `Internal server error`, which hid the
@@ -190,6 +192,7 @@ export async function POST(request: Request) {
     const email = kiroService.extractEmailFromJWT(tokenData.accessToken);
 
     const resolvedAuthMethod = isIdc ? "idc" : (tokenData as any).authMethod || "imported";
+
     const resolvedProfileArn = (tokenData as any).profileArn || null;
 
     // Save to database

@@ -10,6 +10,8 @@ import { InspectorListQuerySchema } from "@/shared/schemas/inspector";
 import { globalTrafficBuffer } from "@/mitm/inspector/buffer";
 import type { ListFilters } from "@/mitm/inspector/types";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const rawQuery: Record<string, string> = {};

@@ -15,6 +15,8 @@ import {
 } from "@/app/api/v1/_shared/rateLimit";
 import { JINA_FOUNDATION_PROVIDER_ID, JINA_SEGMENT_BASE_URL } from "@/lib/providers/jina";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

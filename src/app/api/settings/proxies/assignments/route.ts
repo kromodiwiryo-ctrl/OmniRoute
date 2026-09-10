@@ -6,6 +6,8 @@ import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/e
 import { clearDispatcherCache } from "@omniroute/open-sse/utils/proxyDispatcher";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

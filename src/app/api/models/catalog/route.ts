@@ -3,6 +3,8 @@ import { getUnifiedModelsResponse } from "@/app/api/v1/models/catalog";
 import { INTERNAL_PROXY_ERROR, getCatalogDiagnosticsHeaders } from "@/lib/modelMetadataRegistry";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/models/catalog
  * Returns all models grouped by provider, with metadata (type, custom flag)
@@ -28,6 +30,7 @@ export async function GET(request: Request) {
         typeof model.owned_by === "string" && model.owned_by.length > 0
           ? model.owned_by
           : "unknown";
+
       const bucket = catalog[providerId] || {
         provider: AI_PROVIDERS[providerId]?.name || providerId,
         active: providerId !== "unknown",

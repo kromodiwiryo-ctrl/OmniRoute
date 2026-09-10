@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { revokeRegisteredKey } from "@/lib/db/registeredKeys";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/v1/registered-keys/[id]/revoke
  *

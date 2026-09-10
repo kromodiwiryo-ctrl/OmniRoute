@@ -3,6 +3,8 @@ import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { getApiKeys } from "@/lib/db/apiKeys";
 import { maskStoredApiKey } from "@/lib/apiKeyExposure";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/cli-tools/keys - List API keys with raw values for authenticated CLI tools UI only
 export async function GET(request: Request) {
   const authError = await requireCliToolsAuth(request);

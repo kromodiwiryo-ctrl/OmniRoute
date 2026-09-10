@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getProviderConnections } from "@/lib/db/providers";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/providers/client - List all connections for client (includes sensitive fields for sync)
 export async function GET() {
   try {

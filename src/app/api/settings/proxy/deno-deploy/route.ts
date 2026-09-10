@@ -7,6 +7,8 @@ import { createProxy } from "@/lib/db/proxies";
 import { encrypt } from "@/lib/db/encryption";
 import { isPrivateRelayHostname } from "@/lib/proxyRelay/privateHostname";
 
+export const dynamic = "force-dynamic";
+
 const DENO_API_BASE = process.env.DENO_DEPLOY_API_BASE || "https://api.deno.com/v2";
 const POLL_INTERVAL_MS = 2000;
 const POLL_MAX_ATTEMPTS = 30; // ~60 s
@@ -296,6 +298,7 @@ export async function POST(request: Request) {
         : revision.status === "failed" || revision.status === "errored"
           ? "failed"
           : "timeout";
+
     if (revisionId && finalStatus !== "succeeded" && finalStatus !== "failed") {
       finalStatus = await pollRevision(revisionId, denoToken);
     }

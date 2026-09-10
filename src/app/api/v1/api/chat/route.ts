@@ -3,6 +3,8 @@ import { initTranslators } from "@omniroute/open-sse/translator/index.ts";
 import { transformToOllama } from "@omniroute/open-sse/utils/ollamaTransform.ts";
 import { withChatAdmission } from "@/shared/middleware/withChatAdmission";
 
+export const dynamic = "force-dynamic";
+
 let initialized = false;
 
 async function ensureInitialized() {

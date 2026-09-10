@@ -14,6 +14,8 @@ import {
 } from "@/shared/validation/compressionConfigSchemas";
 import type { CompressionCombo } from "@/lib/db/compressionCombos";
 
+export const dynamic = "force-dynamic";
+
 export const pipelineStepSchema = stackedPipelineStepSchema;
 
 export const compressionComboUpdateSchema = z

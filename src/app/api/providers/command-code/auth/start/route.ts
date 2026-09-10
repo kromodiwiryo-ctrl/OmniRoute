@@ -10,6 +10,8 @@ import {
   stateHashFromState,
 } from "../shared";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

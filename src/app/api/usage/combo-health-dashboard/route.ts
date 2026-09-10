@@ -5,6 +5,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { buildComboHealthDashboardResponse } from "@/lib/usage/comboHealthDashboard";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const querySchema = z.object({
   range: z.enum(["1h", "24h", "7d", "30d"]).default("24h"),
   horizon: z.enum(["24h", "7d", "30d"]).default("30d"),

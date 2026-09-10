@@ -9,6 +9,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { validateBody } from "@/shared/validation/helpers";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const deleteCooldownSchema = z
   .object({
     provider: z.string().optional(),
@@ -59,6 +61,7 @@ export async function DELETE(request: Request) {
 
     const provider = typeof body.provider === "string" ? body.provider.trim() : "";
     const model = typeof body.model === "string" ? body.model.trim() : "";
+
     if (!provider || !model) {
       return NextResponse.json({ error: "provider and model are required" }, { status: 400 });
     }

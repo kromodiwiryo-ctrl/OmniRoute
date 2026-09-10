@@ -7,6 +7,8 @@ import { generateConfig } from "@/lib/cli-helper/config-generator";
 import { guardCliConfigWrite } from "@/lib/api/cliConfigWriteGuard";
 import { getCliPrimaryConfigPath, normalizeCliToolId } from "@/shared/services/cliRuntime";
 
+export const dynamic = "force-dynamic";
+
 const applySchema = z.object({
   toolId: z.string().min(1),
   baseUrl: z.string().optional(),

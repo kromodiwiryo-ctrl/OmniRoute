@@ -18,6 +18,8 @@ import {
   isTlsInterceptEnabled,
 } from "@/lib/inspector/captureState";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(): Promise<Response> {
   try {
     const customHosts = listCustomHosts();

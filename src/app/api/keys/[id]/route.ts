@@ -14,6 +14,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import * as log from "@/sse/utils/logger";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/keys/[id] - Get single API key
 export async function GET(request, { params }) {
   const authError = await requireManagementAuth(request);

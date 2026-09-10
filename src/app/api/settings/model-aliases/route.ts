@@ -16,6 +16,8 @@ import {
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/settings/model-aliases
  * Returns the full alias map, separated into built-in and custom.

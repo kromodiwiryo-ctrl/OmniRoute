@@ -3,6 +3,8 @@ import { z } from "zod";
 
 import { buildCacheHealthResponse } from "@/lib/usage/cacheHealth";
 
+export const dynamic = "force-dynamic";
+
 const querySchema = z.object({
   range: z.enum(["1h", "24h", "7d", "30d"]).default("24h"),
   model: z.string().min(1).max(200).optional(),

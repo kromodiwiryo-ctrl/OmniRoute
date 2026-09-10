@@ -10,6 +10,8 @@ import {
   runRedisRuntimeCommand,
 } from "../redisRuntime";
 
+export const dynamic = "force-dynamic";
+
 export async function POST() {
   const guard = isLocalRequestAllowed();
   if (!guard.allowed) {

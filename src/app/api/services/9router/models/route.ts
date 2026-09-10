@@ -19,6 +19,8 @@ import { getOrCreateApiKey } from "@/lib/services/apiKey";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const TOOL = "9router";
 const DEFAULT_PORT = parseInt(process.env.NINEROUTER_PORT ?? "20130", 10);
 

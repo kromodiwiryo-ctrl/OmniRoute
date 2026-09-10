@@ -24,6 +24,8 @@ import { proxyChat } from "@/lib/telegram/chatProxy";
 import { formatTelegramGatewayError } from "@/lib/telegram/errorMessage";
 import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Telegram update bodies are open-ended (many update types, evolving schema),
  * so validation is deliberately loose: a JSON object with optional string
@@ -142,6 +144,7 @@ async function handleAndReply(chatId: number, text: string, messageId?: number):
 
     const answer = await proxyChat(chatId, trimmed);
     const reply = answer || "⚠️ The gateway returned an empty response.";
+
     await sendTelegramMessage({
       chat_id: chatId,
       text: reply.length > 4096 ? `${reply.slice(0, 4090)}…` : reply,

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { tryAgentAuth, tryIdeAuth } from "@/lib/cursor/tokenExtractor";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/oauth/cursor/auto-import
  * Auto-detect and extract Cursor tokens from:

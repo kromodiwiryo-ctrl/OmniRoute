@@ -11,6 +11,8 @@ import { resolveMitmDataDir } from "@/mitm/dataDir";
 import { KIRO_MITM_PROFILE } from "@/mitm/targets/kiro";
 import { ANTIGRAVITY_MITM_PROFILE } from "@/mitm/targets/antigravity";
 
+export const dynamic = "force-dynamic";
+
 type MitmTargetRoute = {
   id: string;
   name: string;

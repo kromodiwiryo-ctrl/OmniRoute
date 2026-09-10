@@ -7,6 +7,8 @@ import { cliMitmAliasUpdateSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { hasInvalidReasoningEffort, normalizeAliasMappings } from "@/mitm/aliasConfig";
 
+export const dynamic = "force-dynamic";
+
 // GET - Get MITM aliases for a tool
 export async function GET(request) {
   const authError = await requireCliToolsAuth(request);

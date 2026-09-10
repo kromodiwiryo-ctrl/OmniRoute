@@ -3,6 +3,8 @@ import { getOrInitSupervisor } from "../_lib";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const TOOL = "mux";
 
 export async function POST(): Promise<Response> {

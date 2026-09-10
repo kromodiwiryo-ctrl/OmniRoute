@@ -12,6 +12,8 @@ import { createErrorResponse } from "@/lib/api/errorResponse";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createConductorTask } from "@/lib/conductor/hubProxy";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Clamps a hub status before it is used as OUR response status. `createConductorTask`
  * mirrors whatever the hub answered, and `Response.json()` throws a `RangeError` for any

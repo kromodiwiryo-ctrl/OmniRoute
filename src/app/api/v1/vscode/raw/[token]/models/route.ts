@@ -5,6 +5,8 @@ import {
 } from "@/app/api/v1/vscode/[token]/models/route";
 import { withPathTokenApiKey } from "@/app/api/v1/vscode/raw/[token]/tokenizedRequest";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return new Response(null, {
     headers: {

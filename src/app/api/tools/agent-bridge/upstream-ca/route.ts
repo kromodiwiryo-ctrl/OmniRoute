@@ -15,6 +15,8 @@ import fs from "fs";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 const CA_PATH_FILE = path.join(resolveMitmDataDir(), "mitm", "upstream-ca.path");
 
 function readStoredCaPath(): string | null {

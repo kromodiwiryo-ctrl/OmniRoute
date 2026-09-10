@@ -11,6 +11,8 @@ import {
   type QuotaTokenStatus,
 } from "@/shared/contracts/quota";
 
+export const dynamic = "force-dynamic";
+
 type ProviderConnectionRecord = Record<string, unknown>;
 
 function toDateMs(value: unknown): number | null {
@@ -51,6 +53,7 @@ function buildQuotaEntry(
       : "unknown";
   const connectionId =
     typeof connection.id === "string" && connection.id.trim() ? connection.id : "unknown";
+
   const name =
     (typeof connection.name === "string" && connection.name.trim()) ||
     (typeof connection.email === "string" && connection.email.trim()) ||

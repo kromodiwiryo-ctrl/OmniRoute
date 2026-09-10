@@ -17,6 +17,8 @@ import { getLogExportDestinationType } from "@/lib/logExport/registry";
 import { encryptDestinationConfig, requiresEncryptionKey } from "@/lib/logExport/secrets";
 import { toDestinationView } from "@/lib/logExport/presenter";
 
+export const dynamic = "force-dynamic";
+
 const createDestinationSchema = z.object({
   name: z.string().min(1).max(200),
   type: z.string().min(1).max(64),

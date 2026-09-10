@@ -9,6 +9,8 @@ import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { z } from "zod";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const cacheConfigUpdateSchema = z.object({
   semanticCacheEnabled: z.boolean().optional(),
   semanticCacheMaxSize: z.number().positive().optional(),

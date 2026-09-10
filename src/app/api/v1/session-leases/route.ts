@@ -26,6 +26,8 @@ import {
 import { getModelInfo } from "@/sse/services/model";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const action = <T extends string>(name: T, shape: z.ZodRawShape) =>
   z.object({ action: z.literal(name), ...shape });
 const generation = z.number().int().positive().safe();

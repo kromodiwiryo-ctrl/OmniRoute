@@ -7,6 +7,8 @@ import { markAllMemoriesNeedReindex } from "@/lib/db/memoryVec";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { logger } from "@omniroute/open-sse/utils/logger.ts";
 
+export const dynamic = "force-dynamic";
+
 const log = logger("MEMORY_REINDEX_ROUTE");
 
 export async function POST(request: Request) {

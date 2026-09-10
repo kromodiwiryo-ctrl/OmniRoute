@@ -3,6 +3,8 @@ import { z } from "zod";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const reportSchema = z.object({
   title: z.string().min(1).max(300),
   provider: z.string().max(80).optional(),

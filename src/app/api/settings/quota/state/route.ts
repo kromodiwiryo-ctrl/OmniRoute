@@ -20,6 +20,7 @@ import { getQuotaAnalyticsSummary } from "@/lib/quota/quotaAnalytics";
 import { getActiveQuotaResetItems, resetExpiredQuotaWindows } from "@/lib/quota/quotaResetTimers";
 import { clearProviderQuota } from "@/lib/quota/providerQuotaState";
 
+export const dynamic = "force-dynamic";
 const QuotaStateActionSchema = z.discriminatedUnion("action", [
   z.object({ action: z.literal("reset_expired") }),
   z.object({
@@ -28,8 +29,6 @@ const QuotaStateActionSchema = z.discriminatedUnion("action", [
     model: z.string().min(1),
   }),
 ]);
-
-export const dynamic = "force-dynamic";
 
 export async function OPTIONS() {
   return handleCorsOptions();

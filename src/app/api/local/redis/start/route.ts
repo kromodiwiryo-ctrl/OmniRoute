@@ -12,6 +12,8 @@ import {
   runRedisRuntimeCommand,
 } from "../redisRuntime";
 
+export const dynamic = "force-dynamic";
+
 const HOST_PORT = process.env.OMNIROUTE_REDIS_HOST_PORT || "6379";
 const BIND_HOST = process.env.OMNIROUTE_REDIS_BIND_HOST || REDIS_DEFAULT_BIND_HOST;
 const IMAGE = process.env.OMNIROUTE_REDIS_IMAGE || "docker.io/redis:7-alpine";

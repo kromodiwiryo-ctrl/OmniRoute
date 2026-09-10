@@ -2,6 +2,8 @@ import { CORS_HEADERS } from "@/shared/utils/cors";
 import { getLiveWsPath, resolveLiveWsPublicUrl } from "@/shared/utils/wsPath";
 import { authorizeWebSocketHandshake } from "@/lib/ws/handshake";
 
+export const dynamic = "force-dynamic";
+
 const WS_HANDSHAKE_HEADERS = {
   ...CORS_HEADERS,
   "Cache-Control": "no-store",
@@ -51,6 +53,7 @@ export async function OPTIONS() {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const handshake = url.searchParams.get("handshake") === "1";
+
   const auth = await authorizeWebSocketHandshake(request);
 
   if (handshake) {

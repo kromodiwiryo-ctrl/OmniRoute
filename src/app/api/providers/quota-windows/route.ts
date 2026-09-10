@@ -4,6 +4,8 @@ import { getCachedSettings } from "@/lib/db/readCache";
 import { resolveResilienceSettings } from "@/lib/resilience/settings";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/providers/quota-windows
 // Returns the named quota windows registered by each provider's quota fetcher,
 // plus the resolved per-(provider, window) default thresholds from resilience

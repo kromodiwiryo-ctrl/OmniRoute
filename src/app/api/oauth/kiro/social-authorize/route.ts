@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
 import { KIRO_CONFIG } from "@/lib/oauth/constants/oauth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/oauth/kiro/social-authorize
  * Initiate Google/GitHub social login via device flow.

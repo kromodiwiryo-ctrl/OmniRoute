@@ -11,6 +11,8 @@ import {
   stopPeriodicSync,
 } from "@/lib/modelsDevSync";
 
+export const dynamic = "force-dynamic";
+
 const modelsDevActionSchema = z.object({
   action: z.enum(["sync", "start", "stop"]),
   dryRun: z.boolean().optional(),

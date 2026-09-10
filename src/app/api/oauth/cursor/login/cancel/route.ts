@@ -4,6 +4,8 @@ import { isAuthRequired, isAuthenticated } from "@/shared/utils/apiAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { cancelCursorLoginSession } from "@/lib/oauth/services/cursorLogin";
 
+export const dynamic = "force-dynamic";
+
 const cancelSchema = z.object({
   sessionId: z.string().trim().min(1, "sessionId is required"),
 });

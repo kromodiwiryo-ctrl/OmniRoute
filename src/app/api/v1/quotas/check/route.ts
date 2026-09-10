@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { checkQuota } from "@/lib/db/registeredKeys";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/v1/quotas/check?provider=&accountId=
  *

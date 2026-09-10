@@ -5,6 +5,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { compressionSettingsUpdateSchema } from "@/shared/validation/compressionConfigSchemas";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   if (!(await isAuthenticated(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

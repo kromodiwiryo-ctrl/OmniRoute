@@ -17,6 +17,8 @@ import { parseAndValidateWebhookUrl } from "@/shared/network/outboundUrlGuardPol
 
 import { WEBHOOK_EVENT_VALUES } from "@/lib/webhooks/eventDescriptions";
 
+export const dynamic = "force-dynamic";
+
 const WEBHOOK_KINDS = ["slack", "telegram", "discord", "custom"] as const;
 const WEBHOOK_EVENT_VALUES_WITH_WILDCARD = ["*", ...WEBHOOK_EVENT_VALUES] as const;
 

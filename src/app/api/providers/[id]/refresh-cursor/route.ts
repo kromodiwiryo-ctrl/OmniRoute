@@ -10,6 +10,8 @@ import {
   BACKGROUND_IDE_AUTH_TIMEOUT_MS,
 } from "@/lib/cursor/renewal";
 
+export const dynamic = "force-dynamic";
+
 /**
  * A manual "Refresh" click must always see a fresh IDE-credential read, never
  * a stale answer memoized by renewCursorConnection()'s default sweep-facing

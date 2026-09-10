@@ -12,6 +12,8 @@ import {
 } from "@/lib/db/usageAnalytics";
 import { isFreeModel, providerHasFreeModels } from "@/shared/utils/freeModels";
 
+export const dynamic = "force-dynamic";
+
 /**
  * When `settings.hidePaidModels === true`, exports must not leak paid model ids
  * via combos — otherwise a round-trip (export → share/store → import) silently

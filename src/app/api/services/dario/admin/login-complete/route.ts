@@ -11,6 +11,8 @@ import { z } from "zod";
 import { forwardToDarioAdmin, requireAdminAuth } from "../_lib";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 const BodySchema = z.object({
   alias: z.string().min(1).max(200),
   code: z.string().min(1).max(4000),

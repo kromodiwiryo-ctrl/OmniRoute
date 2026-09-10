@@ -10,6 +10,8 @@ import { OutboundUrlGuardError } from "@/shared/network/outboundUrlGuard";
 import { parseAndValidateWebhookUrl } from "@/shared/network/outboundUrlGuardPolicy";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const validateUrlSchema = z.object({
   url: z.string().min(1).max(2000),
 });

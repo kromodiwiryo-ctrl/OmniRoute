@@ -1,5 +1,7 @@
 import { CORS_HEADERS } from "@/shared/utils/cors";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Catch-all fallback for /v1/* (and /api/v1/*) — issue #6405.
  *
@@ -27,7 +29,7 @@ function notFoundResponse(request: Request): Response {
     {
       status: 404,
       headers: { "Content-Type": "application/json", ...CORS_HEADERS },
-    },
+    }
   );
 }
 

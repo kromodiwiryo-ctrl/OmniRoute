@@ -3,6 +3,8 @@ import { buildClaudeAuthFile, ClaudeAuthFileError } from "@/lib/oauth/utils/clau
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 function toErrorResponse(error: unknown) {
   if (error instanceof ClaudeAuthFileError) {
     return NextResponse.json(
@@ -15,6 +17,7 @@ function toErrorResponse(error: unknown) {
   }
 
   const message = sanitizeErrorMessage(error) || "Failed to export Claude auth file";
+
   return NextResponse.json({ error: message }, { status: 500 });
 }
 

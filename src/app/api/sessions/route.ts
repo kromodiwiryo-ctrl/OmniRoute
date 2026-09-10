@@ -15,7 +15,10 @@ import {
   type ExclusiveDashboardSession,
 } from "@/lib/sessionObservability";
 
+export const dynamic = "force-dynamic";
+
 const EXCLUSIVE_PROJECTION_WARNING = "[SESSIONS] Exclusive session projection unavailable";
+
 let exclusiveProjectionWarningEmitted = false;
 
 export async function GET() {

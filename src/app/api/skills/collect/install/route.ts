@@ -18,6 +18,8 @@ import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { sanitizeErrorMessage, buildErrorBody } from "@omniroute/open-sse/utils/error";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 const installSchema = z.object({
   repoName: z.string().min(1, "repoName is required"),
   targets: z
@@ -68,6 +70,7 @@ function expandHome(dir: string): string {
   // Home dir resolution: Windows (USERPROFILE) → Unix fallback (HOME)
   const home =
     typeof process !== "undefined" ? process.env.USERPROFILE || process.env.HOME || "" : "";
+
   return dir.replace(/^~/, home);
 }
 

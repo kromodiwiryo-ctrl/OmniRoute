@@ -4,6 +4,8 @@ import { redeemInvite } from "@/lib/gamification/invites";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

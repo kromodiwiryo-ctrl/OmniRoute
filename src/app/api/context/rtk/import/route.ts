@@ -11,6 +11,8 @@ import {
   type RtkTomlCompatibilityResult,
 } from "@omniroute/open-sse/services/compression/engines/rtk/tomlCompatibility";
 
+export const dynamic = "force-dynamic";
+
 const RequestSchema = z
   .object({
     action: z.enum(["validate", "install"]),

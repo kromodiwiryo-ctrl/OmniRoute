@@ -2,6 +2,8 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const filePath = path.join(process.cwd(), "docs/guides/CODEX-CLI-CONFIGURATION.md");

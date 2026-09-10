@@ -5,6 +5,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { formatValidationMessage, validateBody } from "@/shared/validation/helpers";
 import { volcenginePlanIdentitySchema } from "@/shared/validation/schemas/volcenginePlan";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/providers/volcengine-plan/connect/[sessionId]/identity
  * Pick an identity on the console's select_identity page (the phone maps to

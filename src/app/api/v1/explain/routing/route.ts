@@ -27,6 +27,8 @@ import {
   classifyQuality,
 } from "@omniroute/open-sse/services/routing/index.ts";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return new Response(null, {
     headers: {

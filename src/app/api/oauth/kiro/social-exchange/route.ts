@@ -15,6 +15,8 @@ import { KIRO_CONFIG } from "@/lib/oauth/constants/oauth";
 import { findKiroConnectionByIdentity } from "@/lib/oauth/kiroConnectionIdentity";
 import { classifyKiroSocialPoll } from "@/lib/oauth/kiroSocialPoll";
 
+export const dynamic = "force-dynamic";
+
 const socialExchangeSchema = z.object({
   deviceCode: z.string().min(1, "Missing deviceCode or provider"),
   provider: z.enum(["google", "github"]),
@@ -98,6 +100,7 @@ export async function POST(request: Request) {
     }
 
     const resolvedProvider = targetProvider || "kiro";
+
     const record = {
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,

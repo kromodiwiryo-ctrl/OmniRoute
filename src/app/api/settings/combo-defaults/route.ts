@@ -5,6 +5,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isPaidModelTarget } from "@/shared/utils/freeModels";
 
+export const dynamic = "force-dynamic";
+
 const LEGACY_COMBO_RESILIENCE_KEYS = new Set([
   "timeoutMs",
   "healthCheckEnabled",

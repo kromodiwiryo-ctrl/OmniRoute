@@ -10,6 +10,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isPaidModelTarget } from "@/shared/utils/freeModels";
 
+export const dynamic = "force-dynamic";
+
 /**
  * #6540: is any degradation "to" target a paid-only model while hidePaidModels is on?
  * Only the "to" side is checked — "from" is a detection trigger key, not an invocation

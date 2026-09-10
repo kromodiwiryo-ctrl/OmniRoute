@@ -45,6 +45,7 @@ import {
 } from "@/shared/constants/chatgptWebRetirement";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
 // JSON edit body (Open WebUI / OpenAI-style). All fields optional — the prompt
 // and resolvable image are enforced after extraction in POST — but the top-level
 // shape must be an object with correctly-typed fields, so a malformed body
@@ -204,6 +205,7 @@ function buildAdobeFireflyEditDataUrls(
   if (dataUrls.length === 0 && imageBytes && imageBytes.length > 0) {
     const mime =
       typeof imageMime === "string" && imageMime.startsWith("image/") ? imageMime : "image/png";
+
     dataUrls.push(`data:${mime};base64,${imageBytes.toString("base64")}`);
   }
   return dataUrls;

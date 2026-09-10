@@ -13,6 +13,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { pickApiKeyForInternalUse } from "@/lib/db/apiKeys";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Resolve the OmniRoute API key the spawned MITM child (`server.cjs`) uses to
  * authenticate its own outbound calls back to `/v1/chat/completions`
@@ -81,6 +83,7 @@ export async function POST(request: Request): Promise<Response> {
 
     if (action === "restart") {
       const pwd = sudoPassword || getCachedPassword() || "";
+
       const { startMitm, stopMitm, getMitmStatus } = await import("@/mitm/manager.runtime");
       const status = await getMitmStatus();
       if (status.running) {

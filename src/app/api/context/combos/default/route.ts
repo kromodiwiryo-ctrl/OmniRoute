@@ -4,6 +4,8 @@ import { getCompressionSettings } from "@/lib/db/compression";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 // The default compression pipeline is no longer editable here. It is DERIVED from the
 // per-engine toggle map (see open-sse deriveDefaultPlan). This route is a read-only shim:
 //   - GET  → returns the derived default plan for the live config.

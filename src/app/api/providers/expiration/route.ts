@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getAllExpirations, getExpirationSummary } from "@/domain/providerExpiration";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const list = getAllExpirations();

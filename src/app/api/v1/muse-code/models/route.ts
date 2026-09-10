@@ -12,6 +12,8 @@
 
 import { muse_codeProvider } from "@omniroute/open-sse/config/providers/registry/muse-code/index.ts";
 
+export const dynamic = "force-dynamic";
+
 const MUSECODE_TIMESTAMP = Math.floor(Date.now() / 1000);
 
 interface MuseCodeModel {

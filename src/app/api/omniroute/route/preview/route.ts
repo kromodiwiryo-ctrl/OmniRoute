@@ -3,6 +3,8 @@ import { z } from "zod";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { rankCandidates } from "@/lib/routing/adaptiveRouting";
 
+export const dynamic = "force-dynamic";
+
 const candidateSchema = z.object({
   providerId: z.string().min(1),
   modelId: z.string().min(1),

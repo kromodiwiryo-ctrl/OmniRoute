@@ -16,6 +16,8 @@ import {
 } from "@/lib/db/modelContextOverrides";
 import { getProviderPrefixIndex, type ProviderPrefixEntry } from "@/lib/providerNodePrefixes";
 
+export const dynamic = "force-dynamic";
+
 const overrideKeySchema = z.enum([
   "context_length",
   "max_input_tokens",
@@ -230,6 +232,7 @@ export async function DELETE(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const key = searchParams.get("key") || "";
+
   const parsedKey = overrideKeySchema.safeParse(key);
 
   const { entries, nodeToPrefix, prefixToNode, eligibleNodeIds, compatibleNodeIds } =

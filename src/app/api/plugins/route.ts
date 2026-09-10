@@ -6,6 +6,8 @@ import { pluginManager } from "@/lib/plugins/manager";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }
@@ -47,10 +49,14 @@ export async function POST(request: NextRequest) {
   if (authError) return authError;
   const body = await request.json();
   const schema = z.object({
-    path: z.string().min(1).regex(/^\/[^]*$/, "Path must be absolute").refine(
-      (p) => !p.includes("\0") && !p.includes(".."),
-      "Path must not contain traversal patterns or null bytes"
-    ),
+    path: z
+      .string()
+      .min(1)
+      .regex(/^\/[^]*$/, "Path must be absolute")
+      .refine(
+        (p) => !p.includes("\0") && !p.includes(".."),
+        "Path must not contain traversal patterns or null bytes"
+      ),
   });
 
   const parsed = schema.safeParse(body);

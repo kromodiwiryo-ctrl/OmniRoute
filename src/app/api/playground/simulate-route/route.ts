@@ -11,6 +11,8 @@ import { getCombos } from "@/lib/db/combos";
 import { getProviderConnections } from "@/lib/db/providers";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 interface SimulateRequest {
   /** Combo ID to simulate */
   comboId?: string;
@@ -279,6 +281,7 @@ export async function POST(request: Request) {
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
+
     return NextResponse.json({ error: `Simulation error: ${message}` }, { status: 500 });
   }
 }

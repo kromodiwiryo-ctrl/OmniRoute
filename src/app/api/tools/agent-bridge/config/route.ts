@@ -16,6 +16,8 @@ import {
   importConfig,
 } from "@/lib/inspector/configPortability";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(): Promise<Response> {
   try {
     return Response.json(exportConfig());

@@ -7,6 +7,8 @@ import {
 } from "@omniroute/open-sse/services/comboMetrics.ts";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/combos/metrics - Get per-combo metrics
 export async function GET(request) {
   const authError = await requireManagementAuth(request);

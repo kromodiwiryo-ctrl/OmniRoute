@@ -11,6 +11,8 @@ import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { isRoot } from "@/mitm/systemCommands";
 import { isSudoPasswordRequired } from "@/mitm/dns/dnsConfig";
 
+export const dynamic = "force-dynamic";
+
 // GET - Check MITM status
 export async function GET(request) {
   const authError = await requireCliToolsAuth(request);

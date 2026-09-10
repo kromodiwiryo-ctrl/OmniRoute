@@ -10,6 +10,8 @@ import {
   stateHashFromState,
 } from "../shared";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS(request: Request) {
   return new Response(null, { status: 204, headers: callbackCorsHeaders(request) });
 }
@@ -23,6 +25,7 @@ export async function POST(request: Request) {
     body = await readJsonBodyWithLimit(request, MAX_CALLBACK_BODY_BYTES);
   } catch (error) {
     const isTooLarge = error instanceof Error && error.message === "BODY_TOO_LARGE";
+
     return noStoreJson(
       { success: false, error: isTooLarge ? "Request body too large" : "Invalid JSON body" },
       { status: isTooLarge ? 413 : 400, headers: callbackCorsHeaders(request) }

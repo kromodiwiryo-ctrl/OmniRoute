@@ -26,6 +26,8 @@ import {
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { cliModelConfigSchema } from "@/shared/validation/schemas";
 
+export const dynamic = "force-dynamic";
+
 const logger = pino({ name: "qwen-code-settings-api" });
 
 const getPaths = (): { settings: string; env: string } => {

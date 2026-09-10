@@ -131,6 +131,7 @@ import {
 import { maybeHandleConolModelDiscovery } from "./conolDiscovery";
 import { buildNoAuthModelsResponse, filterModelsForRoute } from "./modelRouteProjection";
 
+export const dynamic = "force-dynamic";
 /**
  * GET /api/providers/[id]/models - Get models list from provider
  */
@@ -2422,6 +2423,7 @@ export async function GET(
     const status = getSafeOutboundFetchErrorStatus(error);
     if (status) {
       const message = error instanceof Error ? error.message : "Failed to fetch models";
+
       return NextResponse.json({ error: message }, { status });
     }
     console.log("Error fetching provider models:", error);

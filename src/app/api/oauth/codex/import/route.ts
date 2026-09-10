@@ -13,6 +13,8 @@ import {
   isUnrecoverableRefreshError,
 } from "@omniroute/open-sse/services/tokenRefresh.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Message returned when the imported record's refresh_token is already dead
  * (rotated/consumed/expired) — see #7522. Persisting a connection whose

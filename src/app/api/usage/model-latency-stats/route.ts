@@ -5,6 +5,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getModelLatencyStats } from "@/lib/usageDb";
 import { buildErrorBody } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 const querySchema = z.object({
   windowHours: z.coerce
     .number()

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { purgeDetailedLogs } from "@/lib/db/cleanup";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   if (!(await isAuthenticated(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

@@ -40,6 +40,7 @@ import { getDarioHomeDir } from "@/lib/services/installers/dario";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
 const ImportBodySchema = z.object({
   connectionId: z.string().trim().min(1).optional(),
   alias: z.string().trim().min(1).optional(),
@@ -51,6 +52,7 @@ function safeAliasFromSource(email: string | null | undefined, connectionId: str
   const base = (email || connectionId || "omniroute").toLowerCase();
   const cleaned = base.replace(/[^a-z0-9_.-]/g, "-").replace(/^[^a-z0-9]+/, "");
   const alias = cleaned || "omniroute";
+
   return `omniroute-${alias}`.slice(0, 64);
 }
 

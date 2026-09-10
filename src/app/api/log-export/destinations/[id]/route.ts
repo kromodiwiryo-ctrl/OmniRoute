@@ -23,6 +23,8 @@ import {
 } from "@/lib/logExport/secrets";
 import { toDestinationView } from "@/lib/logExport/presenter";
 
+export const dynamic = "force-dynamic";
+
 const updateDestinationSchema = z.object({
   name: z.string().min(1).max(200).optional(),
   enabled: z.boolean().optional(),

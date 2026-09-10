@@ -9,6 +9,8 @@ import { execFileSync } from "node:child_process";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/db-backups/exportAll
  * Exports the entire database + settings as a ZIP archive

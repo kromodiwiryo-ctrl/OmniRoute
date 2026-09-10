@@ -3,6 +3,8 @@ import { CORS_HEADERS } from "@/shared/utils/cors";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createBadgeNotificationStream } from "@/lib/gamification/notifications";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/gamification/notifications?apiKeyId=xxx — SSE badge unlock notifications
  */

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { MCP_TOOLS, MCP_TOOL_MAP } from "@omniroute/open-sse/mcp-server/schemas/tools";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request, { acceptMcpConnectScope: true });
   if (authError) return authError;
@@ -20,6 +22,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to load MCP tools";
+
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

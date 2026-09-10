@@ -9,6 +9,8 @@ import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { getComboModelProvider } from "@/lib/combos/steps";
 import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 
+export const dynamic = "force-dynamic";
+
 const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
 
 export async function GET(request: Request) {

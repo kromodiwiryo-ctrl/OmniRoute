@@ -5,6 +5,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getPluginByName, updatePluginConfig } from "@/lib/db/plugins";
 import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

@@ -1,6 +1,8 @@
 import { getSyncedAvailableModels, getAllSyncedAvailableModels } from "@/lib/db/models";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/synced-available-models?provider=<id>
  * List synced available models for a provider (or all providers).

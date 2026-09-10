@@ -12,6 +12,8 @@ import { sumUsageTokensThisMonth } from "@/lib/db/usageSummary";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { listNoCredentialProviders } from "@/shared/utils/providerCredentialRequirement";
 
+export const dynamic = "force-dynamic";
+
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",

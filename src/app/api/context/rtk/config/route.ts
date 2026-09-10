@@ -4,6 +4,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { rtkConfigSchema } from "@/shared/validation/compressionConfigSchemas";
 
+export const dynamic = "force-dynamic";
+
 export { rtkConfigSchema };
 
 export async function GET(request: Request) {

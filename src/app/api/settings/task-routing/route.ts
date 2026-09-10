@@ -11,6 +11,8 @@ import { taskRoutingActionSchema, updateTaskRoutingSchema } from "@/shared/valid
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/settings/task-routing
  * Returns the current task-aware routing configuration.

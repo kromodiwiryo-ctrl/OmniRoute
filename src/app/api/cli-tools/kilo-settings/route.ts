@@ -13,6 +13,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { resolveApiKey } from "@/shared/services/apiKeyResolver";
 import { readJsoncConfig } from "../_lib/jsoncConfig";
 
+export const dynamic = "force-dynamic";
+
 const KILO_DATA_DIR = path.join(os.homedir(), ".local", "share", "kilo");
 const AUTH_PATH = path.join(KILO_DATA_DIR, "auth.json");
 const KILO_CONFIG_DIR = path.join(os.homedir(), ".config", "kilo");
@@ -29,6 +31,7 @@ const hasOmniRouteConfig = (auth) => {
   const routerEntry = auth["openai-compatible"] || auth["omniroute"];
   if (!routerEntry) return false;
   const baseUrl = routerEntry.baseUrl || routerEntry.baseURL || "";
+
   return (
     baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1") || baseUrl.includes("omniroute")
   );

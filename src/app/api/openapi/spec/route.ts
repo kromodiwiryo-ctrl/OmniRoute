@@ -9,6 +9,8 @@ import path from "path";
 import * as yaml from "js-yaml";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 let cachedSpec: { data: any; mtime: number } | null = null;
 const OPENAPI_SPEC_CANDIDATES = [
   path.join(/* turbopackIgnore: true */ process.cwd(), "docs", "openapi.yaml"),
@@ -115,6 +117,7 @@ export function generateExampleFromSchema(
 export async function GET() {
   try {
     let specPath = "";
+
     for (const p of OPENAPI_SPEC_CANDIDATES) {
       if (fs.existsSync(p)) {
         specPath = p;

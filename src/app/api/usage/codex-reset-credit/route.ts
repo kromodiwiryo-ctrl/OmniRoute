@@ -14,6 +14,8 @@ import {
 } from "@/lib/usage/grokResetCredits";
 import { getProviderConnectionById } from "@/lib/db/providers";
 
+export const dynamic = "force-dynamic";
+
 const ConnectionIdSchema = z.string().trim().min(1).max(256);
 
 const CodexResetCreditBodySchema = z.object({
@@ -22,9 +24,7 @@ const CodexResetCreditBodySchema = z.object({
   creditId: z.string().trim().min(1).max(512).optional(),
 });
 
-function isResetCreditError(
-  error: unknown
-): error is CodexResetCreditError | GrokResetCreditError {
+function isResetCreditError(error: unknown): error is CodexResetCreditError | GrokResetCreditError {
   return error instanceof CodexResetCreditError || error instanceof GrokResetCreditError;
 }
 
@@ -34,6 +34,7 @@ function buildErrorResponse(error: unknown) {
   const message = isResetCreditError(error)
     ? sanitizeErrorMessage(error.message) || "Reset-credit request failed."
     : "Reset-credit request failed.";
+
   console.error("[API] /api/usage/codex-reset-credit error:", error);
   return NextResponse.json({ ok: false, code, error: message }, { status });
 }

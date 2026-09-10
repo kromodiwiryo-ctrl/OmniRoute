@@ -10,6 +10,8 @@ import {
 import { resolveKeepaliveThreshold } from "@omniroute/open-sse/utils/keepaliveThreshold";
 import { resolveStreamFlag } from "@omniroute/open-sse/utils/aiSdkCompat";
 
+export const dynamic = "force-dynamic";
+
 let initialized = false;
 
 /**

@@ -6,6 +6,8 @@ import { sanitizeProviderSpecificDataForResponse } from "@/lib/providers/request
 
 import { commandCodeApplySchema, noStoreJson, stateHashFromState } from "../shared";
 
+export const dynamic = "force-dynamic";
+
 function safeConnection(
   connection: Record<string, unknown> | null
 ): Record<string, unknown> | null {

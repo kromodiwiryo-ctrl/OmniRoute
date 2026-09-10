@@ -9,6 +9,8 @@ import { updateParamFilterConfigSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/providers/[id]/param-filters
  * Returns the param filter config for a provider, or null if not configured.

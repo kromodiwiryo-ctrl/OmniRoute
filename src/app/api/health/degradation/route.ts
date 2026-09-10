@@ -5,6 +5,8 @@ import {
   hasAnyDegradation,
 } from "@/domain/degradation";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);

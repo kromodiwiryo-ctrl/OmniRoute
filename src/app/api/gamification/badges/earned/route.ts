@@ -10,6 +10,8 @@ import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
 import { getBadges, getAllEarnedBadges } from "@/lib/db/gamification";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

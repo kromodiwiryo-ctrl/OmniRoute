@@ -7,6 +7,8 @@ import { getSkillsProviderSetting } from "@/lib/skills/providerSettings";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const marketplaceInstallSchema = z.object({
   name: z.string().min(1).max(64),
   description: z.string().min(1).max(1024),

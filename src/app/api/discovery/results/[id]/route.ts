@@ -8,6 +8,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { createErrorResponse, createErrorResponseFromUnknown } from "@/lib/api/errorResponse";
 import { getDiscoveryResultById, deleteDiscoveryResult } from "@/lib/db/discoveryResults";
 
+export const dynamic = "force-dynamic";
+
 function parseId(raw: string): number | null {
   const id = Number(raw);
   return Number.isInteger(id) && id > 0 ? id : null;

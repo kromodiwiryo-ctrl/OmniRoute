@@ -17,6 +17,8 @@ import fs from "fs";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 // Exported for unit testing. Next.js only treats GET/POST/etc. as route
 // handlers; additional named exports are ignored by the App Router.
 export const CertTrustBodySchema = z.object({
@@ -73,6 +75,7 @@ export async function DELETE(request: Request): Promise<Response> {
     const suppliedPassword = parsed.success
       ? normalizeMitmSudoPasswordInput(parsed.data.sudoPassword)
       : "";
+
     if (process.platform !== "win32" && suppliedPassword) {
       setCachedPassword(suppliedPassword);
     }

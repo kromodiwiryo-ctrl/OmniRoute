@@ -16,6 +16,8 @@ import type {
   ProviderPluginModel,
 } from "@omniroute/open-sse/config/providerPluginManifest.ts";
 
+export const dynamic = "force-dynamic";
+
 const SERVICE_BACKEND_EXPOSURE_REQUIRED = new Set(SERVICE_BACKEND_PLUGIN_IDS);
 const SERVICE_BACKEND_PLUGIN_ID_SET = new Set<string>(SERVICE_BACKEND_PLUGIN_IDS);
 
@@ -44,6 +46,7 @@ const SERVICE_MODEL_CACHE_HEADERS = {
 
 function normalizeServiceModelId(tool: string, rawModelId: string): string {
   if (!rawModelId) return "";
+
   return rawModelId.includes("/") ? rawModelId : `${tool}/${rawModelId}`;
 }
 

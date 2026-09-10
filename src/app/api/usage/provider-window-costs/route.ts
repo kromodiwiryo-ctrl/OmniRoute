@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getProviderWindowCostBreakdown } from "@/lib/usage/providerWindowCosts";
 
+export const dynamic = "force-dynamic";
+
 const PROVIDER_RE = /^[a-z0-9._-]{1,80}$/i;
 
 export async function GET(request: Request) {

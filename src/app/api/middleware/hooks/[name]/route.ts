@@ -12,6 +12,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 type RouteParams = { params: Promise<{ name: string }> };
 
 const hookScopeSchema = z.union([
@@ -40,6 +42,7 @@ export async function GET(request: Request, { params }: RouteParams) {
     const { name } = await params;
     const url = new URL(request.url);
     const includeLogs = url.searchParams.get("logs") === "true";
+
     const logLimit = parseInt(url.searchParams.get("logLimit") || "20", 10);
 
     const hook = getMiddlewareHook(name);

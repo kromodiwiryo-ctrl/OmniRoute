@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/shared/utils/apiAuth";
 import { getRegisteredKey, revokeRegisteredKey } from "@/lib/db/registeredKeys";
 
+export const dynamic = "force-dynamic";
+
 // ─── GET /api/v1/registered-keys/[id] ────────────────────────────────────────
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {

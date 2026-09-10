@@ -9,6 +9,8 @@ import { createReasoningRoutingRuleSchema } from "@/shared/validation/schemas";
 import { validatedJsonBody, isValidatedJsonBodyFailure } from "@/shared/validation/helpers";
 import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

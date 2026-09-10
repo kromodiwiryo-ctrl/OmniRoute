@@ -5,6 +5,8 @@ import { createAccessToken, listAccessTokens } from "@/lib/db/accessTokens";
 import { ACCESS_SCOPES } from "@/lib/accessTokens/scopes";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 /**
  * /api/cli/tokens — manage scoped CLI access tokens. Admin-only: the path is in
  * ADMIN_SCOPE_PREFIXES, so the central pipeline + requireManagementAuth both

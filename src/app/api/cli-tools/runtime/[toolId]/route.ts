@@ -8,6 +8,8 @@ import {
   getCliRuntimeStatus,
 } from "@/shared/services/cliRuntime";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request, { params }) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;

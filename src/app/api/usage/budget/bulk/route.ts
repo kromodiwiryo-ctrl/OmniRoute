@@ -3,6 +3,8 @@ import { getCostSummary, checkBudget } from "@/domain/costRules";
 import { getApiKeys } from "@/lib/db/apiKeys";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/usage/budget/bulk — Bulk budget summary for every API key.
  *

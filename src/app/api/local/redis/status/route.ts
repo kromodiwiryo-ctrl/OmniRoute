@@ -4,6 +4,8 @@ import { promisify } from "node:util";
 
 import { isLocalRequestAllowed } from "@/lib/security/localEndpoints";
 
+export const dynamic = "force-dynamic";
+
 const execFileAsync = promisify(execFile);
 
 const CONTAINER_NAME = process.env.OMNIROUTE_REDIS_CONTAINER_NAME || "omniroute-redis";
@@ -93,6 +95,7 @@ export async function GET() {
   // is "connected" whenever REDIS_URL is configured AND the server answers — even
   // when no Docker container is present.
   const redisUrl = process.env.REDIS_URL?.trim() || "";
+
   const parsed = parseRedisUrl(redisUrl);
   const redisUrlReachable = parsed ? await pingRedis(String(parsed.port)) : false;
 

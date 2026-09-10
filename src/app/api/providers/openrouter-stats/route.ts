@@ -14,6 +14,8 @@ import {
   refreshOpenRouterProviderStats,
 } from "@/lib/catalog/openrouterProviderStats";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   if (!(await isAuthenticated(req))) {
     return NextResponse.json(

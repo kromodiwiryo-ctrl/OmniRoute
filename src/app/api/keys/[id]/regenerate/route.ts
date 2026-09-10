@@ -3,6 +3,8 @@ import { regenerateApiKey } from "@/lib/db/apiKeys";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import * as log from "@/sse/utils/logger";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/keys/[id]/regenerate
  *

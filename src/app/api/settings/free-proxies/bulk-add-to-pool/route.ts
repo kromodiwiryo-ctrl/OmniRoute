@@ -10,6 +10,8 @@ import {
 } from "@omniroute/open-sse/utils/proxyDispatcher.ts";
 import { probeEchoTargets } from "@/lib/proxyEchoTarget";
 
+export const dynamic = "force-dynamic";
+
 type QuickTester = (
   host: string,
   port: number,

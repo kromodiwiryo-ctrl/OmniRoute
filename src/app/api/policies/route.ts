@@ -3,6 +3,8 @@ import { getLockedIdentifiers, forceUnlock } from "@/domain/lockoutPolicy";
 import { policyActionSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const lockedIdentifiers = getLockedIdentifiers();

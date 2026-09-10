@@ -3,6 +3,8 @@ import { getCommandCodeAuthSessionSafeStatus } from "@/lib/db/commandCodeAuth";
 
 import { commandCodeStateSchema, noStoreJson, stateHashFromState } from "../shared";
 
+export const dynamic = "force-dynamic";
+
 async function readState(request: Request): Promise<string | null> {
   const urlState = new URL(request.url).searchParams.get("state");
   if (urlState) return urlState;

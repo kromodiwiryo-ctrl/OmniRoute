@@ -13,6 +13,8 @@ import { getXp, getAggregateXp } from "@/lib/db/gamification";
 import { getStreak, getAggregateStreak } from "@/lib/gamification/streaks";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }

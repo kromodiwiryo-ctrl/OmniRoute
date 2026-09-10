@@ -3,6 +3,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getSuite } from "@/lib/evals/evalRunner";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request, { params }: { params: Promise<{ suiteId: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

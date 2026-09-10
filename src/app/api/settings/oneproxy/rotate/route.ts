@@ -2,6 +2,8 @@
 // O conceito mais próximo no novo sistema é forçar uma sincronização das fontes de free proxy.
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

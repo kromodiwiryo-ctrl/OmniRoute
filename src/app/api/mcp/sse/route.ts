@@ -11,6 +11,8 @@ import { getCachedSettings } from "@/lib/db/settings";
 import { handleMcpSSE } from "../../../../../open-sse/mcp-server/httpTransport";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 async function guardEnabled(): Promise<NextResponse | null> {
   const settings = await getCachedSettings();
   if (!settings.mcpEnabled) {
@@ -20,6 +22,7 @@ async function guardEnabled(): Promise<NextResponse | null> {
     );
   }
   const transport = (settings.mcpTransport as string) || "stdio";
+
   if (transport !== "sse") {
     return NextResponse.json(
       { error: `MCP transport is set to "${transport}", not "sse". Change it from Settings.` },

@@ -2,6 +2,8 @@ import { handleChat } from "@/sse/handlers/chat";
 import { initTranslators } from "@omniroute/open-sse/translator/index.ts";
 import { withChatAdmission } from "@/shared/middleware/withChatAdmission";
 
+export const dynamic = "force-dynamic";
+
 let initialized = false;
 
 /**

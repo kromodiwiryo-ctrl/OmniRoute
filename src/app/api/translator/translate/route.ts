@@ -12,6 +12,8 @@ import { isConnectionUnavailableToAuxiliaryActivity } from "@/lib/exclusiveLease
 import { translatorTranslateSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 type JsonRecord = Record<string, unknown>;
 
 function asJsonRecord(value: unknown): JsonRecord {

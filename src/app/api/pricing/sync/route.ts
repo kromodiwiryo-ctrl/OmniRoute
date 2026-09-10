@@ -11,6 +11,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { pricingSyncRequestSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

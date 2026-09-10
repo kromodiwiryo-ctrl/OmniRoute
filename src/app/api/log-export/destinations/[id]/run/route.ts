@@ -9,6 +9,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { runSingleLogExport } from "@/lib/logExport/runner";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const authError = await requireManagementAuth(request);
   if (authError) return authError;

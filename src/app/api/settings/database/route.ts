@@ -8,6 +8,8 @@ import {
   type UserDatabaseSettings,
 } from "@/lib/db/databaseSettings";
 
+export const dynamic = "force-dynamic";
+
 const databaseSettingsPatchSchema = databaseSettingsSchema.partial().strict();
 
 export async function GET(request: NextRequest) {

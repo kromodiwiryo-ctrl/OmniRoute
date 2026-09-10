@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/providers/volcengine-plan/connect/[sessionId]/cancel
  * Cancel an auto phone login session and close its headless browser.

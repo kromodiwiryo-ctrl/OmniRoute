@@ -15,6 +15,8 @@ import { listCustomHosts, addCustomHost } from "@/lib/db/inspectorCustomHosts";
 import { getCachedPassword } from "@/mitm/manager";
 import { addDNSEntries } from "@/mitm/dns/dnsConfig";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(): Promise<Response> {
   try {
     const hosts = listCustomHosts();

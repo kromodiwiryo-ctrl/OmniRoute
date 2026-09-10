@@ -11,6 +11,8 @@ import { createErrorResponse } from "@/lib/api/errorResponse";
 import { globalTrafficBuffer } from "@/mitm/inspector/buffer";
 import type { AgentId } from "@/mitm/types";
 
+export const dynamic = "force-dynamic";
+
 const VALID_IDS = new Set<AgentId>([
   "antigravity",
   "kiro",

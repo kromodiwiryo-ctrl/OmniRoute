@@ -12,6 +12,8 @@ import { createProviderNodeSchema, paginationSchema } from "@/shared/validation/
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { validateProviderNodeBaseUrl } from "./urlGuard";
 
+export const dynamic = "force-dynamic";
+
 const OPENAI_COMPATIBLE_DEFAULTS = {
   baseUrl: "https://api.openai.com/v1",
 };
@@ -54,9 +56,8 @@ async function registerMoonshotFetchersForCreatedNode(node: {
   baseUrl?: unknown;
 }): Promise<void> {
   try {
-    const { registerMoonshotFetchersForNodes } = await import(
-      "@omniroute/open-sse/services/moonshotQuotaFetcher.ts"
-    );
+    const { registerMoonshotFetchersForNodes } =
+      await import("@omniroute/open-sse/services/moonshotQuotaFetcher.ts");
     registerMoonshotFetchersForNodes([
       {
         id: typeof node.id === "string" ? node.id : null,

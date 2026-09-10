@@ -8,6 +8,8 @@ import {
 } from "@/lib/memory/embedding/rerankListings";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/memory/rerank-providers
  *
@@ -44,6 +46,7 @@ export async function GET(request: NextRequest) {
       const nodes = await getCachedProviderNodes();
       for (const n of Array.isArray(nodes) ? nodes : []) {
         const apiType = (n as { apiType?: string }).apiType || "";
+
         if (!["chat", "responses", "rerank"].includes(apiType)) continue;
         const prefix = (n as { prefix?: string }).prefix;
         const baseUrl = (n as { baseUrl?: string }).baseUrl;

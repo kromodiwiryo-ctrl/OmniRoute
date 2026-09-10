@@ -3,6 +3,8 @@ import { z } from "zod";
 import { CORS_HEADERS, handleCorsOptions } from "@/shared/utils/cors";
 import { computeFreeProviderRankings } from "@/lib/freeProviderRankings";
 
+export const dynamic = "force-dynamic";
+
 // Coerce common truthy query-string forms ("1", "true", "yes") to a boolean.
 const boolParam = z
   .string()

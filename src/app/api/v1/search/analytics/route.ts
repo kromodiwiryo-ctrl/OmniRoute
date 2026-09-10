@@ -10,6 +10,8 @@ import { SEARCH_PROVIDERS } from "@omniroute/open-sse/config/searchRegistry.ts";
 import { enforceApiKeyPolicy } from "@/shared/utils/apiKeyPolicy";
 import { getSearchAggregateStats, getSearchProviderCounts } from "@/lib/db/callLogStats";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   const policy = await enforceApiKeyPolicy(req, "analytics");
   if (policy.rejection) return policy.rejection;

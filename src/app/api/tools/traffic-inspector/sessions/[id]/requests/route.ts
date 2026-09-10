@@ -15,6 +15,8 @@ import { buildErrorBody, sanitizeErrorMessage } from "@omniroute/open-sse/utils/
 import { InspectorSessionRequestAppendSchema } from "@/shared/schemas/inspector";
 import { getSession, appendSessionRequest } from "@/lib/db/inspectorSessions";
 
+export const dynamic = "force-dynamic";
+
 interface Params {
   params: Promise<{ id: string }>;
 }

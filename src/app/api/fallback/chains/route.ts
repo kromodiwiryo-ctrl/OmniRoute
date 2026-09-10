@@ -3,6 +3,8 @@ import { getAllFallbackChains, registerFallback, removeFallback } from "@/domain
 import { registerFallbackSchema, removeFallbackSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const chains = getAllFallbackChains();

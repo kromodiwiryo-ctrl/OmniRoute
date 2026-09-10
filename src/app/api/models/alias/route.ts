@@ -11,6 +11,8 @@ import {
 } from "@/lib/modelMetadataRegistry";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/models/alias - Get all aliases
 export async function GET(request) {
   const alias = new URL(request.url).searchParams.get("alias");

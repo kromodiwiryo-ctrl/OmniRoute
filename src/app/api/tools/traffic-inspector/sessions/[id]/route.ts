@@ -16,6 +16,8 @@ import {
   deleteSession,
 } from "@/lib/db/inspectorSessions";
 
+export const dynamic = "force-dynamic";
+
 interface Params {
   params: Promise<{ id: string }>;
 }

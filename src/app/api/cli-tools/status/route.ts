@@ -6,6 +6,8 @@ import { getCliRuntimeStatus, CLI_TOOL_IDS } from "@/shared/services/cliRuntime"
 import { getAllCliToolLastConfigured } from "@/lib/db/cliToolState";
 import { checkToolConfigStatus } from "@/lib/cliTools/checkToolConfigStatus";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/cli-tools/status
  * Returns runtime + config status for all CLI tools in one batch call.
@@ -71,6 +73,7 @@ export async function GET(request: Request) {
         }
         if (!statuses[toolId].installed || !statuses[toolId].runnable) {
           statuses[toolId].configStatus = "not_installed";
+
           return;
         }
         statuses[toolId].configStatus = await checkToolConfigStatus(toolId);

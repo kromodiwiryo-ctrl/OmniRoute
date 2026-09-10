@@ -5,6 +5,8 @@ import {
   listSupportedCompressionLanguages,
 } from "@omniroute/open-sse/services/compression";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   const authError = await requireManagementAuth(req);
   if (authError) return authError;

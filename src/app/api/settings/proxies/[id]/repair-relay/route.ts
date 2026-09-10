@@ -6,6 +6,8 @@ import { decrypt } from "@/lib/db/encryption";
 import { isRelayProxyType, relayRepairMode } from "@/lib/db/proxies/mappers";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const idParamSchema = z.object({ id: z.string().min(1) });
 
 /**

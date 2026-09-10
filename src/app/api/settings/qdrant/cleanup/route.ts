@@ -4,6 +4,8 @@ import { cleanupSemanticMemoryPoints } from "@/lib/memory/qdrant";
 import { getMemorySettings } from "@/lib/memory/settings";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   if (!(await isAuthenticated(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

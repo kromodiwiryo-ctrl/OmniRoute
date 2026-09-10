@@ -18,6 +18,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 import { ALL_TARGETS } from "@/mitm/targets/index";
 
+export const dynamic = "force-dynamic";
+
 type Params = { params: Promise<{ id: string }> };
 
 export async function POST(request: Request, { params }: Params): Promise<Response> {
@@ -65,6 +67,7 @@ export async function POST(request: Request, { params }: Params): Promise<Respon
 
     const suppliedPassword =
       typeof raw.sudoPassword === "string" ? normalizeMitmSudoPasswordInput(raw.sudoPassword) : "";
+
     if (process.platform !== "win32" && suppliedPassword) {
       setCachedPassword(suppliedPassword);
     }

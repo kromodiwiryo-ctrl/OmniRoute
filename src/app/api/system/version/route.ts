@@ -30,9 +30,8 @@ import { restartRunningServer } from "@/lib/system/processManagerRestart";
 // shell on win32 only; SERVICE_VERSION_PATTERN keeps the shell-joined version safe.
 import { buildNpmExecOptions, SERVICE_VERSION_PATTERN } from "@/lib/services/installers/utils";
 
-const execFileAsync = promisify(execFile);
-
 export const dynamic = "force-dynamic";
+const execFileAsync = promisify(execFile);
 
 function getCurrentVersion(): string {
   try {

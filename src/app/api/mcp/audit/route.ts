@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { queryAuditEntries } from "@omniroute/open-sse/mcp-server/audit";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 function parseBooleanParam(value: string | null): boolean | undefined {
   if (value === "true" || value === "1") return true;
   if (value === "false" || value === "0") return false;
@@ -37,6 +39,7 @@ export async function GET(request: Request) {
     return NextResponse.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to load MCP audit log";
+
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

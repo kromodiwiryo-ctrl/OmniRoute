@@ -19,6 +19,8 @@ import {
 import { buildAliasMaps } from "@/app/api/v1/models/catalogProviderMaps";
 import { resolveCanonicalProviderId as resolveCanonicalProviderIdFromMaps } from "@/app/api/v1/models/catalogProviderMaps";
 
+export const dynamic = "force-dynamic";
+
 interface GetModelsDependencies {
   createCapabilitySnapshot?: typeof createModelCapabilityResolutionSnapshot;
 }

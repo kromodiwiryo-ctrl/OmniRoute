@@ -9,6 +9,8 @@ import { isClaudeCodeCompatibleProvider } from "@/shared/constants/providers";
 import { z } from "zod";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 /**
  * The upstream `dario` project can itself proxy other subscription-based
  * providers (OpenAI, Grok) — but OmniRoute's integration only wires up

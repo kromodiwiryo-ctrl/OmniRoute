@@ -11,6 +11,8 @@ import {
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 const assessor = new Assessor(
   process.env.OMNIROUTe_API_KEY ?? process.env.API_KEY ?? "",
   process.env.OMNIROUTe_BASE_URL ?? "http://localhost:20128/v1"

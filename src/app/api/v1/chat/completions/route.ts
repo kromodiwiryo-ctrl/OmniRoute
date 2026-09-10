@@ -37,6 +37,7 @@ import {
   isCommonChatGptWebRetirementError,
 } from "@/shared/constants/chatgptWebRetirement";
 
+export const dynamic = "force-dynamic";
 let initPromise = null;
 
 // Singleton injection guard instance. `logger: null` — the guardrail registry
@@ -236,6 +237,7 @@ export async function POST(request) {
     // per-key `streamDefaultMode: "json"` opt-in are preserved).
     const parsedBodyIsRecord = isRecord(parsedBody);
     const acceptHeader = request.headers.get("accept") || "";
+
     const acceptForcesStream =
       parsedBodyIsRecord && acceptHeaderForcesStream(acceptHeader, parsedBody.stream);
     const wantsStreaming = (parsedBodyIsRecord && parsedBody.stream === true) || acceptForcesStream;

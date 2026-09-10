@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getCachedSettings } from "@/lib/db/readCache";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/auth/oidc/login
  * Starts OIDC login for the dashboard admin gate.
@@ -75,6 +77,7 @@ export async function GET(request: Request) {
   url.searchParams.set("scope", scope);
   url.searchParams.set("state", state);
   const isHttpsRequest = scheme === "https";
+
   const useSecureCookie = process.env.AUTH_COOKIE_SECURE === "true" || isHttpsRequest;
 
   const res = NextResponse.redirect(url.toString());

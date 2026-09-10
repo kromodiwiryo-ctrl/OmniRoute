@@ -11,6 +11,8 @@ import { encrypt } from "@/lib/db/encryption";
 import { resolveRelayTarget } from "../deno-deploy/route";
 import { isPrivateRelayHostname } from "@/lib/proxyRelay/privateHostname";
 
+export const dynamic = "force-dynamic";
+
 const VERCEL_API_BASE = process.env.VERCEL_API_BASE || "https://api.vercel.com";
 const POLL_INTERVAL_MS = 3000;
 const POLL_MAX_ATTEMPTS = 40; // ~2 min

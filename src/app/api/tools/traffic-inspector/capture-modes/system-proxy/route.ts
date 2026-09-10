@@ -24,10 +24,11 @@ import {
   clearSystemProxy,
 } from "@/lib/inspector/captureState";
 
+export const dynamic = "force-dynamic";
+
 const DEFAULT_PORT = Number(process.env.INSPECTOR_HTTP_PROXY_PORT ?? "8080") || 8080;
-const DEFAULT_GUARD_MINUTES = Number(
-  process.env.INSPECTOR_SYSTEM_PROXY_GUARD_MINUTES ?? "30"
-) || 30;
+const DEFAULT_GUARD_MINUTES =
+  Number(process.env.INSPECTOR_SYSTEM_PROXY_GUARD_MINUTES ?? "30") || 30;
 
 export async function POST(request: Request): Promise<Response> {
   let body: unknown;

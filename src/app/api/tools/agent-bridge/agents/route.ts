@@ -8,6 +8,8 @@ import { detectAgent } from "@/mitm/detection/index";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(): Promise<Response> {
   try {
     const agents = ALL_TARGETS.map((t) => ({

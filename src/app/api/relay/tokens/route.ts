@@ -3,6 +3,8 @@ import { z } from "zod";
 import { getRelayTokens, createRelayToken } from "@/lib/db/relayProxies";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const relayTokenInputSchema = z.object({
   name: z.string().trim().min(1, "name is required"),
   description: z.string().optional(),
@@ -56,6 +58,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
+
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }

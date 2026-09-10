@@ -20,6 +20,8 @@ import {
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
 
+export const dynamic = "force-dynamic";
+
 export { resolveVertexOcrAccessToken };
 
 /**
@@ -91,6 +93,7 @@ async function postHandler(request, context) {
 
   // Default to mistral if no provider prefix
   const resolvedProvider = provider || "mistral";
+
   const credentials = await getProviderCredentialsWithQuotaPreflight(resolvedProvider);
   if (!credentials) {
     return errorResponse(

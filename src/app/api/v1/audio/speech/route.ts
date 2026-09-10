@@ -19,6 +19,8 @@ import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

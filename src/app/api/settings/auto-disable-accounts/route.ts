@@ -5,6 +5,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { normalizeAutoDisableBannedScope } from "@/shared/utils/autoDisableBanned";
 
+export const dynamic = "force-dynamic";
+
 function toAutoDisableResponse(settings: Record<string, unknown>) {
   return {
     enabled: Boolean(settings.autoDisableBannedAccounts),

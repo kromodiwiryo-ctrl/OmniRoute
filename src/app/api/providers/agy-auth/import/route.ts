@@ -13,6 +13,8 @@ import { importAgyAuthSchema } from "@/shared/validation/schemas";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { sanitizeProviderSpecificDataForResponse } from "@/lib/providers/requestDefaults";
 
+export const dynamic = "force-dynamic";
+
 function sanitizeConnectionForResponse(connection: Record<string, unknown>) {
   const safe = { ...connection };
   delete safe.accessToken;
@@ -86,7 +88,10 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     if (error instanceof AgyAuthFileError) {
-      return NextResponse.json({ error: error.message, code: error.code }, { status: error.status });
+      return NextResponse.json(
+        { error: error.message, code: error.code },
+        { status: error.status }
+      );
     }
     return NextResponse.json(
       { error: sanitizeErrorMessage(error) || "Failed to import Antigravity CLI auth" },

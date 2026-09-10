@@ -13,6 +13,8 @@ import { importClaudeAuthBulkSchema } from "@/shared/validation/schemas";
 import { validateBody, isValidationFailure } from "@/shared/validation/helpers";
 import { sanitizeProviderSpecificDataForResponse } from "@/lib/providers/requestDefaults";
 
+export const dynamic = "force-dynamic";
+
 function sanitizeConnectionForResponse(connection: Record<string, unknown>) {
   const safe = { ...connection };
   delete safe.accessToken;

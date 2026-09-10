@@ -4,6 +4,8 @@ import { buildErrorBody } from "@omniroute/open-sse/utils/error";
 import { listMarketplacePlugins } from "@/lib/plugins/marketplace";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return handleCorsOptions();
 }
@@ -16,10 +18,7 @@ export async function GET(request: NextRequest) {
   if (authError) return authError;
   try {
     const plugins = await listMarketplacePlugins();
-    return NextResponse.json(
-      { plugins },
-      { headers: CORS_HEADERS }
-    );
+    return NextResponse.json({ plugins }, { headers: CORS_HEADERS });
   } catch (err: unknown) {
     console.error("[plugins/marketplace] Failed to list marketplace plugins:", err);
     return NextResponse.json(buildErrorBody(500, "Failed to list marketplace plugins"), {

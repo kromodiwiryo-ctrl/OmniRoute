@@ -11,6 +11,8 @@ import { removeCustomHost, toggleCustomHost, listCustomHosts } from "@/lib/db/in
 import { getCachedPassword } from "@/mitm/manager";
 import { removeDNSEntries } from "@/mitm/dns/dnsConfig";
 
+export const dynamic = "force-dynamic";
+
 interface Params {
   params: Promise<{ host: string }>;
 }

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { getCallLogById } from "@/lib/usageDb";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request, { params }) {
   try {
     const authError = await requireManagementAuth(request);

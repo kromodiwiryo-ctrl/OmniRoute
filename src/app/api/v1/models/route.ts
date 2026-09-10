@@ -2,6 +2,8 @@ import { after } from "next/server";
 
 import { getUnifiedModelsResponse } from "./catalog";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */

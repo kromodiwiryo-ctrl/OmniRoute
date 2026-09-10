@@ -28,6 +28,8 @@ import { globalTrafficBuffer } from "@/mitm/inspector/buffer";
 import { maskSecret } from "@/mitm/maskSecrets";
 import { sanitizeHeaders } from "@/mitm/sanitizeHeaders";
 
+export const dynamic = "force-dynamic";
+
 // ── Token management ────────────────────────────────────────────────────────
 
 let _cachedToken: string | null = null;
@@ -78,6 +80,7 @@ export async function POST(request: Request): Promise<Response> {
   // Token gate (second layer after LOCAL_ONLY IP check).
   const authHeader = request.headers.get("authorization") ?? "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+
   if (!tokenMatches(token)) {
     return new Response(JSON.stringify(buildErrorBody(403, "Invalid or missing ingest token")), {
       status: 403,

@@ -16,6 +16,8 @@ import { isDashboardSessionAuthenticated } from "@/shared/utils/apiAuth";
 import { isRequireApiKeyEnabled } from "@/shared/utils/featureFlags";
 import { projectCombo, type PublicCombo } from "./projectCombo";
 
+export const dynamic = "force-dynamic";
+
 export async function OPTIONS() {
   return new Response(null, {
     headers: {

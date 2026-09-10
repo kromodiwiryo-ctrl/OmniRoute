@@ -3,6 +3,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { bindVolcenginePlansFromConsoleCredentials } from "@/lib/providers/volcenginePlanBinding";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/providers/volcengine-plan/connect/[sessionId]/status
  * Poll an auto phone login session. When credentials have been extracted, the

@@ -6,6 +6,8 @@ import {
   syncAllProviderLimits,
 } from "@/lib/usage/providerLimits";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/usage/provider-limits
  * Returns cached Provider Limits data without triggering live refreshes.

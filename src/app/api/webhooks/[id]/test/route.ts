@@ -16,6 +16,8 @@ import { isPrivateHost, OutboundUrlGuardError } from "@/shared/network/outboundU
 import { parseAndValidateWebhookUrl } from "@/shared/network/outboundUrlGuardPolicy";
 import crypto from "crypto";
 
+export const dynamic = "force-dynamic";
+
 const MAX_RESPONSE_BODY = 2048;
 
 async function testFetch(
@@ -121,6 +123,7 @@ export async function POST(_: Request, { params }: { params: Promise<{ id: strin
         extraHeaders["X-Webhook-Signature"] =
           `sha256=${crypto.createHmac("sha256", webhook.secret).update(bodyStr).digest("hex")}`;
         extraHeaders["X-Webhook-Event"] = "test.ping";
+
         extraHeaders["X-Webhook-Timestamp"] = testPayload.timestamp;
       }
     }

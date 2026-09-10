@@ -3,6 +3,8 @@ import { z } from "zod";
 import { getAllKeyGroups, createKeyGroup, getKeyGroup } from "@/lib/db/apiKeyGroups";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const createKeyGroupSchema = z.object({
   name: z.string().trim().min(1, "name is required"),
   description: z.string().optional().default(""),

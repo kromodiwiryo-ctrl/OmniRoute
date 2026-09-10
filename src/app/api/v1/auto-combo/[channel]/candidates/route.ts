@@ -16,6 +16,8 @@ import {
   isUnknownAutoChannelError,
 } from "@omniroute/open-sse/handlers/autoComboCandidates.ts";
 
+export const dynamic = "force-dynamic";
+
 const channelParamSchema = z
   .string()
   .min(1)
@@ -26,10 +28,7 @@ export async function OPTIONS() {
   return handleCorsOptions();
 }
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ channel: string }> }
-) {
+export async function GET(request: Request, { params }: { params: Promise<{ channel: string }> }) {
   const scope = await getApiKeyRequestScope(request);
   if (scope.rejection) return scope.rejection;
 

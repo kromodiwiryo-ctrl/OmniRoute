@@ -17,6 +17,8 @@ import type {
   BreakerWithHistory,
 } from "@/types/resilience";
 
+export const dynamic = "force-dynamic";
+
 // Explicit column whitelist -- getRawProviderConnections() DEFAULTS TO SELECT *,
 // so passing columns is MANDATORY to avoid leaking api_key, access_token,
 // refresh_token, id_token, email, scope, project_id, provider_specific_data, last_error.

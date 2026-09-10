@@ -22,6 +22,8 @@ import { fingerprintZedCredential } from "@/lib/zed-oauth/credentialFingerprint"
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isRunningInDocker } from "@/lib/zed-oauth/dockerDetect";
 
+export const dynamic = "force-dynamic";
+
 interface DiscoverCandidate {
   provider: string;
   service: string;

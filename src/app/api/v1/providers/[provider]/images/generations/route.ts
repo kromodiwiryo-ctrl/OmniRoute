@@ -16,6 +16,8 @@ import { runWithCallLogApiKeyContext } from "@/lib/usage/callLogApiKeyContext";
 import { executeImageWithCredentialFallback } from "@/sse/services/imageCredentialRetry";
 import { rejectRetiredCommonChatGptWebProvider } from "@/lib/providers/chatgptWebRetirementResponse";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Handle CORS preflight
  */
@@ -126,5 +128,6 @@ export async function POST(request, { params }) {
     typeof (errorPayload as any)?.error?.message === "string"
       ? (errorPayload as any).error.message
       : "Image generation provider error";
+
   return errorResponse((result as any).status, message);
 }

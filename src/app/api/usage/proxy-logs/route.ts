@@ -1,6 +1,8 @@
 import { getProxyLogs, clearProxyLogs } from "@/lib/proxyLogger";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 function serverErrorResponse(error: unknown): Response {
   return Response.json(
     {

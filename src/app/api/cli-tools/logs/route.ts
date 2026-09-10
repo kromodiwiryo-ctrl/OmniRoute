@@ -27,6 +27,8 @@ import { getAppLogFilePath } from "@/lib/logEnv";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 // Map pino numeric levels to string levels
 const NUMERIC_LEVEL_MAP: Record<number, string> = {
   10: "trace",
@@ -75,6 +77,7 @@ export async function GET(request: NextRequest) {
 
     // Comma-separated filter tokens (e.g. "router,oauth")
     const filterRaw = searchParams.get("filter") || "";
+
     const filterTokens = filterRaw
       .split(",")
       .map((t) => t.trim().toLowerCase())

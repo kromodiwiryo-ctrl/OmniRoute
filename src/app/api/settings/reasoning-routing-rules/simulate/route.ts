@@ -15,6 +15,8 @@ import { validateApiKeyRoutingTarget } from "@/shared/utils/apiKeyPolicy";
 import { getModelInfo } from "@/sse/services/model";
 import { resolveCodexWsModelInfo } from "@/app/api/internal/codex-responses-ws/modelResolution";
 
+export const dynamic = "force-dynamic";
+
 async function resolveSimulationSourceModels(model: string, transport: string, combo: unknown) {
   if (combo) return { normalized: model, aliases: [] };
   return resolveReasoningSourceModels(model, (value) =>

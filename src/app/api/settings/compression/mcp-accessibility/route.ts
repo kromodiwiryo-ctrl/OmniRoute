@@ -5,6 +5,8 @@ import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 import { mcpAccessibilityConfigSchema } from "@/shared/validation/compressionConfigSchemas";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
+export const dynamic = "force-dynamic";
+
 // Read/update the mcpAccessibility engine config (compression/mcpAccessibility DB key) that the
 // MCP server consumes on every tool call to trim oversized tool outputs. Kept as a dedicated
 // sub-route (sibling of settings/compression) so the strict main settings schema stays focused

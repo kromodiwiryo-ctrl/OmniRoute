@@ -7,6 +7,8 @@ import { generateCert } from "@/mitm/cert/generate";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { createErrorResponse } from "@/lib/api/errorResponse";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(): Promise<Response> {
   try {
     // #10467: generateCert() returns the existing paths untouched when a cert is already

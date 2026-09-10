@@ -4,6 +4,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { cloudCredentialUpdateSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 // Update provider credentials (for cloud token refresh)
 export async function PUT(request: Request) {
   const authError = await requireManagementAuth(request, {
@@ -17,7 +19,12 @@ export async function PUT(request: Request) {
     rawBody = await request.json();
   } catch {
     return NextResponse.json(
-      { error: { message: "Invalid request", details: [{ field: "body", message: "Invalid JSON body" }] } },
+      {
+        error: {
+          message: "Invalid request",
+          details: [{ field: "body", message: "Invalid JSON body" }],
+        },
+      },
       { status: 400 }
     );
   }

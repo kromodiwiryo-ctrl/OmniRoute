@@ -7,6 +7,8 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 
 import { parseVersionManagerToolRequest } from "../request";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const parsed = await parseVersionManagerToolRequest(request);
   if (!parsed.ok) {

@@ -17,6 +17,8 @@ import { getApiKeyById } from "@/lib/db/apiKeys";
 import { normalizeCodexBaseUrl } from "@/shared/utils/codexBaseUrl";
 import { migrateCodexFeatureFlags } from "@/shared/utils/codexConfig";
 
+export const dynamic = "force-dynamic";
+
 const getCodexConfigPath = () => getCliConfigPaths("codex").config;
 const getCodexAuthPath = () => getCliConfigPaths("codex").auth;
 const getCodexDir = () => path.dirname(getCodexConfigPath());
@@ -282,6 +284,7 @@ export async function POST(request: Request) {
 
     // Always create a custom provider to reliably pass wire_api and use OMNIROUTE_API_KEY
     parsed._root.model_provider = "omniroute";
+
     parsed._sections["model_providers.omniroute"] = {
       name: "OmniRoute",
       base_url: normalizedBaseUrl,

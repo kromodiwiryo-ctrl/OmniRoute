@@ -5,6 +5,8 @@ import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { executeProviderHealthAutopilotAction } from "@/lib/monitoring/providerHealthAutopilot";
 import { validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const actionSchema = z.object({
   type: z.enum([
     "clear_provider_breaker",

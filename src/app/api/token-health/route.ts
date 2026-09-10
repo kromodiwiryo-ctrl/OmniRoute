@@ -8,6 +8,8 @@
 import { getProviderConnections } from "@/lib/db/providers";
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const connections = await getProviderConnections({ authType: "oauth" });

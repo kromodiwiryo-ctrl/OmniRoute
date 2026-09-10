@@ -17,6 +17,8 @@ import { isRequireApiKeyEnabled } from "@/shared/utils/featureFlags";
 import { paginationSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";
 
+export const dynamic = "force-dynamic";
+
 const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "*",
@@ -115,6 +117,7 @@ export async function POST(request: Request): Promise<Response> {
     const message = firstIssue
       ? `${firstIssue.path.join(".") || "body"}: ${firstIssue.message}`
       : "Invalid request body";
+
     return errorResp(HTTP_STATUS.BAD_REQUEST, message);
   }
   const body = parsed.data;
