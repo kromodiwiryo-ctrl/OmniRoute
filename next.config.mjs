@@ -169,6 +169,7 @@ const nextConfig = {
   // Turbopack config: redirect native modules to stubs at build time
   turbopack: {
     root: projectRoot,
+    resolveExternalPackages: ["better-sqlite3"],
     resolveAlias: {
       // @/mitm/manager → stub ONLY where the runtime can't run the MITM stack
       // (Docker sets OMNIROUTE_MITM_STUB=1 — #3390 graceful degradation). The
